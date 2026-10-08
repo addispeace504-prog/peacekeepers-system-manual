@@ -1,0 +1,3101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peace Keepers – Master Manual – Part 3</title>
+<style>
+  :root{
+    --brand-dark:#0d3d2e;
+    --brand-green:#1a5c3f;
+    --brand-light:#e8f5ec;
+    --brand-gold:#c9a227;
+    --brand-gold-2:#e0b83a;
+    --card:#ffffff;
+    --text:#1a1a1a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --bg:#f4f7f5;
+    --error:#dc2626;
+    --success:#16a34a;
+    --info:#2563eb;
+    --warn:#f59e0b;
+    --purple:#7c3aed;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI','Noto Sans Ethiopic','Nyala',system-ui,sans-serif;
+    background:var(--bg); color:var(--text);
+    line-height:1.75; font-size:15px;
+  }
+
+  /* ============ LANGUAGE BAR ============ */
+  .lang-bar{
+    position:sticky; top:0; z-index:300;
+    background:var(--brand-dark); color:#fff;
+    padding:10px 22px; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:10px;
+    box-shadow:0 4px 18px rgba(13,61,46,.35);
+    border-bottom:3px solid var(--brand-gold);
+  }
+  .lang-bar .brand{
+    display:flex; align-items:center; gap:10px;
+    font-weight:800; font-size:.95rem;
+  }
+  .lang-bar .brand .seal{
+    width:32px; height:32px; border-radius:50%;
+    background:radial-gradient(circle,#1e40af 0%,#1e3a8a 60%,#0d3d2e 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem; border:2px solid var(--brand-gold);
+  }
+  .lang-buttons{display:flex; gap:6px; flex-wrap:wrap}
+  .lang-btn{
+    background:transparent; border:2px solid rgba(255,255,255,.3);
+    color:#fff; padding:5px 14px; border-radius:20px;
+    font-weight:700; cursor:pointer; transition:.2s;
+    font-size:.82rem; min-width:44px;
+  }
+  .lang-btn:hover{background:rgba(255,255,255,.15)}
+  .lang-btn.active{
+    background:var(--brand-gold); color:var(--brand-dark);
+    border-color:var(--brand-gold);
+  }
+
+  /* ============ HERO ============ -->
+  header.hero{
+    background:
+      radial-gradient(circle at 20% 30%, rgba(201,162,39,.28), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(26,92,63,.55), transparent 55%),
+      linear-gradient(135deg,#0d3d2e 0%,#1a5c3f 60%,#0d3d2e 100%);
+    color:#fff; padding:60px 24px 70px; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  header.hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath fill='%23c9a227' fill-opacity='.04' d='M0 0h35v35H0zM35 35h35v35H35z'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  header.hero .seal-big{
+    font-size:5rem; margin-bottom:14px;
+    filter:drop-shadow(0 6px 20px rgba(0,0,0,.5));
+    animation:float 3.5s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  header.hero h1{
+    font-size:2rem; margin-bottom:10px; letter-spacing:.3px;
+    text-shadow:0 4px 20px rgba(0,0,0,.4); font-weight:800;
+  }
+  header.hero h2{
+    font-size:1.1rem; font-weight:400; opacity:.92; margin-bottom:6px;
+  }
+  header.hero p.lead{
+    max-width:780px; margin:18px auto 0; font-size:1rem;
+    opacity:.92; line-height:1.75;
+  }
+  header.hero .badges{
+    display:flex; gap:8px; justify-content:center;
+    flex-wrap:wrap; margin-top:24px;
+  }
+  header.hero .badge{
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28);
+    backdrop-filter:blur(8px);
+    padding:6px 16px; border-radius:24px;
+    font-weight:600; font-size:.82rem;
+  }
+  header.hero .badge.gold{
+    background:var(--brand-gold); color:var(--brand-dark);
+    border-color:var(--brand-gold); font-weight:800;
+  }
+
+  /* ============ SEARCH ============ */
+  .search-bar{
+    position:sticky; top:52px; z-index:200;
+    background:rgba(255,255,255,.98); backdrop-filter:blur(10px);
+    padding:12px 22px; box-shadow:0 4px 18px rgba(13,61,46,.08);
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    border-bottom:3px solid var(--brand-gold);
+  }
+  .search-bar input{
+    flex:1; min-width:240px;
+    padding:11px 20px 11px 44px;
+    border:2px solid var(--border); border-radius:30px;
+    font-size:.95rem; outline:none; transition:.25s;
+    background:#f8fafc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat 16px center;
+  }
+  .search-bar input:focus{
+    border-color:var(--brand-green); background-color:#fff;
+    box-shadow:0 0 0 4px rgba(26,92,63,.12);
+  }
+  .search-bar button{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; border:none; padding:11px 22px; border-radius:30px;
+    font-weight:700; cursor:pointer; transition:.25s; font-size:.9rem;
+  }
+  .search-bar button:hover{transform:translateY(-2px)}
+  .search-stats{font-size:.82rem; color:var(--muted); font-weight:600}
+
+  /* ============ PART NAV ============ */
+  .part-nav{
+    max-width:1180px; margin:22px auto 0; padding:0 22px;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .part-nav a{
+    flex:1; min-width:170px;
+    background:#fff; border:2px solid var(--border);
+    padding:12px 14px; border-radius:12px;
+    text-decoration:none; color:var(--text);
+    font-weight:600; font-size:.85rem;
+    display:flex; align-items:center; gap:10px;
+    transition:.25s;
+  }
+  .part-nav a:hover{
+    border-color:var(--brand-gold); background:var(--brand-light);
+    transform:translateY(-2px);
+  }
+  .part-nav a.active{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; border-color:var(--brand-gold);
+  }
+  .part-nav a .pn-num{
+    background:var(--brand-gold); color:var(--brand-dark);
+    width:26px; height:26px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:.8rem; flex-shrink:0;
+  }
+  .part-nav a.active .pn-num{background:#fff}
+
+  /* ============ TOC ============ */
+  nav.toc{
+    max-width:1180px; margin:22px auto; padding:30px 34px;
+    background:#fff; border-radius:16px;
+    box-shadow:0 4px 24px rgba(13,61,46,.08);
+    border-top:6px solid var(--brand-gold);
+  }
+  nav.toc h2{
+    color:var(--brand-dark); font-size:1.35rem;
+    margin-bottom:20px; display:flex; align-items:center; gap:10px;
+  }
+  nav.toc ol{
+    list-style:none; display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:6px; counter-reset:toc;
+  }
+  nav.toc ol li{counter-increment:toc}
+  nav.toc a{
+    color:var(--text); text-decoration:none;
+    padding:10px 14px; display:flex; align-items:center;
+    gap:10px; border-radius:10px;
+    border-left:4px solid transparent;
+    transition:.2s; font-weight:500; font-size:.9rem;
+  }
+  nav.toc a:hover{
+    background:var(--brand-light); border-left-color:var(--brand-gold);
+    color:var(--brand-dark); transform:translateX(4px);
+  }
+  nav.toc a::before{
+    content:counter(toc);
+    background:var(--brand-dark); color:#fff;
+    width:26px; height:26px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:.78rem; flex-shrink:0;
+  }
+
+  /* ============ MAIN ============ */
+  main{max-width:1180px; margin:auto; padding:0 22px 80px}
+  section{
+    background:#fff; margin:28px 0; padding:34px 38px;
+    border-radius:16px; box-shadow:0 4px 20px rgba(13,61,46,.06);
+    border-left:7px solid var(--brand-dark);
+    scroll-margin-top:130px;
+  }
+  section:nth-of-type(3n+1){border-left-color:var(--brand-dark)}
+  section:nth-of-type(3n+2){border-left-color:var(--brand-gold)}
+  section:nth-of-type(3n+3){border-left-color:var(--purple)}
+  section h2{
+    color:var(--brand-dark); font-size:1.45rem; margin-bottom:18px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding-bottom:14px; border-bottom:2px dashed var(--border);
+  }
+  section h2 .icon{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; width:48px; height:48px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; flex-shrink:0;
+    box-shadow:0 4px 12px rgba(13,61,46,.35);
+    border:2px solid var(--brand-gold);
+  }
+  section h3{
+    color:var(--brand-green); margin:28px 0 14px;
+    font-size:1.18rem; display:flex; align-items:center; gap:8px;
+  }
+  section h3::before{
+    content:"▸"; color:var(--brand-gold); font-size:1.4rem;
+  }
+  section h4{
+    color:var(--brand-gold-2); margin:22px 0 10px;
+    text-transform:uppercase; font-size:.82rem;
+    letter-spacing:1.5px; font-weight:800;
+  }
+  p{margin-bottom:14px; color:#334155; font-size:.97rem}
+
+  /* ============ STEP LISTS ============ */
+  ol.steps{list-style:none; padding:0; margin:16px 0}
+  ol.steps > li{
+    display:flex; align-items:flex-start; gap:14px;
+    margin-bottom:14px; padding:14px 18px;
+    background:var(--brand-light); border-radius:12px;
+    border-left:5px solid var(--brand-gold);
+    transition:.2s;
+  }
+  ol.steps > li:hover{background:#dcefe2; transform:translateX(4px)}
+  ol.steps > li .step-badge{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; min-width:34px; height:34px; border-radius:50%;
+    font-weight:800; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; font-size:.95rem;
+    box-shadow:0 3px 10px rgba(13,61,46,.4);
+  }
+  ol.steps > li .step-text{flex:1; font-size:.96rem}
+  ol.steps > li .step-text strong{
+    color:var(--brand-dark); display:block;
+    margin-bottom:4px; font-size:1rem;
+  }
+  ol.steps > li .step-text code{
+    background:#0d3d2e; color:#7dd3fc; padding:2px 8px;
+    border-radius:5px; font-size:.85em;
+  }
+
+  /* ============ FIELD TABLE ============ */
+  .field-table{
+    width:100%; border-collapse:separate; border-spacing:0;
+    margin:18px 0; border-radius:12px; overflow:hidden;
+    box-shadow:0 2px 14px rgba(13,61,46,.08);
+    font-size:.9rem;
+  }
+  .field-table thead th{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; padding:14px 16px; text-align:left;
+    font-weight:700; font-size:.82rem;
+    text-transform:uppercase; letter-spacing:.5px;
+    border-bottom:3px solid var(--brand-gold);
+  }
+  .field-table tbody td{
+    padding:13px 16px; border-bottom:1px solid var(--border);
+    vertical-align:top; background:#fff;
+  }
+  .field-table tbody tr:last-child td{border-bottom:none}
+  .field-table tbody tr:nth-child(even) td{background:#fafcf9}
+  .field-table tbody tr:hover td{background:var(--brand-light)}
+  .field-table td.field-name{
+    font-weight:700; color:var(--brand-dark); min-width:170px;
+  }
+  .field-table td.field-name::before{content:"📝 "; margin-right:2px}
+
+  /* ============ CALLOUTS ============ */
+  .callout{
+    padding:16px 20px; border-radius:12px; margin:20px 0;
+    border-left:5px solid;
+    display:flex; gap:14px; align-items:flex-start;
+    font-size:.94rem;
+  }
+  .callout .co-icon{font-size:1.5rem; flex-shrink:0}
+  .callout strong{display:block; margin-bottom:4px; font-size:1rem}
+  .callout.tip{background:linear-gradient(90deg,#ecfdf5,#f0fdf4); border-color:var(--success)}
+  .callout.tip strong{color:var(--success)}
+  .callout.warn{background:linear-gradient(90deg,#fffbeb,#fef3c7); border-color:var(--warn)}
+  .callout.warn strong{color:#b45309}
+  .callout.danger{background:linear-gradient(90deg,#fef2f2,#fee2e2); border-color:var(--error)}
+  .callout.danger strong{color:var(--error)}
+  .callout.info{background:linear-gradient(90deg,#eff6ff,#e0f2fe); border-color:var(--info)}
+  .callout.info strong{color:var(--info)}
+  .callout.gold{background:linear-gradient(90deg,#fef9e7,#fef3c7); border-color:var(--brand-gold)}
+  .callout.gold strong{color:#92620a}
+
+  /* ============ BUTTON MOCK ============ */
+  .btn-mock{
+    display:inline-block; padding:6px 16px; border-radius:8px;
+    font-weight:700; font-size:.82rem; margin:2px 4px;
+    color:#fff; box-shadow:0 3px 8px rgba(0,0,0,.15);
+  }
+  .btn-mock.login{background:linear-gradient(135deg,var(--brand-dark),var(--brand-green))}
+  .btn-mock.success{background:linear-gradient(135deg,var(--success),#22c55e)}
+  .btn-mock.warn{background:linear-gradient(135deg,var(--warn),var(--brand-gold-2)); color:#000}
+  .btn-mock.danger{background:linear-gradient(135deg,var(--error),#ef4444)}
+  .btn-mock.gold{background:linear-gradient(135deg,var(--brand-gold),var(--brand-gold-2)); color:var(--brand-dark)}
+  .btn-mock.gray{background:#64748b}
+
+  /* ============ SCREENSHOT PLACEHOLDER ============ */
+  .screenshot{
+    background:linear-gradient(135deg,#f0fdf4,#ecfdf5);
+    border:3px dashed var(--brand-gold);
+    border-radius:14px; padding:38px 24px; text-align:center;
+    margin:22px 0; color:var(--brand-dark);
+  }
+  .screenshot .s-icon{font-size:3rem; margin-bottom:10px; display:block}
+  .screenshot strong{
+    display:block; font-size:1.05rem; margin-bottom:6px;
+    color:var(--brand-dark);
+  }
+  .screenshot small{color:var(--muted); font-size:.83rem}
+
+  /* ============ SCREEN MOCK ============ */
+  .screen-mock{
+    background:#0f172a; border-radius:14px; overflow:hidden;
+    margin:22px 0; border:2px solid #1e293b;
+    box-shadow:0 10px 28px rgba(15,23,42,.28);
+  }
+  .screen-mock .titlebar{
+    background:linear-gradient(135deg,#1e293b,#334155);
+    color:#e2e8f0; padding:12px 18px; font-size:.85rem;
+    font-weight:700; display:flex; align-items:center; gap:10px;
+    border-bottom:2px solid var(--brand-gold);
+  }
+  .screen-mock .titlebar .dots{display:flex; gap:6px; margin-right:10px}
+  .screen-mock .titlebar .dots span{width:12px;height:12px;border-radius:50%}
+  .screen-mock .titlebar .dots span:nth-child(1){background:#ef4444}
+  .screen-mock .titlebar .dots span:nth-child(2){background:#f59e0b}
+  .screen-mock .titlebar .dots span:nth-child(3){background:#22c55e}
+  .screen-mock .body{background:#f8fafc; padding:22px; font-size:.9rem; color:#334155}
+  .screen-mock .body .form-row{
+    display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .screen-mock .body .field{flex:1; min-width:180px}
+  .screen-mock .body .field label{
+    display:block; font-size:.75rem; font-weight:800;
+    color:var(--brand-dark); text-transform:uppercase;
+    margin-bottom:5px; letter-spacing:.5px;
+  }
+  .screen-mock .body .field .input-mock{
+    background:#fff; border:2px solid var(--border); border-radius:8px;
+    padding:10px 14px; color:#94a3b8; font-size:.88rem;
+    font-family:'Consolas',monospace;
+  }
+  .screen-mock .body .big-btn{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; text-align:center; padding:14px;
+    border-radius:10px; font-weight:800; font-size:1rem;
+    margin-top:10px;
+  }
+
+  /* ============ PRACTICE ============ */
+  .practice{
+    background:linear-gradient(135deg,#eff6ff,#e0f2fe);
+    border:2px solid var(--info); border-radius:14px;
+    padding:20px 24px; margin:22px 0;
+  }
+  .practice h4{
+    color:var(--info); margin:0 0 12px;
+    font-size:.98rem; text-transform:uppercase;
+    letter-spacing:1px; font-weight:800;
+  }
+  .practice ol{margin-left:22px; margin-top:8px}
+  .practice ol li{margin-bottom:8px; font-size:.94rem}
+
+  /* ============ BILINGUAL ============ */
+  body.lang-am .en, body.lang-om .en, body.lang-ti .en{display:none !important}
+  body.lang-en .am, body.lang-en .om, body.lang-en .ti{display:none !important}
+  body:not(.lang-am) .am{display:none}
+  body:not(.lang-om) .om{display:none}
+  body:not(.lang-ti) .ti{display:none}
+
+  /* ============ SEARCH ============ */
+  .hl{background:#fde047; padding:1px 3px; border-radius:3px; font-weight:600}
+  .hidden{display:none !important}
+  #noResult{
+    text-align:center; padding:60px 20px; color:var(--error);
+    font-weight:700; font-size:1.15rem; display:none;
+  }
+
+  /* ============ TOP ============ */
+  #toTop{
+    position:fixed; right:22px; bottom:22px; z-index:150;
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; border:2px solid var(--brand-gold);
+    width:54px; height:54px; border-radius:50%;
+    font-size:1.3rem; cursor:pointer; display:none;
+    box-shadow:0 6px 20px rgba(13,61,46,.5);
+    transition:.25s;
+  }
+  #toTop:hover{transform:translateY(-4px) scale(1.08)}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:linear-gradient(135deg,#0d3d2e,#051e16);
+    color:#cbd5e1; text-align:center; padding:46px 24px; margin-top:60px;
+    border-top:4px solid var(--brand-gold);
+  }
+  footer .f-title{
+    color:var(--brand-gold); font-weight:800;
+    font-size:1.15rem; margin-bottom:10px;
+  }
+  footer p{font-size:.88rem; opacity:.85; margin:4px 0; color:#cbd5e1}
+
+  @media (max-width:640px){
+    header.hero h1{font-size:1.5rem}
+    section{padding:22px 20px}
+    nav.toc ol{grid-template-columns:1fr}
+    .search-bar{top:46px}
+  }
+</style>
+</head>
+<body class="lang-en">
+
+<!-- ============ LANGUAGE BAR ============ -->
+<div class="lang-bar">
+  <div class="brand">
+    <span class="seal">🛡️</span>
+    <span>PEACE KEEPERS · Master Manual · Part 3</span>
+  </div>
+  <div class="lang-buttons">
+    <button class="lang-btn active" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('am')" data-lang="am">አማ</button>
+    <button class="lang-btn" onclick="setLang('om')" data-lang="om">Afa O</button>
+    <button class="lang-btn" onclick="setLang('ti')" data-lang="ti">ትግ</button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="seal-big">📁</div>
+  <h1 class="en">Crime Cases, Analytics &amp; Community Reports</h1>
+  <h1 class="am">የወንጀል ጉዳዮች፣ ትንታኔዎች እና የማህበረሰብ ሪፖርቶች</h1>
+  <h1 class="om">Yakkoota, Xiinxala fi Gabaasa Hawaasaa</h1>
+  <h1 class="ti">ጉዳያት ገበን፣ ትንተናታትን ጸብጻባት ማሕበረሰብን</h1>
+
+  <h2 class="en">Part 3 of 5 — Master User Manual</h2>
+  <h2 class="am">ክፍል 3 ከ5 — ማስተር የተጠቃሚ መመሪያ</h2>
+  <h2 class="om">Kutaa 3/5 — Buugqa Fayyadamaa Guddaa</h2>
+  <h2 class="ti">ክፋል 3 ካብ 5 — ቀንዲ መምርሒ ተጠቃሚ</h2>
+
+  <p class="lead en">Everything about registering and managing crime cases, analyzing crime patterns, and submitting community discussion reports — with every field, button, and screen explained step by step.</p>
+  <p class="lead am">ስለ የወንጀል ጉዳዮች መመዝገብና ማስተዳደር፣ የወንጀል ንድፎችን መተንተን እና የማህበረሰብ ውይይት ሪፖርቶችን ማስገባት ሁሉ — እያንዳንዱ መስክ፣ ቁልፍ እና ገጽ ደረጃ በደረጃ ተብራርቷል።</p>
+  <p class="lead om">Waan hundi waa'ee galmeessuu fi bulchuu yakkoota, xiinxaluu akkaataa yakkaa, fi galmeessuu gabaasa marii hawaasaa — dirree hundi, furtuu fi fuula hundi tarkaanfii tarkaanfiin ibsameera.</p>
+  <p class="lead ti">ብዛዕባ ምዝገባን ምሕደራን ጉዳያት ገበን፣ ትንተና ኣቀራርባ ገበንን ምቕራብ ጸብጻባት ምይይት ማሕበረሰብን ኩሉ — ነፍሲ ወከፍ መዳርግ፣ መጠወሊን ገጽን ደረጃ ብደረጃ ተብራሂሩ።</p>
+
+  <div class="badges">
+    <span class="badge gold en">Part 3 of 5</span>
+    <span class="badge gold am">ክፍል 3 ከ5</span>
+    <span class="badge gold om">Kutaa 3/5</span>
+    <span class="badge gold ti">ክፋል 3 ካብ 5</span>
+    <span class="badge en">7 Chapters</span>
+    <span class="badge am">7 ምዕራፎች</span>
+    <span class="badge en">Every Action Covered</span>
+    <span class="badge am">ሁሉም እርምጃ ተካቷል</span>
+  </div>
+</header>
+
+<!-- ============ SEARCH ============ -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="🔍 Search Part 3… / ፈልግ…" oninput="searchManual()">
+  <button onclick="clearSearch()">
+    <span class="en">Clear</span>
+    <span class="am">አጽዳ</span>
+    <span class="om">Haqi</span>
+    <span class="ti">ኣጽሪ</span>
+  </button>
+  <span class="search-stats" id="stats"></span>
+</div>
+
+<!-- ============ PART NAV ============ -->
+<div class="part-nav">
+  <a href="PEACE-KEEPERS-MANUAL-PART-1.html"><span class="pn-num">1</span>
+    <span class="en">Start · Login · Officers</span>
+    <span class="am">ጅምር · መግቢያ · መኮንኖች</span>
+    <span class="om">Jalqaba · Seensa · Ofiseroonni</span>
+    <span class="ti">መጀመሪያ · መእተዊ · መኮነንቲ</span>
+  </a>
+  <a href="PEACE-KEEPERS-MANUAL-PART-2.html"><span class="pn-num">2</span>
+    <span class="en">Officers · Attendance</span>
+    <span class="am">መኮንኖች · ክትትል</span>
+    <span class="om">Ofiseroonni · Argama</span>
+    <span class="ti">መኮነንቲ · ተረኽቦ</span>
+  </a>
+  <a href="#" class="active"><span class="pn-num">3</span>
+    <span class="en">Crimes · Reports</span>
+    <span class="am">ወንጀሎች · ሪፖርቶች</span>
+    <span class="om">Yakkoota · Gabaasota</span>
+    <span class="ti">ገበናት · ጸብጻባት</span>
+  </a>
+  <a href="PEACE-KEEPERS-MANUAL-PART-4.html"><span class="pn-num">4</span>
+    <span class="en">SMS · Users · Certificates</span>
+    <span class="am">SMS · ተጠቃሚዎች · ሰርተፍኬት</span>
+    <span class="om">SMS · Fayyadamtoota · Waraqaa</span>
+    <span class="ti">SMS · ተጠቀምቲ · ሰርተፍኬት</span>
+  </a>
+  <a href="PEACE-KEEPERS-MANUAL-PART-5.html"><span class="pn-num">5</span>
+    <span class="en">Settings · Reports · Help</span>
+    <span class="am">ቅንብሮች · ሪፖርቶች · እርዳታ</span>
+    <span class="om">Qindaa'ina · Gabaasota · Gargaarsa</span>
+    <span class="ti">ቅጥዒ · ጸብጻባት · ሓገዝ</span>
+  </a>
+</div>
+
+<!-- ============ TOC ============ -->
+<nav class="toc">
+  <h2>
+    <span class="en">📖 Table of Contents — Part 3</span>
+    <span class="am">📖 ማውጫ — ክፍል 3</span>
+    <span class="om">📖 Tarree Qabiyyee — Kutaa 3</span>
+    <span class="ti">📖 ዝርዝር ትሕዝቶ — ክፋል 3</span>
+  </h2>
+  <ol>
+    <li><a href="#register-crime">
+      <span class="en">Register a New Crime Case</span>
+      <span class="am">አዲስ የወንጀል ጉዳይ መመዝገብ</span>
+      <span class="om">Yakka Haaraa Galmeessuu</span>
+      <span class="ti">ሓድሽ ጉዳይ ገበን ምዝገባ</span>
+    </a></li>
+    <li><a href="#view-crimes">
+      <span class="en">View, Search &amp; Filter Crime Cases</span>
+      <span class="am">የወንጀል ጉዳዮችን መመልከት፣ መፈለግ እና ማጣራት</span>
+      <span class="om">Yakkoota Ilaaluu, Barbaaduu fi Calaluu</span>
+      <span class="ti">ጉዳያት ገበን ምርኣይ፣ ምድላይን ምጽራይን</span>
+    </a></li>
+    <li><a href="#edit-crime">
+      <span class="en">Edit &amp; Update a Crime Case</span>
+      <span class="am">የወንጀል ጉዳይ ማስተካከል እና ማሻሻል</span>
+      <span class="om">Yakka Sirreessuu fi Haaromsuu</span>
+      <span class="ti">ጉዳይ ገበን ምስተካከልን ምሕዳስን</span>
+    </a></li>
+    <li><a href="#case-types">
+      <span class="en">Manage Crime Case Types</span>
+      <span class="am">የወንጀል ጉዳይ ዓይነቶችን ማስተዳደር</span>
+      <span class="om">Akaakuu Yakkaa Bulchuu</span>
+      <span class="ti">ዓይነታት ጉዳይ ገበን ምሕደራ</span>
+    </a></li>
+    <li><a href="#analyze-crimes">
+      <span class="en">Analyze Crime Patterns</span>
+      <span class="am">የወንጀል ንድፎችን መተንተን</span>
+      <span class="om">Akkaataa Yakkaa Xiinxaluu</span>
+      <span class="ti">ኣቀራርባ ገበን ትንተና</span>
+    </a></li>
+    <li><a href="#analyze-peace">
+      <span class="en">Analyze Peace Keeper Deployment</span>
+      <span class="am">የፒስ ኪፐር ስምሪትን መተንተን</span>
+      <span class="om">Bobbaafama Ofiseroonni Xiinxaluu</span>
+      <span class="ti">ምስማራት ፒስ ኪፐራት ትንተና</span>
+    </a></li>
+    <li><a href="#community-report">
+      <span class="en">Submit a Community Discussion Report</span>
+      <span class="am">የማህበረሰብ ውይይት ሪፖርት ማስገባት</span>
+      <span class="om">Gabaasa Marii Hawaasaa Galmeessuu</span>
+      <span class="ti">ጸብጻብ ምይይት ማሕበረሰብ ምቕራብ</span>
+    </a></li>
+    <li><a href="#problems">
+      <span class="en">Troubleshooting — Part 3</span>
+      <span class="am">ችግር መፍታት — ክፍል 3</span>
+      <span class="om">Rakkoo Furuu — Kutaa 3</span>
+      <span class="ti">ጸገም ምፍታሕ — ክፋል 3</span>
+    </a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============ 1. REGISTER CRIME ============ -->
+<section id="register-crime">
+  <h2><span class="icon">📁</span>
+    <span class="en">1. Register a New Crime Case</span>
+    <span class="am">1. አዲስ የወንጀል ጉዳይ መመዝገብ</span>
+    <span class="om">1. Yakka Haaraa Galmeessuu</span>
+    <span class="ti">1. ሓድሽ ጉዳይ ገበን ምዝገባ</span>
+  </h2>
+
+  <p class="en">Every crime must be registered in the system as soon as it is reported. The crime case is the master record that all investigation, prosecution, and reporting will reference.</p>
+  <p class="am">ማንኛውም ወንጀል እንደዘገበ ወዲያውኑ በሲስተሙ መመዘገብ አለበት። የወንጀሉ ጉዳይ ሁሉም ምርመራ፣ ክስ እና ሪፖርት የሚያጣቅሰው ዋና መዝገብ ነው።</p>
+  <p class="om">Yakki hundi akkuma gabaafame battalumatti sirna keessatti galmaa'uu qaba. Galmeen yakkaa qorannoo, himannaa fi gabaasa hundi isa wabeeffatu ti.</p>
+  <p class="ti">ኩሉ ገበን ከም ዝጠረጸ ብቕጽበት ኣብ ስርዓት ክመዝገብ ኣለዎ። መዝገብ ገበን ዋና መዝገብ ኩሉ ምርመራ፣ ክሲን ጸብጻብን ዝውክሶ እዩ።</p>
+
+  <h3>
+    <span class="en">Before You Start — Prepare</span>
+    <span class="am">ከመጀመርዎ በፊት — ያዘጋጁ</span>
+    <span class="om">Jalqabuu dura — qopheessi</span>
+    <span class="ti">ቅድሚ ምጅማር — ኣዳሉ</span>
+  </h3>
+
+  <div class="callout info">
+    <span class="co-icon">📋</span>
+    <div>
+      <strong class="en">Have this information ready</strong>
+      <strong class="am">ይህን መረጃ ያዘጋጁ</strong>
+      <strong class="om">Odeeffannoo kana qopheessi</strong>
+      <strong class="ti">እዚ ሓበሬታ ኣዳሉ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">Exact location of the incident (sub-city, district, ketena, block, landmark)</li>
+        <li class="en">Date and time the crime was committed</li>
+        <li class="en">Brief description of what happened</li>
+        <li class="en">Who reported it (name &amp; contact if known)</li>
+        <li class="en">Any victims or suspects identified</li>
+        <li class="en">Any evidence (photos, documents, recordings)</li>
+        <li class="am">የተፈጸመበት ትክክለኛ ቦታ (ክፍለ ከተማ፣ አውራጃ፣ ቀበሌ፣ ብሎክ፣ ምልክት)</li>
+        <li class="am">ወንጀሉ የተፈጸመበት ቀን እና ሰዓት</li>
+        <li class="am">የተፈጸመው ነገር አጭር መግለጫ</li>
+        <li class="am">ማን እንደዘገበ (ስም እና ግንኙነት ካለ)</li>
+        <li class="am">የተለዩ ተጎጂዎች ወይም ተጠርጣሪዎች</li>
+        <li class="am">ማንኛውም ማስረጃ (ፎቶ፣ ሰነዶች፣ ቀረጻዎች)</li>
+        <li class="om">Bakka sirrii mudaa (kutaa magaalaa, aanaa, ganda, blookii, mallattoo)</li>
+        <li class="om">Guyyaa fi sa'aatii yakki raawwatame</li>
+        <li class="om">Ibsa gabaabaa waan ta'e</li>
+        <li class="om">Eenyu gabaase (maqaa fi qunnamtii yoo jiraate)</li>
+        <li class="om">Miidhamtoota yookaan shakkisiisota adda baafaman</li>
+        <li class="om">Ragaa kamiyyuu (suuraa, sanada, sagalee)</li>
+        <li class="ti">ቦታ ገበን ብልክዕ (ክፍለ ከተማ፣ ወረዳ፣ ቀበሌ፣ ብሎክ፣ ምልክት)</li>
+        <li class="ti">ዕለትን ሰዓትን ገበን ዝተፈጸመሉ</li>
+        <li class="ti">ሓጺር መግለጺ ዝተፈጸመ</li>
+        <li class="ti">መን ከም ዝጠረጸ (ስምን ርክብን እንተሎ)</li>
+        <li class="ti">ተጎጂታት ወይ ተጠርጠርቲ ዝተለልዩ</li>
+        <li class="ti">ዝኾነ መረጋገጺ (ስእሊ፣ ሰነድ፣ ቅዳሕ)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>
+    <span class="en">Step-by-Step Instructions</span>
+    <span class="am">ደረጃ በደረጃ መመሪያዎች</span>
+    <span class="om">Qajeelfama Tarkaanfii</span>
+    <span class="ti">መምርሒ ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">From the dashboard, click "Crime Cases" in the left menu</strong>
+        <strong class="am">ከዳሽቦርዱ በግራ ምናሌ "የወንጀል ጉዳዮች" ይጫኑ</strong>
+        <strong class="om">Daashboordii irraa menu bitaa irratti "Yakkoota" tuqi</strong>
+        <strong class="ti">ካብ ዳሽቦርድ ኣብ ምናሌ ጸጋ "ጉዳያት ገበን" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Click "Register New Crime" or the "➕ New" button</strong>
+        <strong class="am">"Register New Crime" ወይም "➕ አዲስ" ቁልፍ ይጫኑ</strong>
+        <strong class="om">"Register New Crime" yookaan furtuu "➕ Haaraa" tuqi</strong>
+        <strong class="ti">"Register New Crime" ወይ መጠወሊ "➕ ሓድሽ" ጠውቑ</strong>
+        <span class="btn-mock login">➕ Register New Crime</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">The crime case form opens — fill in every required field</strong>
+        <strong class="am">የወንጀል ጉዳይ ቅጹ ይከፈታል — እያንዳንዱን አስፈላጊ መስክ ይሙሉ</strong>
+        <strong class="om">Unkni galmee yakkaa bana — dirree barbaachisaa hunda guuti</strong>
+        <strong class="ti">ቅጥዒ ጉዳይ ገበን ይኽፈት — ነፍሲ ወከፍ ኣድላዪ መዳርግ ምልኡ</strong>
+        <span class="en">See the full field table in the next section.</span>
+        <span class="am">ሙሉ የመስክ ሰንጠረዡን በሚቀጥለው ክፍል ይመልከቱ።</span>
+        <span class="om">Tarree dirree guutuu kutaa itti aanutti ilaali.</span>
+        <span class="ti">ምሉእ ሰደቓ መዳርግ ኣብ ቀጻሊ ክፍሊ ርአ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Start with "caseNameSelect" or type a custom "caseName"</strong>
+        <strong class="am">በ"caseNameSelect" ይጀምሩ ወይም ብጁ "caseName" ይተይቡ</strong>
+        <strong class="om">"caseNameSelect" jalqabi yookaan "caseName" adda ta'e barreessi</strong>
+        <strong class="ti">ብ "caseNameSelect" ጀምር ወይ "caseName" ፍሉይ ጽሓፍ</strong>
+        <span class="en">Choose from the predefined case names or type a new one.</span>
+        <span class="am">ከተዘጋጁት የጉዳይ ስሞች ይምረጡ ወይም አዲስ ይተይቡ።</span>
+        <span class="om">Maqaa galmee duraan qophaa'e irraa filadhu yookaan haaraa barreessi.</span>
+        <span class="ti">ካብ ዝተዳለዉ ስማት ጉዳይ ምረጽ ወይ ሓድሽ ጽሓፍ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Write a detailed description in "descriptiveInfo"</strong>
+        <strong class="am">በ"descriptiveInfo" ዝርዝር መግለጫ ይጻፉ</strong>
+        <strong class="om">"descriptiveInfo" keessatti ibsa bal'aa barreessi</strong>
+        <strong class="ti">ኣብ "descriptiveInfo" ዝርዝር መግለጺ ጽሓፍ</strong>
+        <span class="en">Who, what, when, where, how — the full narrative.</span>
+        <span class="am">ማን፣ ምን፣ መቼ፣ የት፣ እንዴት — ሙሉ ትረካ።</span>
+        <span class="om">Eenyu, maal, yeroo kam, eessatti, akkamitti — seenaa guutuu.</span>
+        <span class="ti">መን፣ እንታይ፣ መዓስ፣ ኣበይ፣ ከመይ — ምሉእ ትረካ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Set "date" (Ethiopian calendar) and "time"</strong>
+        <strong class="am">"date" (ኢትዮጵያ ቀን መቁጠሪያ) እና "time" ያዘጋጁ</strong>
+        <strong class="om">"date" (kalendarii Itoophiyaa) fi "time" kaa'i</strong>
+        <strong class="ti">"date" (ካላንደር ኢትዮጵያ) ን "time" ኣቐምጥ</strong>
+        <span class="en">Date format: dd/mm/yyyy. Time: 24-hour.</span>
+        <span class="am">የቀን ቅርጸት: ቀን/ወር/ዓመት። ሰዓት: 24 ሰዓት።</span>
+        <span class="om">Boccaa guyyaa: gg/jj/ww. Sa'aatii: 24.</span>
+        <span class="ti">ቅርጺ ዕለት: መዓልቲ/ወርሒ/ዓመት። ሰዓት: 24።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Type the location in "locationSearch"</strong>
+        <strong class="am">በ"locationSearch" ቦታውን ይተይቡ</strong>
+        <strong class="om">"locationSearch" keessatti bakka barreessi</strong>
+        <strong class="ti">ኣብ "locationSearch" ቦታ ጽሓፍ</strong>
+        <span class="en">Type a keyword — the system suggests matching locations.</span>
+        <span class="am">ቁልፍ ቃል ይተይቡ — ሲስተሙ ተመሳሳይ ቦታዎችን ይጠቁማል።</span>
+        <span class="om">Jecha furtuu barreessi — sirni bakka walsimu dhiyeessa.</span>
+        <span class="ti">ቁልፍ ቃል ጽሓፍ — ስርዓት ተመሳሳሊ ቦታ ይጠቁም።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">8</span>
+      <div class="step-text">
+        <strong class="en">Click "Locate on Map" to auto-fill GPS ("geoLocation")</strong>
+        <strong class="am">GPS ("geoLocation") በራስ-ሰር ለመሙላት "Locate on Map" ይጫኑ</strong>
+        <strong class="om">GPS ("geoLocation") ofumaan guutuuf "Locate on Map" tuqi</strong>
+        <strong class="ti">GPS ("geoLocation") ብራስኡ ንምምላእ "Locate on Map" ጠውቑ</strong>
+        <span class="en">Optional but recommended for accurate mapping.</span>
+        <span class="am">አማራጭ ግን ለትክክለኛ ካርታ ይመከራል።</span>
+        <span class="om">Filannoo garuu kaartaa sirriif gorfama.</span>
+        <span class="ti">ኣማራጺ ግን ንቅኑዕ ካርታ ይምከር።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">9</span>
+      <div class="step-text">
+        <strong class="en">Choose "responseAction"</strong>
+        <strong class="am">"responseAction" ይምረጡ</strong>
+        <strong class="om">"responseAction" filadhu</strong>
+        <strong class="ti">"responseAction" ምረጽ</strong>
+        <span class="en">What has been done so far (e.g. "Investigation opened").</span>
+        <span class="am">እስካሁን የተደረገው (ለምሳሌ "ምርመራ ተከፍቷል")።</span>
+        <span class="om">Waan ammaatti raawwatame (fkn "Qorannoon baname").</span>
+        <span class="ti">ክሳብ ሕጂ ዝተገበረ (ኣብነት "ምርመራ ተኸፊቱ")።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">10</span>
+      <div class="step-text">
+        <strong class="en">Choose "currentStatus"</strong>
+        <strong class="am">"currentStatus" ይምረጡ</strong>
+        <strong class="om">"currentStatus" filadhu</strong>
+        <strong class="ti">"currentStatus" ምረጽ</strong>
+        <span class="en">Open / Under Investigation / Resolved / Closed.</span>
+        <span class="am">ክፍት / በምርመራ / ተፈትቷል / ተዘግቷል።</span>
+        <span class="om">Banaa / Qorannoo jalatti / Furame / Cufame.</span>
+        <span class="ti">ክፉት / ትሕቲ ምርመራ / ተፈቲሑ / ተዓጽዩ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">11</span>
+      <div class="step-text">
+        <strong class="en">Choose "priority"</strong>
+        <strong class="am">"priority" ይምረጡ</strong>
+        <strong class="om">"priority" filadhu</strong>
+        <strong class="ti">"priority" ምረጽ</strong>
+        <span class="en">Low / Medium / High / Critical.</span>
+        <span class="am">ዝቅተኛ / መካከለኛ / ከፍተኛ / ወሳኝ።</span>
+        <span class="om">Gadi aanaa / Giddu-galeessa / Ol aanaa / Baay'ee cimaa.</span>
+        <span class="ti">ትሑት / ማእከላይ / ልዑል / ወሳኒ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">12</span>
+      <div class="step-text">
+        <strong class="en">Set "initiatedDate"</strong>
+        <strong class="am">"initiatedDate" ያዘጋጁ</strong>
+        <strong class="om">"initiatedDate" kaa'i</strong>
+        <strong class="ti">"initiatedDate" ኣቐምጥ</strong>
+        <span class="en">The date the case file was opened (usually today).</span>
+        <span class="am">የጉዳዩ ፋይል የተከፈተበት ቀን (አብዛኛውን ጊዜ ዛሬ)።</span>
+        <span class="om">Guyyaa faayilli galmee baname (yeroo baay'ee har'a).</span>
+        <span class="ti">ዕለት ፋይል ጉዳይ ተኸፊቱ (መብዛሕትኡ ሎሚ)።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">13</span>
+      <div class="step-text">
+        <strong class="en">Choose "informedBy"</strong>
+        <strong class="am">"informedBy" ይምረጡ</strong>
+        <strong class="om">"informedBy" filadhu</strong>
+        <strong class="ti">"informedBy" ምረጽ</strong>
+        <span class="en">Who reported this case — citizen, officer, or other source.</span>
+        <span class="am">ይህን ጉዳይ ማን እንደገለጸ — ዜጋ፣ መኮንን ወይም ሌላ ምንጭ።</span>
+        <span class="om">Eenyu galmee kana gabaase — lammii, ofiseraa yookaan madda biraa.</span>
+        <span class="ti">መን ነዚ ጉዳይ ከም ዝጠረጸ — ዜጋ፣ መኮነን ወይ ካልእ ምንጪ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">14</span>
+      <div class="step-text">
+        <strong class="en">Attach any evidence files</strong>
+        <strong class="am">ማንኛውንም የማስረጃ ፋይሎች ያያዙ</strong>
+        <strong class="om">Faayilii ragaa kamiyyuu dabali</strong>
+        <strong class="ti">ዝኾነ ፋይል መረጋገጺ ኣላግብ</strong>
+        <span class="en">Click "Choose File" → select photos, PDFs, or documents (max 10 MB each).</span>
+        <span class="am">"Choose File" ይጫኑ → ፎቶዎችን፣ PDFs ወይም ሰነዶችን ይምረጡ (እያንዳንዱ ቢበዛ 10 MB)።</span>
+        <span class="om">"Choose File" tuqi → suuraa, PDF, yookaan sanada filadhu (tokkoon tokkoon hanga 10 MB).</span>
+        <span class="ti">"Choose File" ጠውቑ → ስእሊ፣ PDF ወይ ሰነድ ምረጹ (ነፍሲ ወከፍ ክሳብ 10 MB)።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">15</span>
+      <div class="step-text">
+        <strong class="en">Double-check every field</strong>
+        <strong class="am">ሁሉንም መስክ በድጋሚ ያረጋግጡ</strong>
+        <strong class="om">Dirree hunda irra deebi'ii mirkaneessi</strong>
+        <strong class="ti">ነፍሲ ወከፍ መዳርግ ደጊምካ ኣረጋግጽ</strong>
+        <span class="en">Especially date, time, and location — they drive all analytics.</span>
+        <span class="am">በተለይ ቀን፣ ሰዓት እና ቦታ — ሁሉንም ትንታኔዎች ይመራሉ።</span>
+        <span class="om">Keessumaa guyyaa, sa'aatii fi bakka — xiinxala hunda oofu.</span>
+        <span class="ti">ብልዕልና ዕለት፣ ሰዓትን ቦታን — ኩሉ ትንተና ይመርሑ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">16</span>
+      <div class="step-text">
+        <strong class="en">Click "Register Crime Case"</strong>
+        <strong class="am">"Register Crime Case" ይጫኑ</strong>
+        <strong class="om">"Register Crime Case" tuqi</strong>
+        <strong class="ti">"Register Crime Case" ጠውቑ</strong>
+        <span class="btn-mock success">✓ Register Crime Case</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">17</span>
+      <div class="step-text">
+        <strong class="en">Wait for the confirmation message</strong>
+        <strong class="am">የማረጋገጫ መልእክቱን ይጠብቁ</strong>
+        <strong class="om">Ergaa mirkaneessaa eegi</strong>
+        <strong class="ti">መልእኽቲ መረጋገጺ ተጸበ</strong>
+        <span class="en">Green message: "Crime case registered successfully". A case number is assigned.</span>
+        <span class="am">አረንጓዴ መልእክት: "የወንጀል ጉዳይ በተሳካ ሁኔታ ተመዝግቧል"። የጉዳይ ቁጥር ይመደባል።</span>
+        <span class="om">Ergaan magariisa: "Galmeen yakkaa milkaa'inaan galmaa'e". Lakkoofsi galmee ramadama.</span>
+        <span class="ti">ቀጠልያ መልእኽቲ: "ጉዳይ ገበን ብዓወት ተመዝጊቡ"። ቁጽሪ ጉዳይ ይመደብ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">18</span>
+      <div class="step-text">
+        <strong class="en">Note the case number for future reference</strong>
+        <strong class="am">ለወደፊት ማጣቀሻ የጉዳዩን ቁጥር ያስታውሱ</strong>
+        <strong class="om">Fuula duraaf lakkoofsa galmee yaadadhu</strong>
+        <strong class="ti">ንመጻኢ መወከሲ ቁጽሪ ጉዳይ ዝክር</strong>
+      </div>
+    </li>
+  </ol>
+
+  <h3>
+    <span class="en">📝 Every Field in the Crime Registration Form</span>
+    <span class="am">📝 በወንጀል ምዝገባ ቅጽ ውስጥ ያሉ ሁሉም መስኮች</span>
+    <span class="om">📝 Dirree Hunda Unka Galmee Yakkaa</span>
+    <span class="ti">📝 ኩሉ መዳርግ ኣብ ቅጥዒ ምዝገባ ገበን</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+        <th><span class="en">Example</span><span class="am">ምሳሌ</span><span class="om">Fakkeenya</span><span class="ti">ኣብነት</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">caseNameSelect</td>
+        <td>
+          <span class="en">Pick a predefined case name from dropdown</span>
+          <span class="am">ከዝርዝሩ አስቀድሞ የተዘጋጀ የጉዳይ ስም ይምረጡ</span>
+          <span class="om">Maqaa galmee duraan qophaa'e tarree irraa filadhu</span>
+          <span class="ti">ካብ ዝርዝር ቅድሚ ዝተዳለወ ስም ጉዳይ ምረጽ</span>
+        </td>
+        <td><span class="en">Theft</span><span class="am">ስርቆት</span><span class="om">Hanna</span><span class="ti">ስርቂ</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">caseName</td>
+        <td>
+          <span class="en">OR type a custom case name if not listed</span>
+          <span class="am">ወይም ካልተዘረዘረ ብጁ የጉዳይ ስም ይተይቡ</span>
+          <span class="om">Yookaan maqaa galmee adda ta'e yoo hin tarreeffamne barreessi</span>
+          <span class="ti">ወይ እንተዘይተዘርዘረ ፍሉይ ስም ጉዳይ ጽሓፍ</span>
+        </td>
+        <td><span class="en">Armed robbery at Merkato</span><span class="am">በመርካቶ የታጠቀ ስርቆት</span><span class="om">Hanna qaroo Merkaatoo</span><span class="ti">ብኣጥር ስርቂ ኣብ መርካቶ</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">descriptiveInfo</td>
+        <td>
+          <span class="en">Full narrative of the incident — who, what, when, where, how</span>
+          <span class="am">የክስተቱ ሙሉ ትረካ — ማን፣ ምን፣ መቼ፣ የት፣ እንዴት</span>
+          <span class="om">Seenaa guutuu mudaa — eenyu, maal, yeroo kam, eessatti, akkamitti</span>
+          <span class="ti">ምሉእ ትረካ ጉዳይ — መን፣ እንታይ፣ መዓስ፣ ኣበይ፣ ከመይ</span>
+        </td>
+        <td><span class="en">Two suspects entered the shop at 22:30…</span><span class="am">ሁለት ተጠርጣሪዎች በ22:30 ሱቁ ገቡ…</span><span class="om">Shakkisiisoonni lama sa'aatii 22:30 dukkana seenan…</span><span class="ti">ክልተ ተጠርጠርቲ ሰዓት 22:30 ድኳን ኣተዉ…</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">date</td>
+        <td>
+          <span class="en">Date the incident occurred (Ethiopian calendar)</span>
+          <span class="am">ክስተቱ የተፈጸመበት ቀን (ኢትዮጵያ ቀን መቁጠሪያ)</span>
+          <span class="om">Guyyaa mudi raawwatame (kalendarii Itoophiyaa)</span>
+          <span class="ti">ዕለት ጉዳይ ዝተፈጸመ (ካላንደር ኢትዮጵያ)</span>
+        </td>
+        <td><code>15/05/2026</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">time</td>
+        <td>
+          <span class="en">Time the incident occurred (24-hour)</span>
+          <span class="am">ክስተቱ የተፈጸመበት ሰዓት (24 ሰዓት)</span>
+          <span class="om">Sa'aatii mudi raawwatame (24)</span>
+          <span class="ti">ሰዓት ጉዳይ ዝተፈጸመ (24)</span>
+        </td>
+        <td><code>22:30</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">locationSearch</td>
+        <td>
+          <span class="en">Type a keyword to search location — dropdown will suggest matches</span>
+          <span class="am">ቦታ ለመፈለግ ቁልፍ ቃል ይተይቡ — ዝርዝሩ ተመሳሳይ ይጠቁማል</span>
+          <span class="om">Bakka barbaaduuaf jecha furtuu barreessi — tarreen walsimu dhiyeessa</span>
+          <span class="ti">ቦታ ንምድላይ ቁልፍ ቃል ጽሓፍ — ዝርዝሩ ተመሳሳሊ ይጠቁም</span>
+        </td>
+        <td><span class="en">Bole Medhanialem</span><span class="am">ቦሌ መድኃኒዓለም</span><span class="om">Boole Medaaniyaalem</span><span class="ti">ቦሌ መድኃኒዓለም</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">latitude / longitude</td>
+        <td>
+          <span class="en">GPS coordinates — fill by clicking "Locate on Map"</span>
+          <span class="am">GPS መጋጠሚያ — "Locate on Map" በመጫን ይሙሉ</span>
+          <span class="om">Qindoo GPS — "Locate on Map" tuquun guuti</span>
+          <span class="ti">ምግጣሚ GPS — "Locate on Map" ብምጥዋቕ ምልኡ</span>
+        </td>
+        <td><code>9.0108, 38.7614</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">geoLocation</td>
+        <td>
+          <span class="en">Auto-filled string version of GPS</span>
+          <span class="am">የGPS በራስ-ሰር የሚሞላ ስሪት</span>
+          <span class="om">Gosa GPS ofumaan guutamu</span>
+          <span class="ti">ቅዳሕ GPS ብራስኡ ዝምልእ</span>
+        </td>
+        <td><em>auto</em></td>
+      </tr>
+      <tr>
+        <td class="field-name">responseAction</td>
+        <td>
+          <span class="en">What has been done so far</span>
+          <span class="am">እስካሁን የተደረገው</span>
+          <span class="om">Waan ammaatti raawwatame</span>
+          <span class="ti">ክሳብ ሕጂ ዝተገበረ</span>
+        </td>
+        <td><span class="en">Investigation opened</span><span class="am">ምርመራ ተከፍቷል</span><span class="om">Qorannoon baname</span><span class="ti">ምርመራ ተኸፊቱ</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">currentStatus</td>
+        <td>
+          <span class="en">Open / Under Investigation / Resolved / Closed</span>
+          <span class="am">ክፍት / በምርመራ / ተፈትቷል / ተዘግቷል</span>
+          <span class="om">Banaa / Qorannoo jalatti / Furame / Cufame</span>
+          <span class="ti">ክፉት / ትሕቲ ምርመራ / ተፈቲሑ / ተዓጽዩ</span>
+        </td>
+        <td><span class="en">Under Investigation</span><span class="am">በምርመራ ላይ</span><span class="om">Qorannoo jalatti</span><span class="ti">ትሕቲ ምርመራ</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">priority</td>
+        <td>
+          <span class="en">Low / Medium / High / Critical</span>
+          <span class="am">ዝቅተኛ / መካከለኛ / ከፍተኛ / ወሳኝ</span>
+          <span class="om">Gadi aanaa / Giddu-galeessa / Ol aanaa / Baay'ee cimaa</span>
+          <span class="ti">ትሑት / ማእከላይ / ልዑል / ወሳኒ</span>
+        </td>
+        <td><span class="en">High</span><span class="am">ከፍተኛ</span><span class="om">Ol aanaa</span><span class="ti">ልዑል</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">initiatedDate</td>
+        <td>
+          <span class="en">Date the case file was opened (usually today)</span>
+          <span class="am">ጉዳዩ የተከፈተበት ቀን (አብዛኛውን ጊዜ ዛሬ)</span>
+          <span class="om">Guyyaa faayilli baname (yeroo baay'ee har'a)</span>
+          <span class="ti">ዕለት ፋይል ተኸፊቱ (መብዛሕትኡ ሎሚ)</span>
+        </td>
+        <td><code>15/05/2026</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">informedBy</td>
+        <td>
+          <span class="en">Who reported this case</span>
+          <span class="am">ይህን ጉዳይ ማን እንደገለጸ</span>
+          <span class="om">Eenyu galmee kana gabaase</span>
+          <span class="ti">መን ነዚ ጉዳይ ከም ዝጠረጸ</span>
+        </td>
+        <td><span class="en">Citizen</span><span class="am">ዜጋ</span><span class="om">Lammii</span><span class="ti">ዜጋ</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">attachmentInput</td>
+        <td>
+          <span class="en">Upload photos, PDFs, or other documents</span>
+          <span class="am">ፎቶዎችን፣ PDFs ወይም ሌሎች ሰነዶችን ይጫኑ</span>
+          <span class="om">Suuraa, PDF, yookaan sanada biraa ol kaa'i</span>
+          <span class="ti">ስእሊ፣ PDF ወይ ካልእ ሰነድ ጽዓን</span>
+        </td>
+        <td><code>photo1.jpg</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="screenshot">
+    <span class="s-icon">🖼️</span>
+    <strong>
+      <span class="en">SCREENSHOT: Crime Registration Form</span>
+      <span class="am">ፎቶ: የወንጀል ምዝገባ ቅጽ</span>
+      <span class="om">Suuraa: Unka Galmee Yakkaa</span>
+      <span class="ti">ስእሊ: ቅጥዒ ምዝገባ ገበን</span>
+    </strong>
+      </div>
+
+  <div class="practice">
+    <h4>🎓
+      <span class="en">Practice Exercise 1</span>
+      <span class="am">የልምምድ ተግባር 1</span>
+      <span class="om">Shaakala 1</span>
+      <span class="ti">ልምምድ 1</span>
+    </h4>
+    <ol>
+      <li class="en">Open "Crime Cases → Register New".</li>
+      <li class="en">Register a <strong>TEST case</strong> with these values:
+        <ul style="margin-left:20px">
+          <li>Case name: <code>TEST - Practice Case</code></li>
+          <li>Description: <code>This is a practice case. Do not act on this.</code></li>
+          <li>Date: today, Time: 12:00</li>
+          <li>Location: your current sub-city</li>
+          <li>Status: <code>Open</code></li>
+          <li>Priority: <code>Low</code></li>
+        </ul>
+      </li>
+      <li class="en">Save and note the assigned case number.</li>
+      <li class="en">Search for it and confirm it appears.</li>
+      <li class="en">Ask your supervisor before deleting the test case.</li>
+
+      <li class="am">"የወንጀል ጉዳዮች → Register New" ይክፈቱ።</li>
+      <li class="am">በእነዚህ እሴቶች <strong>የሙከራ ጉዳይ</strong> ይመዝግቡ:
+        <ul style="margin-left:20px">
+          <li>የጉዳይ ስም: <code>TEST - Practice Case</code></li>
+          <li>መግለጫ: <code>ይህ የልምምድ ጉዳይ ነው። እባክዎ አይተግብሩ።</code></li>
+          <li>ቀን: ዛሬ፣ ሰዓት: 12:00</li>
+          <li>ቦታ: የአሁኑ ክፍለ ከተማዎ</li>
+          <li>ሁኔታ: <code>ክፍት</code></li>
+          <li>ቅድሚያ: <code>ዝቅተኛ</code></li>
+        </ul>
+      </li>
+      <li class="am">ያስቀምጡ እና የተመደበውን የጉዳይ ቁጥር ያስታውሱ።</li>
+      <li class="am">ይፈልጉት እና መታየቱን ያረጋግጡ።</li>
+      <li class="am">የሙከራ ጉዳዩን ከመሰረዝ በፊት ሱፐርቫይዘርዎን ይጠይቁ።</li>
+
+      <li class="om">"Yakkoota → Register New" banaa.</li>
+      <li class="om"><strong>Galmee SHAKALA</strong> gatii kanaan galmeessi:
+        <ul style="margin-left:20px">
+          <li>Maqaa: <code>TEST - Practice Case</code></li>
+          <li>Ibsa: <code>Kun galmee shaakalaa ti. Kanaan hin hojjetinaa.</code></li>
+          <li>Guyyaa: har'a, Sa'aatii: 12:00</li>
+          <li>Bakka: kutaa magaalaa ammaa</li>
+          <li>Haala: <code>Banaa</code></li>
+          <li>Dursa: <code>Gadi aanaa</code></li>
+        </ul>
+      </li>
+      <li class="om">Olkaa'i, lakkoofsa galmee ramadame yaadadhu.</li>
+      <li class="om">Barbaadi, mul'achuu mirkaneessi.</li>
+      <li class="om">Galmee shaakalaa haquu dura toʼataa keessan gaafadhu.</li>
+
+      <li class="ti">"ጉዳያት ገበን → Register New" ክፈቱ።</li>
+      <li class="ti"><strong>ጉዳይ ፈተነ</strong> በዞም እሴታት መዝግብ:
+        <ul style="margin-left:20px">
+          <li>ስም: <code>TEST - Practice Case</code></li>
+          <li>መግለጺ: <code>እዚ ጉዳይ ፈተነ እዩ። በዚ ኣይትስርሑ።</code></li>
+          <li>ዕለት: ሎሚ, ሰዓት: 12:00</li>
+          <li>ቦታ: ህሉው ክፍለ ከተማኻ</li>
+          <li>ኩነታት: <code>ክፉት</code></li>
+          <li>ቅድሚያ: <code>ትሑት</code></li>
+        </ul>
+      </li>
+      <li class="ti">ኣቐምጥ፣ ቁጽሪ ጉዳይ ተመዲቡ ዝኾነ ዝክር።</li>
+      <li class="ti">ድለ፣ ምርኣዩ ኣረጋግጽ።</li>
+      <li class="ti">ጉዳይ ፈተነ ቅድሚ ምድምሳስ ሱፐርቫይዘርካ ሕተት።</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 2. VIEW CRIMES ============ -->
+<section id="view-crimes">
+  <h2><span class="icon">🔎</span>
+    <span class="en">2. View, Search &amp; Filter Crime Cases</span>
+    <span class="am">2. የወንጀል ጉዳዮችን መመልከት፣ መፈለግ እና ማጣራት</span>
+    <span class="om">2. Yakkoota Ilaaluu, Barbaaduu fi Calaluu</span>
+    <span class="ti">2. ጉዳያት ገበን ምርኣይ፣ ምድላይን ምጽራይን</span>
+  </h2>
+
+  <p class="en">With thousands of crime cases recorded, filtering is essential. You can combine multiple filters to drill into exactly the cases you need.</p>
+  <p class="am">በሺዎች የሚቆጠሩ የወንጀል ጉዳዮች ሲመዘገቡ ማጣራት አስፈላጊ ነው። በትክክል የሚፈልጉትን ጉዳዮች ለማውጣት በርካታ ማጣሪያዎችን ማጣመር ይችላሉ።</p>
+  <p class="om">Yeroo galmeen yakkaa kumaatamaan jiru, calaluun barbaachisa. Galmee barbaaddu sirriitti baasuuf calaltuu hedduu walitti fiduu dandeessu.</p>
+  <p class="ti">ሽሕታት ጉዳያት ገበን እንተተመዝጊቦም ምጽራይ ኣድላዪ እዩ። ብልክዕ እትደልዮም ጉዳያት ንምውጻእ ብዙሓት መጽረይታት ክትውህሃድ ትኽእሉ።</p>
+
+  <h3>
+    <span class="en">Available Filters</span>
+    <span class="am">ያሉ ማጣሪያዎች</span>
+    <span class="om">Calaltuu Jiran</span>
+    <span class="ti">መጽረይታት ዘለዉ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Filter</span><span class="am">ማጣሪያ</span><span class="om">Calaltuu</span><span class="ti">መጽረይ</span></th>
+        <th><span class="en">What It Does</span><span class="am">ምን ያደርጋል</span><span class="om">Maal hojjeta</span><span class="ti">እንታይ ይገብር</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">crimeSearch</td>
+        <td>
+          <span class="en">Free-text search by case name or description</span>
+          <span class="am">በጉዳይ ስም ወይም መግለጫ ነፃ ፍለጋ</span>
+          <span class="om">Maqaa galmee yookaan ibsaan barbaacha bilisaa</span>
+          <span class="ti">ብስም ጉዳይ ወይ መግለጺ ናጻ ድሌት</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeCaseName</td>
+        <td>
+          <span class="en">Filter by predefined case name dropdown</span>
+          <span class="am">አስቀድሞ በተዘጋጀ የጉዳይ ስም ዝርዝር ማጣራት</span>
+          <span class="om">Maqaa galmee duraan qophaa'e tarree irraa calali</span>
+          <span class="ti">ብስም ጉዳይ ቅድሚ ዝተዳለወ ዝርዝር ጽረይ</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeStatus</td>
+        <td>
+          <span class="en">Filter by status (Open, Under Investigation, Resolved, Closed)</span>
+          <span class="am">በሁኔታ ማጣራት (ክፍት፣ በምርመራ፣ ተፈትቷል፣ ተዘግቷል)</span>
+          <span class="om">Haalaan calali (Banaa, Qorannoo jalatti, Furame, Cufame)</span>
+          <span class="ti">ብኩነታት ጽረይ (ክፉት፣ ትሕቲ ምርመራ፣ ተፈቲሑ፣ ተዓጽዩ)</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeSubCity</td>
+        <td>
+          <span class="en">Show cases from one sub-city only</span>
+          <span class="am">ከአንድ ክፍለ ከተማ ብቻ ጉዳዮችን ያሳያል</span>
+          <span class="om">Galmeewwan kutaa magaalaa tokko irraa qofa agarsiisa</span>
+          <span class="ti">ጉዳያት ካብ ሓደ ክፍለ ከተማ ጥራይ የርኢ</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeDistrict</td>
+        <td>
+          <span class="en">Narrow to one district</span>
+          <span class="am">ወደ አንድ አውራጃ ማጥበብ</span>
+          <span class="om">Aanaa tokkotti xiqqeessi</span>
+          <span class="ti">ናብ ሓደ ወረዳ ኣጥብ</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeKetena</td>
+        <td>
+          <span class="en">Narrow to one ketena</span>
+          <span class="am">ወደ አንድ ቀበሌ ማጥበብ</span>
+          <span class="om">Ganda tokkotti xiqqeessi</span>
+          <span class="ti">ናብ ሓደ ቀበሌ ኣጥብ</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeBlok</td>
+        <td>
+          <span class="en">Narrow to one block</span>
+          <span class="am">ወደ አንድ ብሎክ ማጥበብ</span>
+          <span class="om">Blookii tokkotti xiqqeessi</span>
+          <span class="ti">ናብ ሓደ ብሎክ ኣጥብ</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimePriority</td>
+        <td>
+          <span class="en">Filter by priority (Low, Medium, High, Critical)</span>
+          <span class="am">በቅድሚያ ማጣራት (ዝቅተኛ፣ መካከለኛ፣ ከፍተኛ፣ ወሳኝ)</span>
+          <span class="om">Dursaan calali (Gadi aanaa, Giddu-galeessa, Ol aanaa, Baay'ee cimaa)</span>
+          <span class="ti">ብቅድሚያ ጽረይ (ትሑት፣ ማእከላይ፣ ልዑል፣ ወሳኒ)</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeStartDate</td>
+        <td>
+          <span class="en">Show cases from this date forward (dd/mm/yyyy)</span>
+          <span class="am">ከዚህ ቀን ወዲያ ጉዳዮችን ያሳያል (ቀን/ወር/ዓመት)</span>
+          <span class="om">Guyyaa kana irraa galmeewwan agarsiisa (gg/jj/ww)</span>
+          <span class="ti">ካብዛ ዕለት ጉዳያት የርኢ (መዓልቲ/ወርሒ/ዓመት)</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">crimeEndDate</td>
+        <td>
+          <span class="en">Show cases up to this date</span>
+          <span class="am">እስከዚህ ቀን ድረስ ጉዳዮችን ያሳያል</span>
+          <span class="om">Hanga guyyaa kanaatti galmeewwan agarsiisa</span>
+          <span class="ti">ክሳብዛ ዕለት ጉዳያት የርኢ</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">Step-by-Step — Search &amp; Filter</span>
+    <span class="am">ደረጃ በደረጃ — ፍለጋ እና ማጣራት</span>
+    <span class="om">Tarkaanfii — Barbaacha fi Calaluu</span>
+    <span class="ti">ደረጃ ብደረጃ — ድሌትን ምጽራይን</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Click "Crime Cases → View Crimes"</strong>
+        <strong class="am">"የወንጀል ጉዳዮች → View Crimes" ይጫኑ</strong>
+        <strong class="om">"Yakkoota → View Crimes" tuqi</strong>
+        <strong class="ti">"ጉዳያት ገበን → View Crimes" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Type in the search box OR pick filters from dropdowns</strong>
+        <strong class="am">በፍለጋ ሳጥኑ ውስጥ ይተይቡ ወይም ከዝርዝሮች ማጣሪያዎችን ይምረጡ</strong>
+        <strong class="om">Saanduqa barbaacha keessatti barreessi yookaan calaltuu tarreewwan irraa filadhu</strong>
+        <strong class="ti">ኣብ ሳጹን ድሌት ጽሓፍ ወይ ካብ ዝርዝራት መጽረይታት ምረጽ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Combine multiple filters</strong>
+        <strong class="am">በርካታ ማጣሪያዎችን ያጣምሩ</strong>
+        <strong class="om">Calaltuu hedduu walitti fidi</strong>
+        <strong class="ti">ብዙሓት መጽረይታት ኣዋህሕ</strong>
+        <span class="en">Example: Sub-City = Bole + Status = Open + Priority = High.</span>
+        <span class="am">ለምሳሌ: ክፍለ ከተማ = ቦሌ + ሁኔታ = ክፍት + ቅድሚያ = ከፍተኛ።</span>
+        <span class="om">Fkn: Kutaa Magaalaa = Boole + Haala = Banaa + Dursa = Ol aanaa.</span>
+        <span class="ti">ኣብነት: ክፍለ ከተማ = ቦሌ + ኩነታት = ክፉት + ቅድሚያ = ልዑል።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Click "Apply Filters"</strong>
+        <strong class="am">"Apply Filters" ይጫኑ</strong>
+        <strong class="om">"Apply Filters" tuqi</strong>
+        <strong class="ti">"Apply Filters" ጠውቑ</strong>
+        <span class="btn-mock login">🔍 Apply Filters</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Click any case row to open the details</strong>
+        <strong class="am">ዝርዝሩን ለመክፈት ማንኛውንም የጉዳይ ረድፍ ይጫኑ</strong>
+        <strong class="om">Odeeffannoo banuuf tarree galmee kamiyyuu tuqi</strong>
+        <strong class="ti">ዝርዝር ንምኽፋት ዝኾነ መስመር ጉዳይ ጠውቑ</strong>
+        <span class="en">A modal shows: full description, location map, officer, timeline, attachments.</span>
+        <span class="am">ሞዳል ያሳያል: ሙሉ መግለጫ፣ የቦታ ካርታ፣ መኮንን፣ የጊዜ መስመር፣ ተያያዥ ፋይሎች።</span>
+        <span class="om">Modal agarsiisa: ibsa guutuu, kaartaa bakka, ofiseraa, yeroo, faayilii dabalataa.</span>
+        <span class="ti">ሞዳል የርኢ: ምሉእ መግለጺ፣ ካርታ ቦታ፣ መኮነን፣ መስመር ግዜ፣ ፋይላት ተወሳኺ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Use the "Print" button to print the filtered list</strong>
+        <strong class="am">የተጣራውን ዝርዝር ለማተም "Print" ቁልፍ ይጠቀሙ</strong>
+        <strong class="om">Tarree calalame maxxansuuf furtuu "Print" fayyadami</strong>
+        <strong class="ti">ዝተጻረየ ዝርዝር ንምሕታም መጠወሊ "Print" ተጠቐም</strong>
+        <span class="btn-mock gray">🖨️ Print</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Click "Reset" to clear all filters</strong>
+        <strong class="am">ሁሉንም ማጣሪያዎች ለማጽዳት "Reset" ይጫኑ</strong>
+        <strong class="om">Calaltuu hunda haquuf "Reset" tuqi</strong>
+        <strong class="ti">ኩሎም መጽረይታት ንምጽራይ "Reset" ጠውቑ</strong>
+        <span class="btn-mock gray">↺ Reset</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout tip">
+    <span class="co-icon">💡</span>
+    <div>
+      <strong class="en">Search tips</strong>
+      <strong class="am">የፍለጋ ምክሮች</strong>
+      <strong class="om">Gorsa barbaacha</strong>
+      <strong class="ti">ምኽሪ ድሌት</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">Search works on partial text — "rob" finds "robbery", "robber", etc.</li>
+        <li class="en">Date range is inclusive on both ends.</li>
+        <li class="en">Combine Sub-City + Ketena + Priority to find the most urgent cases in a specific neighborhood.</li>
+        <li class="am">ፍለጋ በከፊል ጽሁፍ ላይ ይሰራል — "rob" "robbery"፣ "robber" ወዘተ ያገኛል።</li>
+        <li class="am">የቀን ክልሉ በሁለቱም ጫፍ ያካትታል።</li>
+        <li class="am">በአንድ ሰፈር ውስጥ አስቸኳይ ጉዳዮችን ለማግኘት ክፍለ ከተማ + ቀበሌ + ቅድሚያ ያጣምሩ።</li>
+        <li class="om">Barbaachaan barruu walakkaa irratti hojjeta — "rob" "robbery", "robber" argata.</li>
+        <li class="om">Daangaan guyyaa lamaan lamaan dabalata.</li>
+        <li class="om">Kutaa Magaalaa + Ganda + Dursa walitti fiduun galmeewwan baay'ee ariifachiisoo argachuuf.</li>
+        <li class="ti">ድሌት ኣብ ምንታዊ ጽሑፍ ይሰርሕ — "rob" "robbery", "robber" ይረክብ።</li>
+        <li class="ti">ደረት ዕለት ኣብ ክልቲኡ ጫፍ የጠቓልል።</li>
+        <li class="ti">ክፍለ ከተማ + ቀበሌ + ቅድሚያ ብምውህሃድ ኣብ ሓደ ከባቢ ቀልጢፍ ጉዳያት ርኸብ።</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. EDIT CRIME ============ -->
+<section id="edit-crime">
+  <h2><span class="icon">✏️</span>
+    <span class="en">3. Edit &amp; Update a Crime Case</span>
+    <span class="am">3. የወንጀል ጉዳይ ማስተካከል እና ማሻሻል</span>
+    <span class="om">3. Yakka Sirreessuu fi Haaromsuu</span>
+    <span class="ti">3. ጉዳይ ገበን ምስተካከልን ምሕዳስን</span>
+  </h2>
+
+  <p class="en">As investigations progress, you must update the case: change status, add notes, correct details, or attach new evidence. Every change is logged.</p>
+  <p class="am">ምርመራዎች እየተራመዱ ሲሄዱ ጉዳዩን ማዘመን አለብዎ: ሁኔታ መቀየር፣ ማስታወሻ መጨመር፣ ዝርዝር ማስተካከል ወይም አዲስ ማስረጃ ማያያዝ። እያንዳንዱ ለውጥ ይመዘገባል።</p>
+  <p class="om">Qorannoon yeroo itti fufu, galmee haaromsuu qabda: haala jijjiiruu, yaadannoo dabaluu, bal'ina sirreessuu, yookaan ragaa haaraa dabaluu. Jijjiiramni hundi galmeeffama.</p>
+  <p class="ti">ምርመራ ክቕጽል ጉዳይ ክትሓድስ ኣለካ: ኩነታት ምቕያር፣ መተሓሳሰቢ ምውሳኽ፣ ዝርዝር ምስተካከል ወይ ሓድሽ መረጋገጺ ምልጋብ። ኩሉ ለውጢ ይመዝገብ።</p>
+
+  <h3>
+    <span class="en">Step-by-Step Instructions</span>
+    <span class="am">ደረጃ በደረጃ መመሪያዎች</span>
+    <span class="om">Qajeelfama Tarkaanfii</span>
+    <span class="ti">መምርሒ ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Open "Crime Cases → View Crimes"</strong>
+        <strong class="am">"የወንጀል ጉዳዮች → View Crimes" ይክፈቱ</strong>
+        <strong class="om">"Yakkoota → View Crimes" banaa</strong>
+        <strong class="ti">"ጉዳያት ገበን → View Crimes" ክፈቱ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Find the case using search or filters</strong>
+        <strong class="am">በፍለጋ ወይም በማጣሪያ ጉዳዩን ያግኙ</strong>
+        <strong class="om">Barbaacha yookaan calaltuun galmee argi</strong>
+        <strong class="ti">ብድሌት ወይ መጽረይ ጉዳይ ርኸብ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Click "Edit" (pencil ✏️) on the row</strong>
+        <strong class="am">በረድፉ ላይ "Edit" (እርሳስ ✏️) ይጫኑ</strong>
+        <strong class="om">Tarree irratti "Edit" (eeboo ✏️) tuqi</strong>
+        <strong class="ti">ኣብ መስመር "Edit" (ርሳስ ✏️) ጠውቑ</strong>
+        <span class="btn-mock gold">✏️ Edit Case</span>
+        <span class="en">Or click the row → "Edit Case" in the details modal.</span>
+        <span class="am">ወይም ረድፉን ይጫኑ → በዝርዝር ሞዳል ውስጥ "Edit Case"።</span>
+        <span class="om">Yookaan tarree tuqi → modal odeeffannoo keessatti "Edit Case".</span>
+        <span class="ti">ወይ መስመር ጠውቕ → ኣብ ሞዳል ዝርዝር "Edit Case"።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">The edit modal opens with current values</strong>
+        <strong class="am">የአርትዖት ሞዳሉ አሁን ካሉት እሴቶች ጋር ይከፈታል</strong>
+        <strong class="om">Modal gulaallii gatii ammaa waliin bana</strong>
+        <strong class="ti">ሞዳል ምምሕያሽ ምስ ህሉው እሴት ይኽፈት</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Update the fields (see table below)</strong>
+        <strong class="am">መስኮቹን ያዘምኑ (ከታች ሰንጠረዡን ይመልከቱ)</strong>
+        <strong class="om">Dirreewwan haaromsi (tarree gadii ilaali)</strong>
+        <strong class="ti">መዳርግ ኣሕድስ (ሰደቓ ትሕቲ ርአ)</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Add a note about the change in "editDescription" or remarks</strong>
+        <strong class="am">በ"editDescription" ወይም በማስታወሻ ውስጥ ስለ ለውጡ ማስታወሻ ይጨምሩ</strong>
+        <strong class="om">"editDescription" yookaan yaadannoo keessatti waa'ee jijjiiramaa yaadannoo dabali</strong>
+        <strong class="ti">ኣብ "editDescription" ወይ መተሓሳሰቢ ብዛዕባ ለውጢ መተሓሳሰቢ ወስኽ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Click "Save Changes" or "Update Case"</strong>
+        <strong class="am">"Save Changes" ወይም "Update Case" ይጫኑ</strong>
+        <strong class="om">"Save Changes" yookaan "Update Case" tuqi</strong>
+        <strong class="ti">"Save Changes" ወይ "Update Case" ጠውቑ</strong>
+        <span class="btn-mock success">✓ Save Changes</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">8</span>
+      <div class="step-text">
+        <strong class="en">Confirm the green success message</strong>
+        <strong class="am">አረንጓዴውን የስኬት መልእክት ያረጋግጡ</strong>
+        <strong class="om">Ergaa milkaa'inaa magariisa mirkaneessi</strong>
+        <strong class="ti">ቀጠልያ መልእኽቲ ዓወት ኣረጋግጽ</strong>
+      </div>
+    </li>
+  </ol>
+
+  <h3>
+    <span class="en">📝 Fields You Can Edit</span>
+    <span class="am">📝 ማስተካከል የሚችሉ መስኮች</span>
+    <span class="om">📝 Dirreewwan Sirreessuu Dandeessu</span>
+    <span class="ti">📝 መዳርግ ክትስተካክል ትኽእል</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What It Means</span><span class="am">ምን ማለት ነው</span><span class="om">Maal jechuudha</span><span class="ti">እንታይ ማለት</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">editCrimeId</td><td>
+        <span class="en">Hidden internal ID — do not edit</span>
+        <span class="am">የተደበቀ ውስጣዊ መታወቂያ — አያስተካክሉ</span>
+        <span class="om">Eenyummeessaa keessaa dhoksaa — hin sirreessinaa</span>
+        <span class="ti">ውሽጣዊ መንነት ሕቡእ — ኣይትስተካክል</span>
+      </td></tr>
+      <tr><td class="field-name">editCaseNameSelect</td><td>
+        <span class="en">Change the case type from the predefined list</span>
+        <span class="am">ከቅድመ-ተዘጋጁት ዝርዝር የጉዳይ ዓይነት ይቀይሩ</span>
+        <span class="om">Akaakuu galmee tarree duraan qophaa'e irraa jijjiiri</span>
+        <span class="ti">ዓይነት ጉዳይ ካብ ዝርዝር ቅድሚ ዝተዳለወ ቀይር</span>
+      </td></tr>
+      <tr><td class="field-name">editCaseName</td><td>
+        <span class="en">Rename the case</span>
+        <span class="am">ጉዳዩን እንደገና ስም ይስጡ</span>
+        <span class="om">Galmee maqaa haaraa kenni</span>
+        <span class="ti">ጉዳይ ስም ሓድሽ ሃብ</span>
+      </td></tr>
+      <tr><td class="field-name">editDescription</td><td>
+        <span class="en">Add or refine the narrative</span>
+        <span class="am">ትረካ ይጨምሩ ወይም ያጣሩ</span>
+        <span class="om">Seenaa dabali yookaan sirreessi</span>
+        <span class="ti">ትረካ ወስኽ ወይ ኣጽሪ</span>
+      </td></tr>
+      <tr><td class="field-name">editDate</td><td>
+        <span class="en">Correct the incident date</span>
+        <span class="am">የክስተቱን ቀን ያስተካክሉ</span>
+        <span class="om">Guyyaa mudaa sirreessi</span>
+        <span class="ti">ዕለት ጉዳይ ኣስተካክል</span>
+      </td></tr>
+      <tr><td class="field-name">editTime</td><td>
+        <span class="en">Correct the incident time</span>
+        <span class="am">የክስተቱን ሰዓት ያስተካክሉ</span>
+        <span class="om">Sa'aatii mudaa sirreessi</span>
+        <span class="ti">ሰዓት ጉዳይ ኣስተካክል</span>
+      </td></tr>
+      <tr><td class="field-name">editSubCity</td><td>
+        <span class="en">Change sub-city</span>
+        <span class="am">ክፍለ ከተማ ይቀይሩ</span>
+        <span class="om">Kutaa magaalaa jijjiiri</span>
+        <span class="ti">ክፍለ ከተማ ቀይር</span>
+      </td></tr>
+      <tr><td class="field-name">editDistrict</td><td>
+        <span class="en">Change district</span>
+        <span class="am">አውራጃ ይቀይሩ</span>
+        <span class="om">Aanaa jijjiiri</span>
+        <span class="ti">ወረዳ ቀይር</span>
+      </td></tr>
+      <tr><td class="field-name">editKetena</td><td>
+        <span class="en">Change ketena</span>
+        <span class="am">ቀበሌ ይቀይሩ</span>
+        <span class="om">Ganda jijjiiri</span>
+        <span class="ti">ቀበሌ ቀይር</span>
+      </td></tr>
+      <tr><td class="field-name">editBlok</td><td>
+        <span class="en">Change block</span>
+        <span class="am">ብሎክ ይቀይሩ</span>
+        <span class="om">Blookii jijjiiri</span>
+        <span class="ti">ብሎክ ቀይር</span>
+      </td></tr>
+      <tr><td class="field-name">editGeoLocation</td><td>
+        <span class="en">Update GPS position</span>
+        <span class="am">GPS አቀማመጥ ያዘምኑ</span>
+        <span class="om">Qindoo GPS haaromsi</span>
+        <span class="ti">ቦታ GPS ኣሕድስ</span>
+      </td></tr>
+      <tr><td class="field-name">editResponseAction</td><td>
+        <span class="en">Update what action was taken</span>
+        <span class="am">የተወሰደውን እርምጃ ያዘምኑ</span>
+        <span class="om">Gocha raawwatame haaromsi</span>
+        <span class="ti">ተግባር ተገቢሩ ኣሕድስ</span>
+      </td></tr>
+      <tr><td class="field-name">editCurrentStatus</td><td>
+        <span class="en">Update status (Open / Under Investigation / Resolved / Closed)</span>
+        <span class="am">ሁኔታ ያዘምኑ (ክፍት / በምርመራ / ተፈትቷል / ተዘግቷል)</span>
+        <span class="om">Haala haaromsi (Banaa / Qorannoo jalatti / Furame / Cufame)</span>
+        <span class="ti">ኩነታት ኣሕድስ (ክፉት / ትሕቲ ምርመራ / ተፈቲሑ / ተዓጽዩ)</span>
+      </td></tr>
+      <tr><td class="field-name">editInitiatedDate</td><td>
+        <span class="en">Correct the initiated date</span>
+        <span class="am">የተጀመረበትን ቀን ያስተካክሉ</span>
+        <span class="om">Guyyaa jalqabaa sirreessi</span>
+        <span class="ti">ዕለት ተጀሚሩ ኣስተካክል</span>
+      </td></tr>
+      <tr><td class="field-name">editInformedBy</td><td>
+        <span class="en">Update who informed the case</span>
+        <span class="am">ጉዳዩን ያሳወቀውን ሰው ያዘምኑ</span>
+        <span class="om">Eenyu galmee beeksise haaromsi</span>
+        <span class="ti">መን ጉዳይ ኣረዲኡ ኣሕድስ</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    <span class="co-icon">ℹ️</span>
+    <div>
+      <strong class="en">Every edit is logged</strong>
+      <strong class="am">እያንዳንዱ ማስተካከል ይመዘገባል</strong>
+      <strong class="om">Sirreeffamni hundi galmeeffama</strong>
+      <strong class="ti">ኩሉ ምስተካከል ይመዝገብ</strong>
+      <span class="en">The Activity Log records: who edited, what changed, old value, new value, timestamp. This protects against accidental or unauthorized changes.</span>
+      <span class="am">የእንቅስቃሴ ምዝግብ ይመዘግባል: ማን እንደተካ፣ ምን እንደተቀየረ፣ የቀድሞ እሴት፣ አዲስ እሴት፣ ሰዓት። ይህ ከአጋጣሚ ወይም ካልተፈቀደ ለውጦች ይከላከላል።</span>
+      <span class="om">Galmeen sochii galmeessa: eenyu sirreesse, maal jijjiirame, gatii moofaa, gatii haaraa, sa'aatii. Kun jijjiirama tasaa yookaan hayyama hin qabne irraa eega.</span>
+      <span class="ti">መዝገብ ተግባር ይመዝግብ: መን ኣስተካክለ፣ እንታይ ተቐይሩ፣ እሴት ቀዳማይ፣ እሴት ሓድሽ፣ ሰዓት። እዚ ካብ ብኣጋጣሚ ወይ ፍቓድ ዘይብሉ ለውጢ ይከላኸል።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. CASE TYPES ============ -->
+<section id="case-types">
+  <h2><span class="icon">📂</span>
+    <span class="en">4. Manage Crime Case Types</span>
+    <span class="am">4. የወንጀል ጉዳይ ዓይነቶችን ማስተዳደር</span>
+    <span class="om">4. Akaakuu Yakkaa Bulchuu</span>
+    <span class="ti">4. ዓይነታት ጉዳይ ገበን ምሕደራ</span>
+  </h2>
+
+  <p class="en">Crime case types are the predefined categories that appear in the "Case Name" dropdown. Administrators manage them so that officers register cases consistently.</p>
+  <p class="am">የወንጀል ጉዳይ ዓይነቶች በ"Case Name" ዝርዝር ውስጥ የሚታዩ አስቀድመው የተዘጋጁ ምድቦች ናቸው። አስተዳዳሪዎች መኮንኖች ጉዳዮችን በተመሳሳይ መንገድ እንዲመዘግቡ ያስተዳድሯቸዋል።</p>
+  <p class="om">Akaakuu galmee yakkaa kateegoriiwwan duraan qophaa'an tarree "Case Name" keessatti mul'atan ti. Bulchaan isaan bulcha, ofiseroonni galmee walfakkaataan akka galmeessan.</p>
+  <p class="ti">ዓይነታት ጉዳይ ገበን ኣብ ዝርዝር "Case Name" ዝርአዩ ቅድሚ ዝተዳለዉ ምድባት እዮም። ኣማሓዳሪታት ይሓድርዎም መኮነንቲ ብሓደ መንገዲ ጉዳያት ክመዝግቡ።</p>
+
+  <h3>
+    <span class="en">Add a New Case Type</span>
+    <span class="am">አዲስ የጉዳይ ዓይነት ይጨምሩ</span>
+    <span class="om">Akaakuu Galmee Haaraa Dabali</span>
+    <span class="ti">ሓድሽ ዓይነት ጉዳይ ወስኽ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Click "Crime Cases → Manage Case Types"</strong>
+        <strong class="am">"የወንጀል ጉዳዮች → Manage Case Types" ይጫኑ</strong>
+        <strong class="om">"Yakkoota → Manage Case Types" tuqi</strong>
+        <strong class="ti">"ጉዳያት ገበን → Manage Case Types" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Click "Add Case Type"</strong>
+        <strong class="am">"Add Case Type" ይጫኑ</strong>
+        <strong class="om">"Add Case Type" tuqi</strong>
+        <strong class="ti">"Add Case Type" ጠውቑ</strong>
+        <span class="btn-mock login">➕ Add Case Type</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Fill in the fields (see table below)</strong>
+        <strong class="am">መስኮቹን ይሙሉ (ከታች ሰንጠረዡን ይመልከቱ)</strong>
+        <strong class="om">Dirreewwan guuti (tarree gadii ilaali)</strong>
+        <strong class="ti">መዳርግ ምልኡ (ሰደቓ ትሕቲ ርአ)</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Click "Save"</strong>
+        <strong class="am">"Save" ይጫኑ</strong>
+        <strong class="om">"Save" tuqi</strong>
+        <strong class="ti">"Save" ጠውቑ</strong>
+        <span class="btn-mock success">✓ Save</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">The new type appears in the dropdown for all users</strong>
+        <strong class="am">አዲሱ ዓይነት ለሁሉም ተጠቃሚዎች በዝርዝሩ ውስጥ ይታያል</strong>
+        <strong class="om">Akaakuun haaraan fayyadamtoota hundaaf tarree keessatti mul'ata</strong>
+        <strong class="ti">ሓድሽ ዓይነት ንኹሎም ተጠቀምቲ ኣብ ዝርዝር ይርአ</strong>
+      </div>
+    </li>
+  </ol>
+
+  <h3>
+    <span class="en">📝 Fields</span>
+    <span class="am">📝 መስኮች</span>
+    <span class="om">📝 Dirreewwan</span>
+    <span class="ti">📝 መዳርግ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+        <th><span class="en">Example</span><span class="am">ምሳሌ</span><span class="om">Fakkeenya</span><span class="ti">ኣብነት</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">newCaseName</td>
+        <td>
+          <span class="en">Short name of the case type (shown in dropdowns)</span>
+          <span class="am">የጉዳይ ዓይነት አጭር ስም (በዝርዝሮች ይታያል)</span>
+          <span class="om">Maqaa gabaabaa akaakuu galmee (tarreewwan keessatti mul'ata)</span>
+          <span class="ti">ሓጺር ስም ዓይነት ጉዳይ (ኣብ ዝርዝራት ይርአ)</span>
+        </td>
+        <td><span class="en">Armed Robbery</span><span class="am">የታጠቀ ስርቆት</span><span class="om">Hanna Qaroo</span><span class="ti">ብኣጥር ስርቂ</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">newDescription</td>
+        <td>
+          <span class="en">Full explanation of when to use this case type</span>
+          <span class="am">ይህን የጉዳይ ዓይነት መቼ መጠቀም እንዳለበት ሙሉ ማብራሪያ</span>
+          <span class="om">Ibsa guutuu yeroo akaakuu kana fayyadamuu qabdan</span>
+          <span class="ti">ምሉእ መግለጺ መዓስ እዚ ዓይነት ክትጥቀም ከም ዘለካ</span>
+        </td>
+        <td>
+          <span class="en">Robbery involving a weapon</span>
+          <span class="am">መሳሪያ የተጠቀመ ስርቆት</span>
+          <span class="om">Hanna meeshaa waliin</span>
+          <span class="ti">ስርቂ ብመሳርሒ ዝተፈጸመ</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">newResponseAction</td>
+        <td>
+          <span class="en">Default response action (auto-prefilled when this type is used)</span>
+          <span class="am">ነባሪ ምላሽ እርምጃ (ይህ ዓይነት ሲጠቀም በራስ-ሰር ይሞላል)</span>
+          <span class="om">Gocha deebii durtii (akaakuu kana yeroo fayyadamnu ofumaan guutama)</span>
+          <span class="ti">ንቡር ተግባር ምላሽ (እዚ ዓይነት ክጥቀም ብራስኡ ይምልእ)</span>
+        </td>
+        <td><span class="en">Investigation opened</span><span class="am">ምርመራ ተከፍቷል</span><span class="om">Qorannoon baname</span><span class="ti">ምርመራ ተኸፊቱ</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">newDefaultStatus</td>
+        <td>
+          <span class="en">Default status when registered</span>
+          <span class="am">ሲመዘገብ ነባሪ ሁኔታ</span>
+          <span class="om">Haala durtii yeroo galmaa'u</span>
+          <span class="ti">ንቡር ኩነታት ክመዝገብ</span>
+        </td>
+        <td><span class="en">Open</span><span class="am">ክፍት</span><span class="om">Banaa</span><span class="ti">ክፉት</span></td>
+      </tr>
+      <tr>
+        <td class="field-name">newPriority</td>
+        <td>
+          <span class="en">Default priority level</span>
+          <span class="am">ነባሪ የቅድሚያ ደረጃ</span>
+          <span class="om">Sadarkaa dursaa durtii</span>
+          <span class="ti">ንቡር ደረጃ ቅድሚያ</span>
+        </td>
+        <td><span class="en">High</span><span class="am">ከፍተኛ</span><span class="om">Ol aanaa</span><span class="ti">ልዑል</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">Edit or Delete a Case Type</span>
+    <span class="am">የጉዳይ ዓይነት ማስተካከል ወይም መሰረዝ</span>
+    <span class="om">Akaakuu Galmee Sirreessuu yookaan Haquu</span>
+    <span class="ti">ዓይነት ጉዳይ ምስተካከል ወይ ምድምሳስ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Open "Manage Case Types"</strong>
+        <strong class="am">"Manage Case Types" ይክፈቱ</strong>
+        <strong class="om">"Manage Case Types" banaa</strong>
+        <strong class="ti">"Manage Case Types" ክፈቱ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Find the type in the list</strong>
+        <strong class="am">ዓይነቱን በዝርዝሩ ውስጥ ያግኙ</strong>
+        <strong class="om">Akaakuu tarree keessatti argi</strong>
+        <strong class="ti">ዓይነት ኣብ ዝርዝር ርኸብ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Click ✏️ Edit to change name/description</strong>
+        <strong class="am">ስም/መግለጫ ለመቀየር ✏️ Edit ይጫኑ</strong>
+        <strong class="om">Maqaa/ibsa jijjiiruuf ✏️ Edit tuqi</strong>
+        <strong class="ti">ስም/መግለጺ ንምቕያር ✏️ Edit ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">OR click 🗑️ Delete to remove it</strong>
+        <strong class="am">ወይም ለማስወገድ 🗑️ Delete ይጫኑ</strong>
+        <strong class="om">Yookaan haquuf 🗑️ Delete tuqi</strong>
+        <strong class="ti">ወይ ንምድምሳስ 🗑️ Delete ጠውቑ</strong>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="co-icon">⚠️</span>
+    <div>
+      <strong class="en">Deleting a case type does NOT delete cases that use it</strong>
+      <strong class="am">የጉዳይ ዓይነት መሰረዝ እሱን የሚጠቀሙ ጉዳዮችን አይሰርዝም</strong>
+      <strong class="om">Akaakuu galmee haquun galmeewwan isa fayyadaman hin haqu</strong>
+      <strong class="ti">ዓይነት ጉዳይ ምድምሳስ ነቶም ዝጥቀሙሉ ጉዳያት ኣይድምስስን</strong>
+      <span class="en">Existing cases keep their original type name. Only the dropdown option disappears. If you're unsure, edit the name instead of deleting.</span>
+      <span class="am">ያሉ ጉዳዮች የመጀመሪያውን የዓይነት ስም ይይዛሉ። የሚጠፋው የዝርዝር አማራጭ ብቻ ነው። እርግጠኛ ካልሆኑ ከመሰረዝ ይልቅ ስሙን ያስተካክሉ።</span>
+      <span class="om">Galmeewwan jiran maqaa akaakuu isaanii jalqabaa qabatu. Filannoon tarree qofa bada. Yoo hin mirkaneeffanne, haquu irraa maqaa sirreessi.</span>
+      <span class="ti">ጉዳያት ዘለዉ ናይ መጀመርታ ስም ዓይነቶም ይሕዙ። ዝጠፍእ ምርጫ ዝርዝር ጥራይ እዩ። እንተዘይተረጋገጽካ ካብ ምድምሳስ ስም ኣስተካክል።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ANALYZE CRIMES ============ -->
+<section id="analyze-crimes">
+  <h2><span class="icon">📊</span>
+    <span class="en">5. Analyze Crime Patterns</span>
+    <span class="am">5. የወንጀል ንድፎችን መተንተን</span>
+    <span class="om">5. Akkaataa Yakkaa Xiinxaluu</span>
+    <span class="ti">5. ኣቀራርባ ገበን ትንተና</span>
+  </h2>
+
+  <p class="en">Crime Analysis lets supervisors see patterns: where crimes happen, which types are increasing, which areas need more peace keepers, and how case resolution is progressing.</p>
+  <p class="am">የወንጀል ትንታኔ ለተቆጣጣሪዎች ንድፎችን ለማየት ያስችላል: ወንጀሎች የሚከሰቱበት ቦታ፣ እየጨመሩ ያሉ ዓይነቶች፣ ተጨማሪ ፒስ ኪፐሮች የሚያስፈልጋቸው አካባቢዎች እና የጉዳይ አፈታት እድገት።</p>
+  <p class="om">Xiinxalli Yakkaa toʼattootaaf akkaataa ilaaluu dandeessisa: yakki eessatti mudata, akaakuu kam dabalaa jira, naannoo kam ofiseroonni dabalata barbaachisa, fi furmaanni galmee akkamitti adeema.</p>
+  <p class="ti">ትንተና ገበን ንሱፐርቫይዘራት ኣቀራርባ ንምርኣይ ይሕግዝ: ገበናት ኣበይ ይፍጸሙ፣ ኣየናይ ዓይነታት ይውስኹ ኣለዉ፣ ኣየናይ ከባቢታት ተወሳኺ ፒስ ኪፐራት የድልዮም፣ ከመይ ድማ ፍታሕ ጉዳያት ይኸይድ።</p>
+
+  <h3>
+    <span class="en">Available Filters</span>
+    <span class="am">ያሉ ማጣሪያዎች</span>
+    <span class="om">Calaltuu Jiran</span>
+    <span class="ti">መጽረይታት ዘለዉ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Filter</span><span class="am">ማጣሪያ</span><span class="om">Calaltuu</span><span class="ti">መጽረይ</span></th>
+        <th><span class="en">What It Does</span><span class="am">ምን ያደርጋል</span><span class="om">Maal hojjeta</span><span class="ti">እንታይ ይገብር</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">crimeAnalysisStartDate</td><td>
+        <span class="en">Start of the analysis period</span>
+        <span class="am">የትንታኔ ጊዜ መጀመሪያ</span>
+        <span class="om">Jalqaba yeroo xiinxalaa</span>
+        <span class="ti">መጀመሪያ ግዜ ትንተና</span>
+      </td></tr>
+      <tr><td class="field-name">crimeAnalysisEndDate</td><td>
+        <span class="en">End of the analysis period</span>
+        <span class="am">የትንታኔ ጊዜ መጨረሻ</span>
+        <span class="om">Xumura yeroo xiinxalaa</span>
+        <span class="ti">መወዳእታ ግዜ ትንተና</span>
+      </td></tr>
+      <tr><td class="field-name">crimeFilterSubCity</td><td>
+        <span class="en">Limit to one sub-city</span>
+        <span class="am">ወደ አንድ ክፍለ ከተማ ብቻ</span>
+        <span class="om">Kutaa magaalaa tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ክፍለ ከተማ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">crimeFilterDistrict</td><td>
+        <span class="en">Limit to one district</span>
+        <span class="am">ወደ አንድ አውራጃ ብቻ</span>
+        <span class="om">Aanaa tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ወረዳ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">crimeFilterKetena</td><td>
+        <span class="en">Limit to one ketena</span>
+        <span class="am">ወደ አንድ ቀበሌ ብቻ</span>
+        <span class="om">Ganda tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ቀበሌ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">crimeFilterBlok</td><td>
+        <span class="en">Limit to one block</span>
+        <span class="am">ወደ አንድ ብሎክ ብቻ</span>
+        <span class="om">Blookii tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ብሎክ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">crimeAnalysisColumn</td><td>
+        <span class="en">Group by column (e.g. Case_Type, Sub_City, Status)</span>
+        <span class="am">በአምድ ተቀናጅቶ (ለምሳሌ የጉዳይ ዓይነት፣ ክፍለ ከተማ፣ ሁኔታ)</span>
+        <span class="om">Kolomiitiin gareessi (fkn Akaakuu, Kutaa Magaalaa, Haala)</span>
+        <span class="ti">ብኣምዲ ብጉጅለ (ኣብነት ዓይነት፣ ክፍለ ከተማ፣ ኩነታት)</span>
+      </td></tr>
+      <tr><td class="field-name">crimeValue</td><td>
+        <span class="en">Restrict to one specific value in that column</span>
+        <span class="am">በዚያ አምድ ውስጥ ወደ አንድ የተወሰነ እሴት ብቻ</span>
+        <span class="om">Kolomii sana keessatti gatii murtaa'a tokkootti daangessi</span>
+        <span class="ti">ኣብቲ ኣምዲ ናብ ሓደ ፍሉይ እሴት ጥራይ</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">Step-by-Step Instructions</span>
+    <span class="am">ደረጃ በደረጃ መመሪያዎች</span>
+    <span class="om">Qajeelfama Tarkaanfii</span>
+    <span class="ti">መምርሒ ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Click "Crime Cases → Analyze Crimes"</strong>
+        <strong class="am">"የወንጀል ጉዳዮች → Analyze Crimes" ይጫኑ</strong>
+        <strong class="om">"Yakkoota → Analyze Crimes" tuqi</strong>
+        <strong class="ti">"ጉዳያት ገበን → Analyze Crimes" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Set date range in "crimeAnalysisStartDate" and "crimeAnalysisEndDate"</strong>
+        <strong class="am">በ"crimeAnalysisStartDate" እና "crimeAnalysisEndDate" የቀን ክልል ያዘጋጁ</strong>
+        <strong class="om">"crimeAnalysisStartDate" fi "crimeAnalysisEndDate" keessatti daangaa guyyaa kaa'i</strong>
+        <strong class="ti">ኣብ "crimeAnalysisStartDate" ን "crimeAnalysisEndDate" ደረት ዕለት ኣቐምጥ</strong>
+        <span class="en">Example: 01/01/2026 to 30/06/2026.</span>
+        <span class="am">ለምሳሌ: 01/01/2026 እስከ 30/06/2026።</span>
+        <span class="om">Fkn: 01/01/2026 hanga 30/06/2026.</span>
+        <span class="ti">ኣብነት: 01/01/2026 ክሳብ 30/06/2026።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Choose filters: sub-city, district, ketena, block</strong>
+        <strong class="am">ማጣሪያዎችን ይምረጡ: ክፍለ ከተማ፣ አውራጃ፣ ቀበሌ፣ ብሎክ</strong>
+        <strong class="om">Calaltuu filadhu: kutaa magaalaa, aanaa, ganda, blookii</strong>
+        <strong class="ti">መጽረይታት ምረጽ: ክፍለ ከተማ፣ ወረዳ፣ ቀበሌ፣ ብሎክ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Choose grouping in "crimeAnalysisColumn"</strong>
+        <strong class="am">በ"crimeAnalysisColumn" ስብስብ ይምረጡ</strong>
+        <strong class="om">"crimeAnalysisColumn" keessatti gareessuu filadhu</strong>
+        <strong class="ti">ኣብ "crimeAnalysisColumn" ጉጅለ ምረጽ</strong>
+        <span class="en">For example: group by Case_Type to see the most frequent crime.</span>
+        <span class="am">ለምሳሌ: በጣም ተደጋጋሚውን ወንጀል ለማየት በጉዳይ ዓይነት ስብሰሩ።</span>
+        <span class="om">Fkn: yakka baay'ee mul'atu ilaaluuf Akaakuudhaan gareessi.</span>
+        <span class="ti">ኣብነት: ብዙሕ ተደጋጋሚ ገበን ንምርኣይ ብዓይነት ጉጅለ ግበር።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Optionally restrict to one value in "crimeValue"</strong>
+        <strong class="am">አማራጭ — በ"crimeValue" ወደ አንድ እሴት ብቻ ገድቡ</strong>
+        <strong class="om">Filannoo — "crimeValue" keessatti gatii tokkootti daangessi</strong>
+        <strong class="ti">ኣማራጺ — ኣብ "crimeValue" ናብ ሓደ እሴት ጥራይ ደረት ግበር</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Click "Analyze" or "Apply"</strong>
+        <strong class="am">"Analyze" ወይም "Apply" ይጫኑ</strong>
+        <strong class="om">"Analyze" yookaan "Apply" tuqi</strong>
+        <strong class="ti">"Analyze" ወይ "Apply" ጠውቑ</strong>
+        <span class="btn-mock login">📊 Analyze</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Review the results table</strong>
+        <strong class="am">የውጤት ሰንጠረዡን ይገምግሙ</strong>
+        <strong class="om">Tarree bu'aa gamaaggami</strong>
+        <strong class="ti">ሰደቓ ውጽኢት ገምግም</strong>
+        <span class="en">You'll see counts and percentages per group.</span>
+        <span class="am">ለየአንዱ ቡድን ቁጥሮችን እና በመቶኛዎችን ያያሉ።</span>
+        <span class="om">Lakkoofsa fi dhibbeentaa garee tokkoon tokkoon argita.</span>
+        <span class="ti">ቁጽርታትን ሚእታዊን ንነፍሲ ወከፍ ጉጅለ ትርኢ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">8</span>
+      <div class="step-text">
+        <strong class="en">Switch to Charts view if available</strong>
+        <strong class="am">ካለ ወደ ግራፍ እይታ ይቀይሩ</strong>
+        <strong class="om">Yoo jiraate gara ilaalcha Chaartii jijjiiri</strong>
+        <strong class="ti">እንተሎ ናብ ትርኢት ስእልታት ቀይር</strong>
+        <span class="en">Bar chart, pie chart, or trend line.</span>
+        <span class="am">የባር ግራፍ፣ የኬክ ግራፍ ወይም የአዝማሚያ መስመር።</span>
+        <span class="om">Chaartii bar, chaartii pie, yookaan sarara adeemsaa.</span>
+        <span class="ti">ስእሊ ባር፣ ስእሊ ፓይ ወይ መስመር ኣዝማሚያ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">9</span>
+      <div class="step-text">
+        <strong class="en">Click "Print" or "Export" to save the report</strong>
+        <strong class="am">ሪፖርቱን ለማስቀመጥ "Print" ወይም "Export" ይጫኑ</strong>
+        <strong class="om">Gabaasa olkaa'uuf "Print" yookaan "Export" tuqi</strong>
+        <strong class="ti">ጸብጻብ ንምቕማጥ "Print" ወይ "Export" ጠውቑ</strong>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout tip">
+    <span class="co-icon">💡</span>
+    <div>
+      <strong class="en">Useful analysis recipes</strong>
+      <strong class="am">ጠቃሚ የትንታኔ ዘዴዎች</strong>
+      <strong class="om">Caasaa xiinxala barbaachisaa</strong>
+      <strong class="ti">ኣጠቓቕማ ትንተና ጠቓሚ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en"><strong>Top crimes:</strong> group by Case_Type, no sub-city filter. See what crimes are most common citywide.</li>
+        <li class="en"><strong>Hotspot:</strong> group by Ketena, filter sub-city = Bole. See which ketena in Bole has the most cases.</li>
+        <li class="en"><strong>Trend:</strong> use start/end dates of two different months and compare counts.</li>
+        <li class="en"><strong>Status overview:</strong> group by Status to see how many cases are open vs. closed.</li>
+        <li class="am"><strong>ከፍተኛ ወንጀሎች:</strong> በጉዳይ ዓይነት ስብሰሩ፣ የክፍለ ከተማ ማጣሪያ የለም። በከተማው ውስጥ በጣም የተለመዱ ወንጀሎችን ይመልከቱ።</li>
+        <li class="am"><strong>ሆትስፖት:</strong> በቀበሌ ስብሰሩ፣ ክፍለ ከተማ = ቦሌ ማጣራት። በቦሌ ውስጥ ብዙ ጉዳዮች ያሉት ቀበሌ ይመልከቱ።</li>
+        <li class="am"><strong>አዝማሚያ:</strong> የሁለት የተለያዩ ወሮች መጀመሪያ/መጨረሻ ቀናት ይጠቀሙ እና ቁጥሮችን ያወዳድሩ።</li>
+        <li class="am"><strong>የሁኔታ አጠቃላይ እይታ:</strong> ስንት ጉዳዮች ክፍት እንደሆኑ እና ስንት እንደተዘጉ ለማየት በሁኔታ ስብሰሩ።</li>
+        <li class="om"><strong>Yakkoota olaanaa:</strong> Akaakuudhaan gareessi, calaltuu kutaa magaalaa hin fayyadamin. Yakkoota magaalaa keessatti baay'ee baramaa ilaali.</li>
+        <li class="om"><strong>Bakka ho'aa:</strong> Gandaadhaan gareessi, kutaa magaalaa = Boole. Boole keessatti ganda kam galmee baay'ee qaba ilaali.</li>
+        <li class="om"><strong>Adeemsa:</strong> Guyyaa jalqabaa/dhumaa ji'a lamaan adda addaa fayyadamiitii lakkoofsa wal bira qabi.</li>
+        <li class="om"><strong>Waliigala haalaa:</strong> Haalaadhaan gareessi, galmeewwan meeqa banaa fi meeqa cufame ilaaluuf.</li>
+        <li class="ti"><strong>ገበናት ልዑላን:</strong> ብዓይነት ጉጅለ ግበር፣ መጽረይ ክፍለ ከተማ የለን። ኣብ ከተማ ብዙሕ ተለምዶም ገበናት ርአ።</li>
+        <li class="ti"><strong>ቦታ ውዑይ:</strong> ብቀበሌ ጉጅለ ግበር፣ ክፍለ ከተማ = ቦሌ። ኣብ ቦሌ ብዙሕ ጉዳያት ዘለዎ ቀበሌ ርአ።</li>
+        <li class="ti"><strong>ኣዝማሚያ:</strong> ዕለት መጀመርታ/መወዳእታ ክልተ ወርሒ ተጠቒምካ ቁጽርታት ኣወዳድር።</li>
+        <li class="ti"><strong>ሓፈሻ ኩነታት:</strong> ብኩነታት ጉጅለ ግበር፣ ክንደይ ጉዳያት ክፉትን ተዓጺዩን ንምርኣይ።</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="screenshot">
+    <span class="s-icon">📊</span>
+    <strong>
+      <span class="en">SCREENSHOT: Crime Analysis Dashboard</span>
+      <span class="am">ፎቶ: የወንጀል ትንታኔ ዳሽቦርድ</span>
+      <span class="om">Suuraa: Daashboordii Xiinxala Yakkaa</span>
+      <span class="ti">ስእሊ: ዳሽቦርድ ትንተና ገበን</span>
+    </strong>
+      </div>
+</section>
+
+<!-- ============ 6. ANALYZE PEACE ============ -->
+<section id="analyze-peace">
+  <h2><span class="icon">📈</span>
+    <span class="en">6. Analyze Peace Keeper Deployment</span>
+    <span class="am">6. የፒስ ኪፐር ስምሪትን መተንተን</span>
+    <span class="om">6. Bobbaafama Ofiseroonni Xiinxaluu</span>
+    <span class="ti">6. ምስማራት ፒስ ኪፐራት ትንተና</span>
+  </h2>
+
+  <p class="en">Peace Analysis shows you how peace keepers are distributed — by sub-city, ketena, round, member type, and status. Use it to balance coverage and identify under-staffed areas.</p>
+  <p class="am">የፒስ ትንታኔ ፒስ ኪፐሮች እንዴት እንደተከፋፈሉ ያሳያል — በክፍለ ከተማ፣ በቀበሌ፣ በዙር፣ በአባል ዓይነት እና በሁኔታ። ሽፋንን ለማመጣጠን እና አነስተኛ ሰራተኞች ያሉባቸውን አካባቢዎች ለመለየት ይጠቀሙበት።</p>
+  <p class="om">Xiinxalli Nagaa ofiseroonni akkamitti qoodaman agarsiisa — kutaa magaalaa, ganda, marsaa, akaakuu miseensaa fi haalaan. Haguuggii wal madaalchisuuf fi naannoo hojjettoota muraasa qabu adda baasuuf fayyadami.</p>
+  <p class="ti">ትንተና ሰላም ፒስ ኪፐራት ከመይ ከም ዝተኸፋፈሉ የርኢ — ብክፍለ ከተማ፣ ቀበሌ፣ ዙር፣ ዓይነት ኣባልን ኩነታትን። ሽፋን ንምምዛዝን ትሑት ሰራሕተኛታት ዘለዎም ከባቢታት ንምልላይን ተጠቐሞ።</p>
+
+  <h3>
+    <span class="en">Available Filters</span>
+    <span class="am">ያሉ ማጣሪያዎች</span>
+    <span class="om">Calaltuu Jiran</span>
+    <span class="ti">መጽረይታት ዘለዉ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Filter</span><span class="am">ማጣሪያ</span><span class="om">Calaltuu</span><span class="ti">መጽረይ</span></th>
+        <th><span class="en">What It Does</span><span class="am">ምን ያደርጋል</span><span class="om">Maal hojjeta</span><span class="ti">እንታይ ይገብር</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">peaceFilterSubCity</td><td>
+        <span class="en">Limit to one sub-city</span>
+        <span class="am">ወደ አንድ ክፍለ ከተማ ብቻ</span>
+        <span class="om">Kutaa magaalaa tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ክፍለ ከተማ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">peaceFilterDistrict</td><td>
+        <span class="en">Limit to one district</span>
+        <span class="am">ወደ አንድ አውራጃ ብቻ</span>
+        <span class="om">Aanaa tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ወረዳ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">peaceFilterKetena</td><td>
+        <span class="en">Limit to one ketena</span>
+        <span class="am">ወደ አንድ ቀበሌ ብቻ</span>
+        <span class="om">Ganda tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ቀበሌ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">peaceFilterBlok</td><td>
+        <span class="en">Limit to one block</span>
+        <span class="am">ወደ አንድ ብሎክ ብቻ</span>
+        <span class="om">Blookii tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ብሎክ ጥራይ</span>
+      </td></tr>
+      <tr><td class="field-name">peaceAnalysisColumn</td><td>
+        <span class="en">Group by column (Sub_City, Ketena, Round, Member_Type, Status)</span>
+        <span class="am">በአምድ ተቀናጅቶ (ክፍለ ከተማ፣ ቀበሌ፣ ዙር፣ የአባል ዓይነት፣ ሁኔታ)</span>
+        <span class="om">Kolomiitiin gareessi (Kutaa Magaalaa, Ganda, Marsaa, Akaakuu Miseensaa, Haala)</span>
+        <span class="ti">ብኣምዲ ብጉጅለ (ክፍለ ከተማ፣ ቀበሌ፣ ዙር፣ ዓይነት ኣባል፣ ኩነታት)</span>
+      </td></tr>
+      <tr><td class="field-name">peaceValue</td><td>
+        <span class="en">Restrict to one specific value</span>
+        <span class="am">ወደ አንድ የተወሰነ እሴት ብቻ</span>
+        <span class="om">Gatii murtaa'a tokkootti daangessi</span>
+        <span class="ti">ናብ ሓደ ፍሉይ እሴት ጥራይ</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">Step-by-Step Instructions</span>
+    <span class="am">ደረጃ በደረጃ መመሪያዎች</span>
+    <span class="om">Qajeelfama Tarkaanfii</span>
+    <span class="ti">መምርሒ ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Click "Peace Keepers → Analyze Peace"</strong>
+        <strong class="am">"ፒስ ኪፐሮች → Analyze Peace" ይጫኑ</strong>
+        <strong class="om">"Ofiseroonni → Analyze Peace" tuqi</strong>
+        <strong class="ti">"ፒስ ኪፐራት → Analyze Peace" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Set filters (sub-city, district, ketena, block)</strong>
+        <strong class="am">ማጣሪያዎችን ያዘጋጁ (ክፍለ ከተማ፣ አውራጃ፣ ቀበሌ፣ ብሎክ)</strong>
+        <strong class="om">Calaltuu kaa'i (kutaa magaalaa, aanaa, ganda, blookii)</strong>
+        <strong class="ti">መጽረይታት ኣቐምጥ (ክፍለ ከተማ፣ ወረዳ፣ ቀበሌ፣ ብሎክ)</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Choose grouping in "peaceAnalysisColumn"</strong>
+        <strong class="am">በ"peaceAnalysisColumn" ስብስብ ይምረጡ</strong>
+        <strong class="om">"peaceAnalysisColumn" keessatti gareessuu filadhu</strong>
+        <strong class="ti">ኣብ "peaceAnalysisColumn" ጉጅለ ምረጽ</strong>
+        <span class="en">Recommended: Sub_City to see distribution by area.</span>
+        <span class="am">ይመከራል: በአካባቢ ስርጭት ለማየት Sub_City።</span>
+        <span class="om">Gorfama: naannoon qoodama ilaaluuf Sub_City.</span>
+        <span class="ti">ይምከር: ብከባቢ ስርጭት ንምርኣይ Sub_City።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Click "Analyze" or "Apply"</strong>
+        <strong class="am">"Analyze" ወይም "Apply" ይጫኑ</strong>
+        <strong class="om">"Analyze" yookaan "Apply" tuqi</strong>
+        <strong class="ti">"Analyze" ወይ "Apply" ጠውቑ</strong>
+        <span class="btn-mock login">📊 Analyze</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Review distribution table</strong>
+        <strong class="am">የስርጭት ሰንጠረዡን ይገምግሙ</strong>
+        <strong class="om">Tarree raabsaa gamaaggami</strong>
+        <strong class="ti">ሰደቓ ስርጭት ገምግም</strong>
+        <span class="en">Columns: group name, officer count, percentage.</span>
+        <span class="am">አምዶች: የቡድን ስም፣ የመኮንን ብዛት፣ በመቶኛ።</span>
+        <span class="om">Kolommii: maqaa garee, lakkoofsa ofiseraa, dhibbeentaa.</span>
+        <span class="ti">ኣምዳታት: ስም ጉጅለ፣ ቁጽሪ መኮነን፣ ሚእታዊ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Identify under-staffed areas</strong>
+        <strong class="am">አነስተኛ ሰራተኞች ያሉባቸውን አካባቢዎች ይለዩ</strong>
+        <strong class="om">Naannoo hojjettoota muraasa qabu adda baasi</strong>
+        <strong class="ti">ትሑት ሰራሕተኛታት ዘለዎም ከባቢታት ለሊ</strong>
+        <span class="en">Compare counts per sub-city. A big gap means re-deployment is needed.</span>
+        <span class="am">በክፍለ ከተማ ቁጥሮችን ያወዳድሩ። ትልቅ ልዩነት ካለ እንደገና ማሰማራት ያስፈልጋል።</span>
+        <span class="om">Lakkoofsa kutaa magaalaa tokkoon tokkoon wal bira qabi. Garaagarummaan guddaan yoo jiraate bobbaafamni haaraa barbaachisa.</span>
+        <span class="ti">ቁጽርታት ንነፍሲ ወከፍ ክፍለ ከተማ ኣወዳድር። ዓቢ ፍልልይ እንተሎ ምስማራት ሓድሽ የድሊ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Click "Export" or "Print" to save the report</strong>
+        <strong class="am">ሪፖርቱን ለማስቀመጥ "Export" ወይም "Print" ይጫኑ</strong>
+        <strong class="om">Gabaasa olkaa'uuf "Export" yookaan "Print" tuqi</strong>
+        <strong class="ti">ጸብጻብ ንምቕማጥ "Export" ወይ "Print" ጠውቑ</strong>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout tip">
+    <span class="co-icon">💡</span>
+    <div>
+      <strong class="en">Useful analysis recipes</strong>
+      <strong class="am">ጠቃሚ የትንታኔ ዘዴዎች</strong>
+      <strong class="om">Caasaa xiinxala barbaachisaa</strong>
+      <strong class="ti">ኣጠቓቕማ ትንተና ጠቓሚ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en"><strong>Coverage balance:</strong> group by Sub_City. Look for imbalance.</li>
+        <li class="en"><strong>Round distribution:</strong> group by Round to see how many officers per deployment round.</li>
+        <li class="en"><strong>Member type mix:</strong> group by Member_Type to see full-time vs. volunteer ratio.</li>
+        <li class="en"><strong>Status overview:</strong> group by Status to see how many officers are currently active.</li>
+        <li class="am"><strong>የሽፋን ሚዛን:</strong> በክፍለ ከተማ ስብሰሩ። ሚዛን ማጣትን ይፈልጉ።</li>
+        <li class="am"><strong>የዙር ስርጭት:</strong> በዙር ስብሰሩ በየዙሩ ስንት መኮንኖች እንዳሉ ለማየት።</li>
+        <li class="am"><strong>የአባል ዓይነት ድብልቅ:</strong> በአባል ዓይነት ስብሰሩ የሙሉ ጊዜ እና የበጎ ፈቃደኛ ጥምርታ ለማየት።</li>
+        <li class="am"><strong>የሁኔታ አጠቃላይ እይታ:</strong> በሁኔታ ስብሰሩ አሁን ስንት መኮንኖች ንቁ እንደሆኑ ለማየት።</li>
+        <li class="om"><strong>Madaallii haguuggii:</strong> Sub_City'n gareessi. Wal madaallii dhabuu barbaadi.</li>
+        <li class="om"><strong>Raabsa marsaa:</strong> Marsaadhaan gareessi, marsaa tokkoon tokkoon ofiseroonni meeqa akka jiran ilaaluuf.</li>
+        <li class="om"><strong>Walitti makamuu akaakuu miseensaa:</strong> Akaakuu Miseensaatiin gareessi, reeshiyoo yeroo guutuu fi fedhii ilaaluuf.</li>
+        <li class="om"><strong>Waliigala haalaa:</strong> Haalaadhaan gareessi, amma ofiseroonni meeqa socho'aa jiran ilaaluuf.</li>
+        <li class="ti"><strong>ሚዛን ሽፋን:</strong> ብ Sub_City ጉጅለ ግበር። ሚዛን ምጥፋእ ድለ።</li>
+        <li class="ti"><strong>ስርጭት ዙር:</strong> ብዙር ጉጅለ ግበር፣ ኣብ ዙር ዙር ክንደይ መኮነንቲ ከም ዘለዉ ንምርኣይ።</li>
+        <li class="ti"><strong>ውህሃድ ዓይነት ኣባል:</strong> ብዓይነት ኣባል ጉጅለ ግበር፣ ሚዛን ምሉእ ግዜን ብፍቓድን ንምርኣይ።</li>
+        <li class="ti"><strong>ሓፈሻ ኩነታት:</strong> ብኩነታት ጉጅለ ግበር፣ ሕጂ ክንደይ መኮነንቲ ንጡፋት ከም ዘለዉ ንምርኣይ።</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. COMMUNITY REPORT ============ -->
+<section id="community-report">
+  <h2><span class="icon">🏘️</span>
+    <span class="en">7. Submit a Community Discussion Report</span>
+    <span class="am">7. የማህበረሰብ ውይይት ሪፖርት ማስገባት</span>
+    <span class="om">7. Gabaasa Marii Hawaasaa Galmeessuu</span>
+    <span class="ti">7. ጸብጻብ ምይይት ማሕበረሰብ ምቕራብ</span>
+  </h2>
+
+  <p class="en">Community discussion reports are formal records of meetings held with residents. They include attendance, coverage percentages, achievements, challenges, and approver signatures.</p>
+  <p class="am">የማህበረሰብ ውይይት ሪፖርቶች ከነዋሪዎች ጋር የተደረጉ ስብሰባዎችን መደበኛ መዝገቦች ናቸው። ተሳትፎን፣ የሽፋን በመቶኛዎችን፣ ስኬቶችን፣ ችግሮችን እና የአጽዳቂ ፊርማዎችን ያካትታሉ።</p>
+  <p class="om">Gabaasni marii hawaasaa galmee idilee walgahii jiraattoota waliin taasifame ti. Argama, dhibbeentaa haguuggii, milkaa'ina, rakkoo fi mallattoo mirkaneessaa dabalata.</p>
+  <p class="ti">ጸብጻባት ምይይት ማሕበረሰብ መዝገብ ወግዓዊ ኣኼባታት ምስ ነበርቲ ዝተገብሩ እዮም። ተሳትፎ፣ ሚእታዊ ሽፋን፣ ዓወታት፣ ጸገማትን ፊርማ ኣረጋጋጺን የጠቓልሉ።</p>
+
+  <h3>
+    <span class="en">Before You Start — Prepare</span>
+    <span class="am">ከመጀመርዎ በፊት — ያዘጋጁ</span>
+    <span class="om">Jalqabuu dura — qopheessi</span>
+    <span class="ti">ቅድሚ ምጅማር — ኣዳሉ</span>
+  </h3>
+
+  <div class="callout info">
+    <span class="co-icon">📋</span>
+    <div>
+      <strong class="en">Have this ready</strong>
+      <strong class="am">ይህን ያዘጋጁ</strong>
+      <strong class="om">Kana qopheessi</strong>
+      <strong class="ti">እዚ ኣዳሉ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">Number of blocks in the target area</li>
+        <li class="en">Expected attendees (male, female)</li>
+        <li class="en">Actual attendees (male, female)</li>
+        <li class="en">Number of blocks where discussion was held vs. not held</li>
+        <li class="en">Positive points (what went well)</li>
+        <li class="en">Negative points (challenges faced)</li>
+        <li class="en">Actions taken to address challenges</li>
+        <li class="en">Results achieved and problems encountered</li>
+        <li class="en">Signed attendance sheet (if available)</li>
+        <li class="en">Voice recording or meeting minutes (if available)</li>
+        <li class="en">Approver's name and role</li>
+        <li class="am">በዒላማው አካባቢ ያሉ ብሎኮች ብዛት</li>
+        <li class="am">የሚጠበቁ ተሳታፊዎች (ወንድ፣ ሴት)</li>
+        <li class="am">ትክክለኛ ተሳታፊዎች (ወንድ፣ ሴት)</li>
+        <li class="am">ውይይት የተደረገባቸው እና ያልተደረገባቸው ብሎኮች ብዛት</li>
+        <li class="am">አዎንታዊ ነጥቦች (ምን ጥሩ ሆነ)</li>
+        <li class="am">አሉታዊ ነጥቦች (ያጋጠሙ ችግሮች)</li>
+        <li class="am">ችግሮችን ለመፍታት የተወሰዱ እርምጃዎች</li>
+        <li class="am">የተገኙ ውጤቶች እና ያጋጠሙ ችግሮች</li>
+        <li class="am">የተፈረመ የክትትል ወረቀት (ካለ)</li>
+        <li class="am">የድምጽ ቀረጻ ወይም የስብሰባ ደቂቃ (ካለ)</li>
+        <li class="am">የአጽዳቂ ስም እና ሚና</li>
+        <li class="om">Baay'ina blookii naannoo kaayyeffannaa</li>
+        <li class="om">Hirmaattota eegaman (dhiira, dhalaa)</li>
+        <li class="om">Hirmaattota dhugaa (dhiira, dhalaa)</li>
+        <li class="om">Blookiiwwan mariin irratti taasifame fi hin taasifamne</li>
+        <li class="om">Qabxii gaarii (waan gaarii ta'e)</li>
+        <li class="om">Qabxii gadhee (rakkoolee mudatan)</li>
+        <li class="om">Gochaawwan rakkoolee furuuf raawwataman</li>
+        <li class="om">Bu'aa argame fi rakkoolee mudatan</li>
+        <li class="om">Waraqaa argamaa mallatteeffame (yoo jiraate)</li>
+        <li class="om">Sagalee yookaan daqiiqaa walgahii (yoo jiraate)</li>
+        <li class="om">Maqaa fi gahee mirkaneessaa</li>
+        <li class="ti">ብዝሒ ብሎካት ኣብ ከባቢ ሸቶ</li>
+        <li class="ti">ተሳተፍቲ ትጽቢት ዝግበረሎም (ተባዕታይ፣ ኣንስተይቲ)</li>
+        <li class="ti">ተሳተፍቲ ሓቂ (ተባዕታይ፣ ኣንስተይቲ)</li>
+        <li class="ti">ብሎካት ምይይት ዝተገብረሎምን ዘይተገብረሎምን</li>
+        <li class="ti">ኣወንታዊ ነጥብታት (እንታይ ጽቡቕ ኮይኑ)</li>
+        <li class="ti">ኣሉታዊ ነጥብታት (ጸገማት ዝተጋጠሙ)</li>
+        <li class="ti">ተግባራት ጸገማት ንምፍታሕ ዝተገበሩ</li>
+        <li class="ti">ውጽኢታት ዝተረኽቡን ጸገማት ዝተጋጠሙን</li>
+        <li class="ti">ቅርጺ ተረኽቦ ዝተፈረመ (እንተሎ)</li>
+        <li class="ti">ቅዳሕ ድምጺ ወይ ደቒቕ ኣኼባ (እንተሎ)</li>
+        <li class="ti">ስምን ተራ ኣረጋጋጺን</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>
+    <span class="en">Step-by-Step Instructions</span>
+    <span class="am">ደረጃ በደረጃ መመሪያዎች</span>
+    <span class="om">Qajeelfama Tarkaanfii</span>
+    <span class="ti">መምርሒ ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Click "Community Reports" in the left menu</strong>
+        <strong class="am">በግራ ምናሌ "Community Reports" ይጫኑ</strong>
+        <strong class="om">Menu bitaa irratti "Community Reports" tuqi</strong>
+        <strong class="ti">ኣብ ምናሌ ጸጋ "Community Reports" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Click "New Community Report"</strong>
+        <strong class="am">"New Community Report" ይጫኑ</strong>
+        <strong class="om">"New Community Report" tuqi</strong>
+        <strong class="ti">"New Community Report" ጠውቑ</strong>
+        <span class="btn-mock login">➕ New Community Report</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">The report form opens — fill it in section by section</strong>
+        <strong class="am">የሪፖርት ቅጹ ይከፈታል — በክፍል በክፍል ይሙሉ</strong>
+        <strong class="om">Unkni gabaasaa bana — kutaan kutaan guuti</strong>
+        <strong class="ti">ቅጥዒ ጸብጻብ ይኽፈት — ብክፍሊ ብክፍሊ ምልኡ</strong>
+        <span class="en">The form has 5 sections: Discussion Info, Expected vs Actual, Coverage, Narrative, Approval.</span>
+        <span class="am">ቅጹ 5 ክፍሎች አሉት: የውይይት መረጃ፣ የተጠበቀ vs ትክክለኛ፣ ሽፋን፣ ትረካ፣ ማጽደቅ።</span>
+        <span class="om">Unkni kutaa 5 qaba: Odeeffannoo Marii, Eegame vs Dhugaa, Haguuggii, Seenaa, Mirkaneessaa.</span>
+        <span class="ti">ቅጥዒ 5 ክፍልታት ኣለዎ: ሓበሬታ ምይይት፣ ትጽቢት vs ሓቂ፣ ሽፋን፣ ትረካ፣ ምርግጋጽ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Fill Discussion Info: date, sub-city, district</strong>
+        <strong class="am">የውይይት መረጃ ይሙሉ: ቀን፣ ክፍለ ከተማ፣ አውራጃ</strong>
+        <strong class="om">Odeeffannoo Marii guuti: guyyaa, kutaa magaalaa, aanaa</strong>
+        <strong class="ti">ሓበሬታ ምይይት ምልኡ: ዕለት፣ ክፍለ ከተማ፣ ወረዳ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Fill Expected vs Actual attendance</strong>
+        <strong class="am">የተጠበቀ እና ትክክለኛ ተሳትፎ ይሙሉ</strong>
+        <strong class="om">Argama Eegame fi Dhugaa guuti</strong>
+        <strong class="ti">ተሳትፎ ትጽቢትን ሓቅን ምልኡ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Fill Coverage section</strong>
+        <strong class="am">የሽፋን ክፍል ይሙሉ</strong>
+        <strong class="om">Kutaa Haguuggii guuti</strong>
+        <strong class="ti">ክፍሊ ሽፋን ምልኡ</strong>
+        <span class="en">Count how many blocks held discussions vs. did not.</span>
+        <span class="am">ስንት ብሎኮች ውይይት እንዳካሄዱ እና ስንት እንዳላካሄዱ ይቁጠሩ።</span>
+        <span class="om">Blookiiwwan meeqa marii gaggeessan fi meeqa hin gaggeessine lakkaa'i.</span>
+        <span class="ti">ክንደይ ብሎካት ምይይት ከም ዝገበሩን ከም ዘይገበሩን ቁጽሪ ግበር።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Fill Narrative: positive points, negative points, reconciliation actions, results, problems</strong>
+        <strong class="am">ትረካ ይሙሉ: አዎንታዊ ነጥቦች፣ አሉታዊ ነጥቦች፣ የማስታረቅ እርምጃዎች፣ ውጤቶች፣ ችግሮች</strong>
+        <strong class="om">Seenaa guuti: qabxii gaarii, qabxii gadhee, gochaawwan araaraa, bu'aa, rakkoolee</strong>
+        <strong class="ti">ትረካ ምልኡ: ኣወንታዊ ነጥብታት፣ ኣሉታዊ ነጥብታት፣ ተግባራት ዕርቂ፣ ውጽኢታት፣ ጸገማት</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">8</span>
+      <div class="step-text">
+        <strong class="en">Write a one-sentence summary</strong>
+        <strong class="am">የአንድ ዓረፍተ ነገር ማጠቃለያ ይጻፉ</strong>
+        <strong class="om">Cuunfaa hima tokkoo barreessi</strong>
+        <strong class="ti">ሓደ ሓረግ ማጠቃለያ ጽሓፍ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">9</span>
+      <div class="step-text">
+        <strong class="en">Tick the checkboxes for attached documents</strong>
+        <strong class="am">ለተያዙ ሰነዶች ሳጥኖቹን ምልክት ያድርጉ</strong>
+        <strong class="om">Sanadoota dabalatan saanduqawwan mallattoo godhi</strong>
+        <strong class="ti">ንሰነዳት ዝተላገቡ ሳጹናት ምልክት ግበር</strong>
+        <span class="en">Options: signed_attendance_sheet_attached, voice_recording_or_minutes_attached.</span>
+        <span class="am">አማራጮች: signed_attendance_sheet_attached, voice_recording_or_minutes_attached።</span>
+        <span class="om">Filannoowwan: signed_attendance_sheet_attached, voice_recording_or_minutes_attached.</span>
+        <span class="ti">ምርጫታት: signed_attendance_sheet_attached, voice_recording_or_minutes_attached።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">10</span>
+      <div class="step-text">
+        <strong class="en">Upload attachments via "attachmentInput"</strong>
+        <strong class="am">በ"attachmentInput" ተያያዥ ፋይሎችን ይጫኑ</strong>
+        <strong class="om">"attachmentInput" keessatti dabalata ol kaa'i</strong>
+        <strong class="ti">ኣብ "attachmentInput" ተወሳኺ ጽዓን</strong>
+        <span class="en">Photos of signed sheets, audio files, PDFs of minutes.</span>
+        <span class="am">የተፈረሙ ወረቀቶች ፎቶዎች፣ የድምጽ ፋይሎች፣ የደቂቃ PDFs።</span>
+        <span class="om">Suuraa waraqaa mallatteeffame, faayilii sagalee, PDF daqiiqaa.</span>
+        <span class="ti">ስእሊ ዝተፈረሙ ቅርጺታት፣ ፋይል ድምጺ፣ PDF ደቒቕ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">11</span>
+      <div class="step-text">
+        <strong class="en">Fill approver info: "approver_name" and "approver_role"</strong>
+        <strong class="am">የአጽዳቂ መረጃ ይሙሉ: "approver_name" እና "approver_role"</strong>
+        <strong class="om">Odeeffannoo mirkaneessaa guuti: "approver_name" fi "approver_role"</strong>
+        <strong class="ti">ሓበሬታ ኣረጋጋጺ ምልኡ: "approver_name" ን "approver_role"</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">12</span>
+      <div class="step-text">
+        <strong class="en">Click "Submit Report"</strong>
+        <strong class="am">"Submit Report" ይጫኑ</strong>
+        <strong class="om">"Submit Report" tuqi</strong>
+        <strong class="ti">"Submit Report" ጠውቑ</strong>
+        <span class="btn-mock success">✓ Submit Report</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">13</span>
+      <div class="step-text">
+        <strong class="en">Confirm the success message and tracking ID</strong>
+        <strong class="am">የስኬት መልእክቱን እና የክትትል መታወቂያ ያረጋግጡ</strong>
+        <strong class="om">Ergaa milkaa'inaa fi eenyummeessaa hordoffii mirkaneessi</strong>
+        <strong class="ti">መልእኽቲ ዓወትን መንነት ክትትልን ኣረጋግጽ</strong>
+      </div>
+    </li>
+  </ol>
+
+  <h3>
+    <span class="en">📝 Fields — Group 1: Discussion Info</span>
+    <span class="am">📝 መስኮች — ቡድን 1: የውይይት መረጃ</span>
+    <span class="om">📝 Dirreewwan — Garee 1: Odeeffannoo Marii</span>
+    <span class="ti">📝 መዳርግ — ጉጅለ 1: ሓበሬታ ምይይት</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">report_discussion_date</td><td>
+        <span class="en">Date of the discussion (Ethiopian calendar)</span>
+        <span class="am">የውይይቱ ቀን (ኢትዮጵያ ቀን መቁጠሪያ)</span>
+        <span class="om">Guyyaa marii (kalendarii Itoophiyaa)</span>
+        <span class="ti">ዕለት ምይይት (ካላንደር ኢትዮጵያ)</span>
+      </td></tr>
+      <tr><td class="field-name">report_sub_city</td><td>
+        <span class="en">Sub-city where discussion was held</span>
+        <span class="am">ውይይቱ የተካሄደበት ክፍለ ከተማ</span>
+        <span class="om">Kutaa magaalaa mariin irratti taasifame</span>
+        <span class="ti">ክፍለ ከተማ ምይይት ዝተኻየደ</span>
+      </td></tr>
+      <tr><td class="field-name">report_district</td><td>
+        <span class="en">District (woreda) name</span>
+        <span class="am">የአውራጃ (ወረዳ) ስም</span>
+        <span class="om">Maqaa aanaa</span>
+        <span class="ti">ስም ወረዳ</span>
+      </td></tr>
+      <tr><td class="field-name">sub_city</td><td>
+        <span class="en">Duplicate field — auto-synced</span>
+        <span class="am">ተደጋጋሚ መስክ — በራስ-ሰር ይመሳሰላል</span>
+        <span class="om">Dirree irra deebi'e — ofumaan walsima</span>
+        <span class="ti">ተደጋጋሚ መዳርግ — ብራስኡ ይሰማማዕ</span>
+      </td></tr>
+      <tr><td class="field-name">district</td><td>
+        <span class="en">Duplicate field</span>
+        <span class="am">ተደጋጋሚ መስክ</span>
+        <span class="om">Dirree irra deebi'e</span>
+        <span class="ti">ተደጋጋሚ መዳርግ</span>
+      </td></tr>
+      <tr><td class="field-name">ketena</td><td>
+        <span class="en">Ketena where the discussion was held</span>
+        <span class="am">ውይይቱ የተካሄደበት ቀበሌ</span>
+        <span class="om">Ganda mariin irratti taasifame</span>
+        <span class="ti">ቀበሌ ምይይት ዝተኻየደ</span>
+      </td></tr>
+      <tr><td class="field-name">blok</td><td>
+        <span class="en">Block number (leave blank for all blocks)</span>
+        <span class="am">የብሎክ ቁጥር (ለሁሉም ብሎኮች ባዶ ይልቀቁ)</span>
+        <span class="om">Lakkoofsa blookii (blookii hundaaf duwwaa dhiisi)</span>
+        <span class="ti">ቁጽሪ ብሎክ (ንኹሎም ብሎካት ጻዕዳ ግደፍ)</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">📝 Fields — Group 2: Expected vs Actual Attendance</span>
+    <span class="am">📝 መስኮች — ቡድን 2: የተጠበቀ vs ትክክለኛ ተሳትፎ</span>
+    <span class="om">📝 Dirreewwan — Garee 2: Argama Eegame vs Dhugaa</span>
+    <span class="ti">📝 መዳርግ — ጉጅለ 2: ተሳትፎ ትጽቢት vs ሓቂ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">total_blocks</td><td>
+        <span class="en">Total number of blocks in the target area</span>
+        <span class="am">በዒላማ አካባቢ ያሉ ጠቅላላ ብሎኮች</span>
+        <span class="om">Lakkoofsa waliigalaa blookii naannoo kaayyeffannaa</span>
+        <span class="ti">ጠቕላላ ቁጽሪ ብሎካት ኣብ ከባቢ ሸቶ</span>
+      </td></tr>
+      <tr><td class="field-name">expected_male</td><td>
+        <span class="en">How many men were expected to attend</span>
+        <span class="am">ስንት ወንዶች እንደሚገኙ ተጠብቆ ነበር</span>
+        <span class="om">Dhiiroonni meeqa akka argaman eegame</span>
+        <span class="ti">ክንደይ ተባዕታይ ክርከቡ ከም ተጸብዩ</span>
+      </td></tr>
+      <tr><td class="field-name">expected_female</td><td>
+        <span class="en">How many women were expected</span>
+        <span class="am">ስንት ሴቶች እንደሚገኙ ተጠብቆ ነበር</span>
+        <span class="om">Dhalaan meeqa akka argaman eegame</span>
+        <span class="ti">ክንደይ ኣንስቲ ክርከባ ከም ተጸብዩ</span>
+      </td></tr>
+      <tr><td class="field-name">expected_total</td><td>
+        <span class="en">Auto-calculated: male + female</span>
+        <span class="am">በራስ-ሰር: ወንድ + ሴት</span>
+        <span class="om">Ofumaan: dhiira + dhalaa</span>
+        <span class="ti">ብራስኡ: ተባዕታይ + ኣንስተይቲ</span>
+      </td></tr>
+      <tr><td class="field-name">actual_male</td><td>
+        <span class="en">How many men actually came</span>
+        <span class="am">በትክክል ስንት ወንዶች መጡ</span>
+        <span class="om">Dhiiroonni meeqa dhugaan dhufan</span>
+        <span class="ti">ክንደይ ተባዕታይ ብሓቂ መጹ</span>
+      </td></tr>
+      <tr><td class="field-name">actual_female</td><td>
+        <span class="en">How many women actually came</span>
+        <span class="am">በትክክል ስንት ሴቶች መጡ</span>
+        <span class="om">Dhalaan meeqa dhugaan dhufan</span>
+        <span class="ti">ክንደይ ኣንስቲ ብሓቂ መጻ</span>
+      </td></tr>
+      <tr><td class="field-name">actual_total</td><td>
+        <span class="en">Auto-calculated: actual male + female</span>
+        <span class="am">በራስ-ሰር: ትክክለኛ ወንድ + ሴት</span>
+        <span class="om">Ofumaan: dhiira + dhalaa dhugaa</span>
+        <span class="ti">ብራስኡ: ተባዕታይ + ኣንስተይቲ ሓቂ</span>
+      </td></tr>
+      <tr><td class="field-name">performance_percentage</td><td>
+        <span class="en">Auto-calculated performance %</span>
+        <span class="am">በራስ-ሰር የሚሰላ የአፈጻጸም %</span>
+        <span class="om">Dhibbeentaa raawwii ofumaan shallagame</span>
+        <span class="ti">ሚእታዊ ኣፈጻጽማ ብራስኡ ዝሕሰብ</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">📝 Fields — Group 3: Discussion Coverage</span>
+    <span class="am">📝 መስኮች — ቡድን 3: የውይይት ሽፋን</span>
+    <span class="om">📝 Dirreewwan — Garee 3: Haguuggii Marii</span>
+    <span class="ti">📝 መዳርግ — ጉጅለ 3: ሽፋን ምይይት</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">blocks_with_discussion</td><td>
+        <span class="en">Number of blocks where discussion was held</span>
+        <span class="am">ውይይት የተደረገባቸው ብሎኮች ቁጥር</span>
+        <span class="om">Lakkoofsa blookii mariin irratti taasifame</span>
+        <span class="ti">ቁጽሪ ብሎካት ምይይት ዝተኻየደሎም</span>
+      </td></tr>
+      <tr><td class="field-name">discussion_not_held_blocks</td><td>
+        <span class="en">Blocks where no discussion happened</span>
+        <span class="am">ውይይት ያልተደረገባቸው ብሎኮች</span>
+        <span class="om">Blookiiwwan mariin irratti hin taasifamne</span>
+        <span class="ti">ብሎካት ምይይት ዘይተኻየደሎም</span>
+      </td></tr>
+      <tr><td class="field-name">coverage_percentage</td><td>
+        <span class="en">Auto-calculated coverage %</span>
+        <span class="am">በራስ-ሰር የሚሰላ የሽፋን %</span>
+        <span class="om">Dhibbeentaa haguuggii ofumaan</span>
+        <span class="ti">ሚእታዊ ሽፋን ብራስኡ</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">📝 Fields — Group 4: Narrative</span>
+    <span class="am">📝 መስኮች — ቡድን 4: ትረካ</span>
+    <span class="om">📝 Dirreewwan — Garee 4: Seenaa</span>
+    <span class="ti">📝 መዳርግ — ጉጅለ 4: ትረካ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">positive_points</td><td>
+        <span class="en">What went well? Achievements, good feedback, successful outcomes.</span>
+        <span class="am">ምን ጥሩ ሆነ? ስኬቶች፣ ጥሩ ግምገማ፣ ስኬታማ ውጤቶች።</span>
+        <span class="om">Maal gaarii ta'e? Milkaa'ina, deebii gaarii, bu'aa milkaa'aa.</span>
+        <span class="ti">እንታይ ጽቡቕ ኮይኑ? ዓወታት፣ ጽቡቕ ርእይቶ፣ ውጽኢት ዓወት።</span>
+      </td></tr>
+      <tr><td class="field-name">negative_points</td><td>
+        <span class="en">Challenges faced, low attendance, complaints, issues.</span>
+        <span class="am">ያጋጠሙ ችግሮች፣ ዝቅተኛ ተሳትፎ፣ ቅሬታዎች፣ ጉዳዮች።</span>
+        <span class="om">Rakkoolee mudatan, argama gadi aanaa, komii, dhimma.</span>
+        <span class="ti">ጸገማት ዝተጋጠሙ፣ ትሑት ተሳትፎ፣ ጥርዓን፣ ጉዳያት።</span>
+      </td></tr>
+      <tr><td class="field-name">reconciliation_actions</td><td>
+        <span class="en">What actions were taken to address challenges</span>
+        <span class="am">ችግሮችን ለመፍታት ምን እርምጃዎች ተወስደዋል</span>
+        <span class="om">Rakkoolee furuuf gochaawwan maal raawwataman</span>
+        <span class="ti">ጸገማት ንምፍታሕ እንታይ ተግባራት ተገቢሮም</span>
+      </td></tr>
+      <tr><td class="field-name">results_achieved</td><td>
+        <span class="en">Concrete results achieved</span>
+        <span class="am">የተገኙ ተጨባጭ ውጤቶች</span>
+        <span class="om">Bu'aa qabatamaa argame</span>
+        <span class="ti">ዝተረኽቡ ተጨባጭ ውጽኢታት</span>
+      </td></tr>
+      <tr><td class="field-name">problems_encountered</td><td>
+        <span class="en">Specific problems during the discussion</span>
+        <span class="am">በውይይቱ ወቅት ያጋጠሙ ልዩ ችግሮች</span>
+        <span class="om">Rakkoolee adda ta'an yeroo marii</span>
+        <span class="ti">ፍሉያት ጸገማት ኣብ እዋን ምይይት</span>
+      </td></tr>
+      <tr><td class="field-name">one_sentence_summary</td><td>
+        <span class="en">Summarize the entire discussion in one sentence</span>
+        <span class="am">ሙሉ ውይይቱን በአንድ ዓረፍተ ነገር ያጠቃልሉ</span>
+        <span class="om">Marii guutuu hima tokkoon cuunfessi</span>
+        <span class="ti">ብምሉኡ ምይይት ብሓደ ሓረግ ጠቕሊስ</span>
+      </td></tr>
+      <tr><td class="field-name">community_sector_input</td><td>
+        <span class="en">Add community sectors represented (press Enter to add each)</span>
+        <span class="am">የተወከሉ የማህበረሰብ ዘርፎችን ይጨምሩ (እያንዳንዱን ለመጨመር Enter ይጫኑ)</span>
+        <span class="om">Sektoorota hawaasaa bakka bu'an dabali (tokkoon tokkoon dabaluuf Enter tuqi)</span>
+        <span class="ti">ዝተወከሉ ዘርፍታት ማሕበረሰብ ወስኽ (ንነፍሲ ወከፍ ንምውሳኽ Enter ጠውቕ)</span>
+      </td></tr>
+      <tr><td class="field-name">community_sectors</td><td>
+        <span class="en">Hidden field — auto-collects the values above</span>
+        <span class="am">የተደበቀ መስክ — ከላይ ያሉትን እሴቶች በራስ-ሰር ይሰበስባል</span>
+        <span class="om">Dirree dhoksaa — gatiwwan olii ofumaan sassaaba</span>
+        <span class="ti">ሕቡእ መዳርግ — ነቶም ኣብ ላዕሊ ዘለዉ እሴታት ብራስኡ ይእክብ</span>
+      </td></tr>
+      <tr><td class="field-name">sector_office_input</td><td>
+        <span class="en">Add sector offices represented</span>
+        <span class="am">የተወከሉ የዘርፍ ቢሮዎችን ይጨምሩ</span>
+        <span class="om">Waajjiraalee sektoraa bakka bu'an dabali</span>
+        <span class="ti">ቢሮታት ዘርፊ ዝተወከሉ ወስኽ</span>
+      </td></tr>
+      <tr><td class="field-name">agenda_input</td><td>
+        <span class="en">Add agenda items discussed</span>
+        <span class="am">የተወያዩባቸውን አጀንዳዎች ይጨምሩ</span>
+        <span class="om">Ajandaa irratti mari'aman dabali</span>
+        <span class="ti">ኣጀንዳታት ዝተመያየጡሎም ወስኽ</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">📝 Fields — Group 5: Attachments &amp; Approval</span>
+    <span class="am">📝 መስኮች — ቡድን 5: ተያያዥ ፋይሎች እና ማጽደቅ</span>
+    <span class="om">📝 Dirreewwan — Garee 5: Dabalata fi Mirkaneessaa</span>
+    <span class="ti">📝 መዳርግ — ጉጅለ 5: ተወሳኺን ምርግጋጽን</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="field-name">signed_attendance_sheet_attached</td><td>
+        <span class="en">Tick if you uploaded the signed attendance sheet</span>
+        <span class="am">የተፈረመውን የክትትል ወረቀት ካስገቡ ምልክት ያድርጉ</span>
+        <span class="om">Waraqaa argamaa mallatteeffame yoo ol kaa'te mallattoo godhi</span>
+        <span class="ti">ቅርጺ ተረኽቦ ዝተፈረመ እንተጸዓንካ ምልክት ግበር</span>
+      </td></tr>
+      <tr><td class="field-name">voice_recording_or_minutes_attached</td><td>
+        <span class="en">Tick if you uploaded recording or minutes</span>
+        <span class="am">ቀረጻ ወይም ደቂቃ ካስገቡ ምልክት ያድርጉ</span>
+        <span class="om">Sagalee yookaan daqiiqaa yoo ol kaa'te mallattoo godhi</span>
+        <span class="ti">ቅዳሕ ወይ ደቒቕ እንተጸዓንካ ምልክት ግበር</span>
+      </td></tr>
+      <tr><td class="field-name">attachmentInput</td><td>
+        <span class="en">Click "Choose File" and select your attachment(s)</span>
+        <span class="am">"Choose File" ይጫኑ እና ተያያዥ ፋይሎችዎን ይምረጡ</span>
+        <span class="om">"Choose File" tuqiitii dabalata keessan filadhu</span>
+        <span class="ti">"Choose File" ጠውቑ ተወሳኺኹም ምረጹ</span>
+      </td></tr>
+      <tr><td class="field-name">approver_name</td><td>
+        <span class="en">Full name of the person who approved this report</span>
+        <span class="am">ይህን ሪፖርት ያጸደቀው ሰው ሙሉ ስም</span>
+        <span class="om">Maqaa guutuu nama gabaasa kana mirkaneesse</span>
+        <span class="ti">ምሉእ ስም ነዚ ጸብጻብ ዘረጋገጸ</span>
+      </td></tr>
+      <tr><td class="field-name">approver_role</td><td>
+        <span class="en">Their role (e.g. Sub City Administrator)</span>
+        <span class="am">የእነሱ ሚና (ለምሳሌ የክፍለ ከተማ አስተዳዳሪ)</span>
+        <span class="om">Gahee isaanii (fkn Bulchaa Kutaa Magaalaa)</span>
+        <span class="ti">ተሮም (ኣብነት ኣማሓዳሪ ክፍለ ከተማ)</span>
+      </td></tr>
+      <tr><td class="field-name">report_signature_base64</td><td>
+        <span class="en">Auto-captured digital signature (if signature pad is used)</span>
+        <span class="am">በራስ-ሰር የሚያዝ ዲጂታል ፊርማ (የፊርማ ሰሌዳ ካለ)</span>
+        <span class="om">Mallattoo dijitaalaa ofumaan qabame (yoo gabateen mallattoo jiraate)</span>
+        <span class="ti">ብራስኡ ዝተታሕዘ ዲጂታል ፊርማ (እንተሎ ጣቕዒ ፊርማ)</span>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span class="co-icon">💡</span>
+    <div>
+      <strong class="en">Writing tips for narrative fields</strong>
+      <strong class="am">ለትረካ መስኮች የጽሁፍ ምክሮች</strong>
+      <strong class="om">Gorsa barreessuu dirree seenaaf</strong>
+      <strong class="ti">ምኽሪ ጽሕፈት ንመዳርግ ትረካ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">Be specific — mention numbers, names, places.</li>
+        <li class="en">Avoid vague words like "good" or "bad" — explain why.</li>
+        <li class="en">Write in the past tense, in plain language.</li>
+        <li class="en">Keep it under 300 words per field.</li>
+        <li class="en">Use bullet form for multiple points.</li>
+        <li class="am">ተለይተው ይጻፉ — ቁጥሮችን፣ ስሞችን፣ ቦታዎችን ይጥቀሱ።</li>
+        <li class="am">እንደ "ጥሩ" ወይም "መጥፎ" ያሉ ግልጽ ያልሆኑ ቃላትን ያስወግዱ — ለምን እንደሆነ ያብራሩ።</li>
+        <li class="am">በአላማጭ ጊዜ እና በቀላል ቋንቋ ይጻፉ።</li>
+        <li class="am">በአንድ መስክ ከ300 ቃላት በታች ያቆዩ።</li>
+        <li class="am">ለበርካታ ነጥቦች የነጥብ ቅርጸት ይጠቀሙ።</li>
+        <li class="om">Adda ba'aa — lakkoofsa, maqaa, bakka ibsi.</li>
+        <li class="om">Jecha ifa hin taane akka "gaarii" yookaan "gadhee" hin fayyadaminaa — maaliif ibsi.</li>
+        <li class="om">Yeroo darbe fi afaan salphaan barreessi.</li>
+        <li class="om">Dirree tokko keessatti jecha 300 gadi tursiisi.</li>
+        <li class="om">Qabxii hedduuf bifa tuqaa fayyadami.</li>
+        <li class="ti">ፍሉይ ኩን — ቁጽርታት፣ ስማት፣ ቦታታት ጥቀስ።</li>
+        <li class="ti">ከም "ጽቡቕ" ወይ "ገዲፍ" ዘይንጹር ቃላት ኣወግድ — ስለምንታይ ኣብራህ።</li>
+        <li class="ti">ብግዜ ዝሓለፈን ብቐሊል ቋንቋን ጽሓፍ።</li>
+        <li class="ti">ኣብ ሓደ መዳርግ ትሕቲ 300 ቃላት ኣቐምጥ።</li>
+        <li class="ti">ንብዙሓት ነጥብታት ቅርጺ ነጥቢ ተጠቐም።</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="practice">
+    <h4>🎓
+      <span class="en">Practice Exercise 2</span>
+      <span class="am">የልምምድ ተግባር 2</span>
+      <span class="om">Shaakala 2</span>
+      <span class="ti">ልምምድ 2</span>
+    </h4>
+    <ol>
+      <li class="en">Open "Community Reports → New Community Report".</li>
+      <li class="en">Fill in a TEST report using your current area.</li>
+      <li class="en">Use these values:
+        <ul style="margin-left:20px">
+          <li>Sub-city: any</li>
+          <li>Date: today</li>
+          <li>Total blocks: 10</li>
+          <li>Expected male: 50, female: 30</li>
+          <li>Actual male: 45, female: 25</li>
+          <li>Blocks with discussion: 8</li>
+        </ul>
+      </li>
+      <li class="en">Write a positive point and one negative point.</li>
+      <li class="en">Enter approver name as <code>Test Approver</code>.</li>
+      <li class="en">Submit and verify the success message.</li>
+      <li class="en">Ask your supervisor before deleting the test report.</li>
+
+      <li class="am">"Community Reports → New Community Report" ይክፈቱ።</li>
+      <li class="am">የአሁኑን አካባቢዎን በመጠቀም የሙከራ ሪፖርት ይሙሉ።</li>
+      <li class="am">እነዚህን እሴቶች ይጠቀሙ:
+        <ul style="margin-left:20px">
+          <li>ክፍለ ከተማ: ማንኛውም</li>
+          <li>ቀን: ዛሬ</li>
+          <li>ጠቅላላ ብሎኮች: 10</li>
+          <li>የሚጠበቁ ወንዶች: 50፣ ሴቶች: 30</li>
+          <li>ትክክለኛ ወንዶች: 45፣ ሴቶች: 25</li>
+          <li>ውይይት የተደረገባቸው ብሎኮች: 8</li>
+        </ul>
+      </li>
+      <li class="am">አንድ አዎንታዊ ነጥብ እና አንድ አሉታዊ ነጥብ ይጻፉ።</li>
+      <li class="am">የአጽዳቂ ስም <code>Test Approver</code> አስገቡ።</li>
+      <li class="am">አስገብተው የስኬት መልእክቱን ያረጋግጡ።</li>
+      <li class="am">የሙከራ ሪፖርቱን ከመሰረዝ በፊት ሱፐርቫይዘርዎን ይጠይቁ።</li>
+
+      <li class="om">"Community Reports → New Community Report" banaa.</li>
+      <li class="om">Naannoo ammaa keessan fayyadamuun gabaasa SHAKALA guuti.</li>
+      <li class="om">Gatiiwwan kana fayyadami:
+        <ul style="margin-left:20px">
+          <li>Kutaa magaalaa: kamiyyuu</li>
+          <li>Guyyaa: har'a</li>
+          <li>Blookii waliigalaa: 10</li>
+          <li>Dhiira eegame: 50, dhalaa: 30</li>
+          <li>Dhiira dhugaa: 45, dhalaa: 25</li>
+          <li>Blookii marii waliin: 8</li>
+        </ul>
+      </li>
+      <li class="om">Qabxii gaarii tokko fi qabxii gadhee tokko barreessi.</li>
+      <li class="om">Maqaa mirkaneessaa <code>Test Approver</code> galchi.</li>
+      <li class="om">Galchi, ergaa milkaa'inaa mirkaneessi.</li>
+      <li class="om">Gabaasa shaakalaa haquu dura toʼataa keessan gaafadhu.</li>
+
+      <li class="ti">"Community Reports → New Community Report" ክፈቱ።</li>
+      <li class="ti">ከባቢኹም ህሉው ተጠቒምኩም ጸብጻብ ፈተነ ምልኡ።</li>
+      <li class="ti">እዞም እሴታት ተጠቐሙ:
+        <ul style="margin-left:20px">
+          <li>ክፍለ ከተማ: ዝኾነ</li>
+          <li>ዕለት: ሎሚ</li>
+          <li>ጠቕላላ ብሎካት: 10</li>
+          <li>ተባዕታይ ትጽቢት: 50, ኣንስተይቲ: 30</li>
+          <li>ተባዕታይ ሓቂ: 45, ኣንስተይቲ: 25</li>
+          <li>ብሎካት ምይይት ዘለዎም: 8</li>
+        </ul>
+      </li>
+      <li class="ti">ሓደ ኣወንታዊ ነጥብን ሓደ ኣሉታዊ ነጥብን ጽሓፍ።</li>
+      <li class="ti">ስም ኣረጋጋጺ <code>Test Approver</code> ኣእቱ።</li>
+      <li class="ti">ኣቕርብ, መልእኽቲ ዓወት ኣረጋግጽ።</li>
+      <li class="ti">ጸብጻብ ፈተነ ቅድሚ ምድምሳስ ሱፐርቫይዘርካ ሕተት።</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 8. TROUBLESHOOTING ============ -->
+<section id="problems">
+  <h2><span class="icon">🛠️</span>
+    <span class="en">8. Troubleshooting — Part 3</span>
+    <span class="am">8. ችግር መፍታት — ክፍል 3</span>
+    <span class="om">8. Rakkoo Furuu — Kutaa 3</span>
+    <span class="ti">8. ጸገም ምፍታሕ — ክፋል 3</span>
+  </h2>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Problem</span><span class="am">ችግር</span><span class="om">Rakkoo</span><span class="ti">ጸገም</span></th>
+        <th><span class="en">What to Do</span><span class="am">ምን ማድረግ</span><span class="om">Maal gochuu</span><span class="ti">እንታይ ምግባር</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Crime form won't save</span>
+          <span class="am">የወንጀል ቅጹ አይቀመጥም</span>
+          <span class="om">Unkni yakkaa hin olkaa'amu</span>
+          <span class="ti">ቅጥዒ ገበን ኣይቕመጥን</span>
+        </td>
+        <td>
+          <span class="en">Look for red error messages. Common causes: empty required field, invalid date format, or file too big (max 10 MB per file).</span>
+          <span class="am">ቀይ የስህተት መልእክቶችን ይፈልጉ። የተለመዱ ምክንያቶች: ባዶ የግዴታ መስክ፣ የተሳሳተ የቀን ቅርጸት ወይም በጣም ትልቅ ፋይል (በአንድ ፋይል ቢበዛ 10 MB)።</span>
+          <span class="om">Ergaawwan dogoggoraa diimaa barbaadi. Sababa baramaa: dirree barbaachisaa duwwaa, boccaa guyyaa dogoggora, yookaan faayilii baay'ee guddaa (faayilii tokkoof hanga 10 MB).</span>
+          <span class="ti">ቀያሕ መልእኽትታት ጌጋ ድለ። ምኽንያት ልሙድ: መዳርግ ኣድላዪ ጻዕዳ፣ ቅርጺ ዕለት ጌጋ ወይ ፋይል ኣዝዩ ዓቢ (ንፋይል ሓደ ክሳብ 10 MB)።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Location search shows nothing</span>
+          <span class="am">የቦታ ፍለጋ ምንም አያሳይም</span>
+          <span class="om">Barbaachaan bakkaa homaa hin argisiisu</span>
+          <span class="ti">ድሌት ቦታ ዋላ ሓደ ኣየርኢን</span>
+        </td>
+        <td>
+          <span class="en">Try a shorter keyword (first 3-4 letters). Or select the location directly from a related dropdown (Sub-City → District → Ketena).</span>
+          <span class="am">አጭር ቁልፍ ቃል ይሞክሩ (የመጀመሪያ 3-4 ፊደላት)። ወይም ከተዛማጅ ዝርዝር ቦታውን በቀጥታ ይምረጡ (ክፍለ ከተማ → አውራጃ → ቀበሌ)።</span>
+          <span class="om">Jecha furtuu gabaabaa yaali (qubee 3-4 jalqabaa). Yookaan tarree walfakkaatu irraa bakka kallattiin filadhu (Kutaa Magaalaa → Aanaa → Ganda).</span>
+          <span class="ti">ሓጺር ቁልፍ ቃል ፈትን (3-4 ፊደላት ቀዳሞ)። ወይ ካብ ዝሰማማዕ ዝርዝር ቦታ ብቐጥታ ምረጽ (ክፍለ ከተማ → ወረዳ → ቀበሌ)።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Case number not appearing</span>
+          <span class="am">የጉዳይ ቁጥር አይታይም</span>
+          <span class="om">Lakkoofsi galmee hin mul'atu</span>
+          <span class="ti">ቁጽሪ ጉዳይ ኣይርአን</span>
+        </td>
+        <td>
+          <span class="en">Refresh the page (F5). If still missing, check the View Crimes list — the case exists but the confirmation may not have loaded. Sort by newest first.</span>
+          <span class="am">ገጹን ያድሱ (F5)። አሁንም ካልታየ የ"View Crimes" ዝርዝርን ያረጋግጡ — ጉዳዩ አለ ግን ማረጋገጫው ላይጫን ይችላል። በአዲስነት ደርድሩ።</span>
+          <span class="om">Fuula haaromsi (F5). Yoo ammas hin mul'atu, tarree "View Crimes" ilaali — galmeen jira garuu mirkaneessaan hin fe'amne. Haaraan jalqabi.</span>
+          <span class="ti">ገጽ ኣሕድስ (F5)። እንተዘይተራእየ ዝርዝር "View Crimes" ርአ — ጉዳይ ኣሎ ግን መረጋገጺ ኣይጸዓነን። ብሓድሽ ስርዓት።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Analytics showing zero</span>
+          <span class="am">ትንታኔ ዜሮ ያሳያል</span>
+          <span class="om">Xiinxalli zeeroo agarsiisa</span>
+          <span class="ti">ትንተና ዜሮ የርኢ</span>
+        </td>
+        <td>
+          <span class="en">Widen the date range. If too few cases exist, the chart is empty. Also check whether your filter combination is too narrow.</span>
+          <span class="am">የቀን ክልሉን ያስፉ። በጣም ጥቂት ጉዳዮች ካሉ ግራፉ ባዶ ነው። የማጣሪያ ጥምረቱ በጣም ጠባብ መሆኑንም ያረጋግጡ።</span>
+          <span class="om">Daangaa guyyaa babal'isi. Yoo galmeewwan muraasni jiran, chaartiin duwwaa ti. Calaltuun keessan baay'ee dhiphoo ta'uu mirkaneessi.</span>
+          <span class="ti">ደረት ዕለት ኣስፋሕ። ውሑዳት ጉዳያት እንተለዉ ስእሊ ጻዕዳ እዩ። መጽረይኩም ኣዝዩ ጸባብ ምዃኑ ኣረጋግጹ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Community report rejected</span>
+          <span class="am">የማህበረሰብ ሪፖርት ውድቅ ሆነ</span>
+          <span class="om">Gabaasni hawaasaa didame</span>
+          <span class="ti">ጸብጻብ ማሕበረሰብ ተኣገደ</span>
+        </td>
+        <td>
+          <span class="en">Check the error message. Common causes: missing positive_points, missing negative_points, or no approver name. All three are required.</span>
+          <span class="am">የስህተት መልእክቱን ይመልከቱ። የተለመዱ ምክንያቶች: የጎደለ positive_points፣ የጎደለ negative_points ወይም የአጽዳቂ ስም የለም። ሦስቱም ግዴታ ናቸው።</span>
+          <span class="om">Ergaa dogoggoraa ilaali. Sababa baramaa: positive_points hanqate, negative_points hanqate, yookaan maqaa mirkaneessaa hin jiru. Sadan isaanii dirqama.</span>
+          <span class="ti">መልእኽቲ ጌጋ ርአ። ምኽንያት ልሙድ: positive_points ጎዲሉ፣ negative_points ጎዲሉ ወይ ስም ኣረጋጋጺ የለን። ሰለስቲኦም ግዴታ እዮም።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Map won't display</span>
+          <span class="am">ካርታው አይታይም</span>
+          <span class="om">Kaartaan hin mul'atu</span>
+          <span class="ti">ካርታ ኣይርአን</span>
+        </td>
+        <td>
+          <span class="en">Check your internet connection. Some maps require Google Maps API or OpenStreetMap access. Refresh and try again.</span>
+          <span class="am">የኢንተርኔት ግንኙነትዎን ያረጋግጡ። አንዳንድ ካርታዎች Google Maps API ወይም OpenStreetMap መዳረሻ ይፈልጋሉ። አድስ እና እንደገና ይሞክሩ።</span>
+          <span class="om">Walqunnamtii interneetii keessan ilaali. Kaartaawwan tokko tokko Google Maps API yookaan OpenStreetMap barbaadu. Haaromsiitii irra deebi'i.</span>
+          <span class="ti">ምትእስሳር ኢንተርነትኩም ኣረጋግጹ። ገለ ካርታታት Google Maps API ወይ OpenStreetMap የድልዮም። ኣሕድስ ደጊምካ ፈትን።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">What Comes Next</span>
+    <span class="am">ቀጣይ ምን ይመጣል</span>
+    <span class="om">Itti aanu maal dhufa</span>
+    <span class="ti">ቀጻሊ እንታይ ይመጽእ</span>
+  </h3>
+
+  <p class="en">You have completed Part 3. In <strong>Part 4</strong> you will learn how to:</p>
+  <p class="am">ክፍል 3 ን ጨርሰዋል። በ<strong>ክፍል 4</strong> የሚከተሉትን ይማራሉ:</p>
+  <p class="om">Kutaa 3 xumurtan. <strong>Kutaa 4</strong> keessatti barattu:</p>
+  <p class="ti">ክፋል 3 ወዲእኩም። ኣብ <strong>ክፋል 4</strong> እዞም ትምህሩ:</p>
+
+  <ul style="margin-left:24px; margin-top:8px">
+    <li class="en">Send SMS messages to peace keepers</li>
+    <li class="en">Approve or reject SMS messages</li>
+    <li class="en">Send internal messages to other system users</li>
+    <li class="en">Manage system user accounts</li>
+    <li class="en">Handle certificates and ID card requests</li>
+    <li class="en">View and manage notifications</li>
+
+    <li class="am">ለፒስ ኪፐሮች SMS መልእክቶችን መላክ</li>
+    <li class="am">SMS መልእክቶችን ማጽደቅ ወይም ውድቅ ማድረግ</li>
+    <li class="am">ለሌሎች የሲስተም ተጠቃሚዎች የውስጥ መልእክቶችን መላክ</li>
+    <li class="am">የሲስተም ተጠቃሚ መለያዎችን ማስተዳደር</li>
+    <li class="am">ሰርተፍኬቶችን እና የመታወቂያ ጥያቄዎችን ማስተናገድ</li>
+    <li class="am">ማሳወቂያዎችን መመልከት እና ማስተዳደር</li>
+
+    <li class="om">Ofiseroonniif SMS erguu</li>
+    <li class="om">SMS mirkaneessuu yookaan diduu</li>
+    <li class="om">Fayyadamtoota sirna biraaf ergaa giddu-galeessaa erguu</li>
+    <li class="om">Akaawuntii fayyadamaa sirnaa bulchuu</li>
+    <li class="om">Waraqaa fi gaaffii eenyummeessaa qabachuu</li>
+    <li class="om">Beeksisa ilaaluu fi bulchuu</li>
+
+    <li class="ti">ንፒስ ኪፐራት SMS ምስዳድ</li>
+    <li class="ti">SMS ምጽዳቕ ወይ ምንጻግ</li>
+    <li class="ti">ንኻልኦት ተጠቀምቲ ስርዓት ውሽጣዊ መልእኽቲ ምስዳድ</li>
+    <li class="ti">ሕሳባት ተጠቀምቲ ስርዓት ምሕደራ</li>
+    <li class="ti">ሰርተፍኬትን ሕቶ መንነትን ምሕዳር</li>
+    <li class="ti">መልእኽትታት ምርኣይን ምሕደራን</li>
+  </ul>
+
+  <div class="callout tip">
+    <span class="co-icon">➡️</span>
+    <div>
+      <strong class="en">Ready for Part 4?</strong>
+      <strong class="am">ለክፍል 4 ተዘጋጅተዋል?</strong>
+      <strong class="om">Kutaa 4f qophii dha?</strong>
+      <strong class="ti">ንክፋል 4 ተዳሊኹም?</strong>
+      <span class="en">Reply "GO 4" to continue.</span>
+      <span class="am">ለመቀጠል "GO 4" ይመልሱ።</span>
+      <span class="om">Itti fufuuf "GO 4" deebisi.</span>
+      <span class="ti">ንምቕጻል "GO 4" መልስ።</span>
+    </div>
+  </div>
+</section>
+
+<div id="noResult">
+  <span class="en">❌ No matching sections — try a different keyword.</span>
+  <span class="am">❌ ተመሳሳይ ክፍል አልተገኘም — ሌላ ቃል ይሞክሩ።</span>
+  <span class="om">❌ Kutaan walsimu hin argamne — jecha biraa yaali.</span>
+  <span class="ti">❌ ዝሰማማዕ ክፋል ኣይተረኽበን — ካልእ ቃል ፈትን።</span>
+</div>
+
+</main>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Top">↑</button>
+
+<footer>
+  <div class="f-title">
+    <span class="en">🛡️ Peace Keepers – Master Manual – Part 3 of 5</span>
+    <span class="am">🛡️ ፒስ ኪፐርስ – ማስተር መመሪያ – ክፍል 3 ከ5</span>
+    <span class="om">🛡️ Peace Keepers – Buugqa Guddaa – Kutaa 3/5</span>
+    <span class="ti">🛡️ ፒስ ኪፐርስ – ቀንዲ መምርሒ – ክፋል 3 ካብ 5</span>
+  </div>
+  <p class="en">Addis Ababa City Peace &amp; Security Administration Bureau · Internal Use Only</p>
+  <p class="am">የአዲስ አበባ ከተማ ሰላምና ጸጥታ አስተዳደር ቢሮ · ለውስጥ አገልግሎት ብቻ</p>
+  <p class="om">Biiroo Bulchiinsaa Nageenyaa fi Nagaa Magaalaa Finfinnee · Fayyadama Keessaa Qofa</p>
+  <p class="ti">ቤሮ ሰላምን ጸጥታን ከተማ ኣዲስ ኣበባ · ንውሽጢ ጥራይ</p>
+  <p style="margin-top:14px;opacity:.6;font-size:.8rem">© 2026 · v1.0</p>
+</footer>
+
+<script>
+/* ============ LANGUAGE TOGGLE ============ */
+function setLang(lang){
+  const body = document.body;
+  body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  document.documentElement.lang = lang;
+  try{ localStorage.setItem('pk-lang', lang); }catch(e){}
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  let saved = 'en';
+  try{ saved = localStorage.getItem('pk-lang') || 'en'; }catch(e){}
+  setLang(saved);
+});
+
+/* ============ SEARCH ============ */
+let originalHTML = new Map();
+document.querySelectorAll('main section').forEach((sec,i)=>originalHTML.set(i, sec.innerHTML));
+
+function escapeReg(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+
+function searchManual(){
+  const q = document.getElementById('searchInput').value.trim();
+  const sections = document.querySelectorAll('main section');
+  const noRes = document.getElementById('noResult');
+  const stats = document.getElementById('stats');
+  let visible = 0;
+  const kw = q.toLowerCase();
+
+  sections.forEach((sec, i)=>{
+    sec.innerHTML = originalHTML.get(i);
+    if(!kw){ sec.classList.remove('hidden'); visible++; return; }
+    const text = sec.innerText.toLowerCase();
+    if(text.includes(kw)){
+      sec.classList.remove('hidden'); visible++;
+      highlightNode(sec, kw);
+    } else sec.classList.add('hidden');
+  });
+
+  document.querySelectorAll('nav.toc a').forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if(target && target.classList.contains('hidden')) a.style.opacity='.3';
+    else a.style.opacity='1';
+  });
+
+  noRes.style.display = (kw && visible === 0) ? 'block' : 'none';
+  stats.textContent = kw ? (visible + ' section(s) match') : '';
+}
+
+function highlightNode(node, kw){
+  const regex = new RegExp('('+escapeReg(kw)+')','gi');
+  const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => {
+      if(!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      const p = n.parentNode.nodeName;
+      if(p==='SCRIPT'||p==='STYLE'||p==='CODE'||p==='PRE') return NodeFilter.FILTER_REJECT;
+      return regex.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const targets=[];
+  while(walker.nextNode()) targets.push(walker.currentNode);
+  targets.forEach(t=>{
+    const span = document.createElement('span');
+    span.innerHTML = t.nodeValue.replace(regex,'<span class="hl">$1</span>');
+    t.parentNode.replaceChild(span, t);
+  });
+}
+
+function clearSearch(){
+  document.getElementById('searchInput').value='';
+  searchManual();
+  document.getElementById('searchInput').focus();
+}
+
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  toTop.style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='/' && document.activeElement.tagName!=='INPUT'){
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+  if(e.key==='Escape') clearSearch();
+});
+</script>
+
+</body>
+</html>
