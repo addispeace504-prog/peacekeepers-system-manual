@@ -1,0 +1,3608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peace Keepers – Master Manual – Part 1</title>
+<style>
+  :root{
+    --brand-dark:#0d3d2e;
+    --brand-green:#1a5c3f;
+    --brand-light:#e8f5ec;
+    --brand-gold:#c9a227;
+    --brand-gold-2:#e0b83a;
+    --card:#ffffff;
+    --text:#1a1a1a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --bg:#f4f7f5;
+    --error:#dc2626;
+    --success:#16a34a;
+    --info:#2563eb;
+    --warn:#f59e0b;
+    --purple:#7c3aed;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI','Noto Sans Ethiopic','Nyala',system-ui,sans-serif;
+    background:var(--bg); color:var(--text);
+    line-height:1.75; font-size:15px;
+  }
+
+  /* ============ LANGUAGE BAR ============ */
+  .lang-bar{
+    position:sticky; top:0; z-index:300;
+    background:var(--brand-dark); color:#fff;
+    padding:10px 22px; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:10px;
+    box-shadow:0 4px 18px rgba(13,61,46,.35);
+    border-bottom:3px solid var(--brand-gold);
+  }
+  .lang-bar .brand{
+    display:flex; align-items:center; gap:10px;
+    font-weight:800; font-size:.95rem;
+  }
+  .lang-bar .brand .seal{
+    width:32px; height:32px; border-radius:50%;
+    background:radial-gradient(circle,#1e40af 0%,#1e3a8a 60%,#0d3d2e 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem; border:2px solid var(--brand-gold);
+  }
+  .lang-buttons{display:flex; gap:6px; flex-wrap:wrap}
+  .lang-btn{
+    background:transparent; border:2px solid rgba(255,255,255,.3);
+    color:#fff; padding:5px 14px; border-radius:20px;
+    font-weight:700; cursor:pointer; transition:.2s;
+    font-size:.82rem; min-width:44px;
+  }
+  .lang-btn:hover{background:rgba(255,255,255,.15)}
+  .lang-btn.active{
+    background:var(--brand-gold); color:var(--brand-dark);
+    border-color:var(--brand-gold);
+  }
+
+  /* ============ HERO ============ */
+  header.hero{
+    background:
+      radial-gradient(circle at 20% 30%, rgba(201,162,39,.28), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(26,92,63,.55), transparent 55%),
+      linear-gradient(135deg,#0d3d2e 0%,#1a5c3f 60%,#0d3d2e 100%);
+    color:#fff; padding:60px 24px 70px; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  header.hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath fill='%23c9a227' fill-opacity='.04' d='M0 0h35v35H0zM35 35h35v35H35z'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  header.hero .seal-big{
+    font-size:5rem; margin-bottom:14px;
+    filter:drop-shadow(0 6px 20px rgba(0,0,0,.5));
+    animation:float 3.5s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  header.hero h1{
+    font-size:2rem; margin-bottom:10px; letter-spacing:.3px;
+    text-shadow:0 4px 20px rgba(0,0,0,.4); font-weight:800;
+  }
+  header.hero h2{
+    font-size:1.1rem; font-weight:400; opacity:.92;
+    margin-bottom:6px;
+  }
+  header.hero p.lead{
+    max-width:780px; margin:18px auto 0; font-size:1rem;
+    opacity:.92; line-height:1.75;
+  }
+  header.hero .badges{
+    display:flex; gap:8px; justify-content:center;
+    flex-wrap:wrap; margin-top:24px;
+  }
+  header.hero .badge{
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28);
+    backdrop-filter:blur(8px);
+    padding:6px 16px; border-radius:24px;
+    font-weight:600; font-size:.82rem;
+  }
+  header.hero .badge.gold{
+    background:var(--brand-gold); color:var(--brand-dark);
+    border-color:var(--brand-gold); font-weight:800;
+  }
+
+  /* ============ SEARCH ============ */
+  .search-bar{
+    position:sticky; top:52px; z-index:200;
+    background:rgba(255,255,255,.98); backdrop-filter:blur(10px);
+    padding:12px 22px; box-shadow:0 4px 18px rgba(13,61,46,.08);
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    border-bottom:3px solid var(--brand-gold);
+  }
+  .search-bar input{
+    flex:1; min-width:240px;
+    padding:11px 20px 11px 44px;
+    border:2px solid var(--border); border-radius:30px;
+    font-size:.95rem; outline:none; transition:.25s;
+    background:#f8fafc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat 16px center;
+  }
+  .search-bar input:focus{
+    border-color:var(--brand-green); background-color:#fff;
+    box-shadow:0 0 0 4px rgba(26,92,63,.12);
+  }
+  .search-bar button{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; border:none; padding:11px 22px; border-radius:30px;
+    font-weight:700; cursor:pointer; transition:.25s; font-size:.9rem;
+  }
+  .search-bar button:hover{transform:translateY(-2px)}
+  .search-stats{font-size:.82rem; color:var(--muted); font-weight:600}
+
+  /* ============ PART NAV ============ */
+  .part-nav{
+    max-width:1180px; margin:22px auto 0; padding:0 22px;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .part-nav a{
+    flex:1; min-width:170px;
+    background:#fff; border:2px solid var(--border);
+    padding:12px 14px; border-radius:12px;
+    text-decoration:none; color:var(--text);
+    font-weight:600; font-size:.85rem;
+    display:flex; align-items:center; gap:10px;
+    transition:.25s;
+  }
+  .part-nav a:hover{
+    border-color:var(--brand-gold); background:var(--brand-light);
+    transform:translateY(-2px);
+  }
+  .part-nav a.active{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; border-color:var(--brand-gold);
+  }
+  .part-nav a .pn-num{
+    background:var(--brand-gold); color:var(--brand-dark);
+    width:26px; height:26px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:.8rem; flex-shrink:0;
+  }
+  .part-nav a.active .pn-num{background:#fff}
+
+  /* ============ TOC ============ */
+  nav.toc{
+    max-width:1180px; margin:22px auto; padding:30px 34px;
+    background:#fff; border-radius:16px;
+    box-shadow:0 4px 24px rgba(13,61,46,.08);
+    border-top:6px solid var(--brand-gold);
+  }
+  nav.toc h2{
+    color:var(--brand-dark); font-size:1.35rem;
+    margin-bottom:20px; display:flex; align-items:center; gap:10px;
+  }
+  nav.toc ol{
+    list-style:none; display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:6px; counter-reset:toc;
+  }
+  nav.toc ol li{counter-increment:toc}
+  nav.toc a{
+    color:var(--text); text-decoration:none;
+    padding:10px 14px; display:flex; align-items:center;
+    gap:10px; border-radius:10px;
+    border-left:4px solid transparent;
+    transition:.2s; font-weight:500; font-size:.9rem;
+  }
+  nav.toc a:hover{
+    background:var(--brand-light); border-left-color:var(--brand-gold);
+    color:var(--brand-dark); transform:translateX(4px);
+  }
+  nav.toc a::before{
+    content:counter(toc);
+    background:var(--brand-dark); color:#fff;
+    width:26px; height:26px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:.78rem; flex-shrink:0;
+  }
+
+  /* ============ MAIN ============ */
+  main{max-width:1180px; margin:auto; padding:0 22px 80px}
+  section{
+    background:#fff; margin:28px 0; padding:34px 38px;
+    border-radius:16px; box-shadow:0 4px 20px rgba(13,61,46,.06);
+    border-left:7px solid var(--brand-dark);
+    scroll-margin-top:130px;
+  }
+  section:nth-of-type(3n+1){border-left-color:var(--brand-dark)}
+  section:nth-of-type(3n+2){border-left-color:var(--brand-gold)}
+  section:nth-of-type(3n+3){border-left-color:var(--purple)}
+  section h2{
+    color:var(--brand-dark); font-size:1.45rem; margin-bottom:18px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding-bottom:14px; border-bottom:2px dashed var(--border);
+  }
+  section h2 .icon{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; width:48px; height:48px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; flex-shrink:0;
+    box-shadow:0 4px 12px rgba(13,61,46,.35);
+    border:2px solid var(--brand-gold);
+  }
+  section h3{
+    color:var(--brand-green); margin:28px 0 14px;
+    font-size:1.18rem; display:flex; align-items:center; gap:8px;
+  }
+  section h3::before{
+    content:"▸"; color:var(--brand-gold); font-size:1.4rem;
+  }
+  section h4{
+    color:var(--brand-gold-2); margin:22px 0 10px;
+    text-transform:uppercase; font-size:.82rem;
+    letter-spacing:1.5px; font-weight:800;
+  }
+  p{margin-bottom:14px; color:#334155; font-size:.97rem}
+
+  /* ============ STEP LISTS ============ */
+  ol.steps{list-style:none; padding:0; margin:16px 0}
+  ol.steps > li{
+    display:flex; align-items:flex-start; gap:14px;
+    margin-bottom:14px; padding:14px 18px;
+    background:var(--brand-light); border-radius:12px;
+    border-left:5px solid var(--brand-gold);
+    transition:.2s;
+  }
+  ol.steps > li:hover{background:#dcefe2; transform:translateX(4px)}
+  ol.steps > li .step-badge{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; min-width:34px; height:34px; border-radius:50%;
+    font-weight:800; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; font-size:.95rem;
+    box-shadow:0 3px 10px rgba(13,61,46,.4);
+  }
+  ol.steps > li .step-text{flex:1; font-size:.96rem}
+  ol.steps > li .step-text strong{
+    color:var(--brand-dark); display:block;
+    margin-bottom:4px; font-size:1rem;
+  }
+  ol.steps > li .step-text code{
+    background:#0d3d2e; color:#7dd3fc; padding:2px 8px;
+    border-radius:5px; font-size:.85em;
+  }
+
+  /* ============ FIELD TABLE ============ */
+  .field-table{
+    width:100%; border-collapse:separate; border-spacing:0;
+    margin:18px 0; border-radius:12px; overflow:hidden;
+    box-shadow:0 2px 14px rgba(13,61,46,.08);
+    font-size:.9rem;
+  }
+  .field-table thead th{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; padding:14px 16px; text-align:left;
+    font-weight:700; font-size:.82rem;
+    text-transform:uppercase; letter-spacing:.5px;
+    border-bottom:3px solid var(--brand-gold);
+  }
+  .field-table tbody td{
+    padding:13px 16px; border-bottom:1px solid var(--border);
+    vertical-align:top; background:#fff;
+  }
+  .field-table tbody tr:last-child td{border-bottom:none}
+  .field-table tbody tr:nth-child(even) td{background:#fafcf9}
+  .field-table tbody tr:hover td{background:var(--brand-light)}
+  .field-table td.field-name{
+    font-weight:700; color:var(--brand-dark); min-width:170px;
+  }
+  .field-table td.field-name::before{content:"📝 "; margin-right:2px}
+
+  /* ============ CALLOUTS ============ */
+  .callout{
+    padding:16px 20px; border-radius:12px; margin:20px 0;
+    border-left:5px solid;
+    display:flex; gap:14px; align-items:flex-start;
+    font-size:.94rem;
+  }
+  .callout .co-icon{font-size:1.5rem; flex-shrink:0}
+  .callout strong{display:block; margin-bottom:4px; font-size:1rem}
+  .callout.tip{background:linear-gradient(90deg,#ecfdf5,#f0fdf4); border-color:var(--success)}
+  .callout.tip strong{color:var(--success)}
+  .callout.warn{background:linear-gradient(90deg,#fffbeb,#fef3c7); border-color:var(--warn)}
+  .callout.warn strong{color:#b45309}
+  .callout.danger{background:linear-gradient(90deg,#fef2f2,#fee2e2); border-color:var(--error)}
+  .callout.danger strong{color:var(--error)}
+  .callout.info{background:linear-gradient(90deg,#eff6ff,#e0f2fe); border-color:var(--info)}
+  .callout.info strong{color:var(--info)}
+  .callout.gold{background:linear-gradient(90deg,#fef9e7,#fef3c7); border-color:var(--brand-gold)}
+  .callout.gold strong{color:#92620a}
+
+  /* ============ BUTTON MOCK ============ */
+  .btn-mock{
+    display:inline-block; padding:6px 16px; border-radius:8px;
+    font-weight:700; font-size:.82rem; margin:2px 4px;
+    color:#fff; box-shadow:0 3px 8px rgba(0,0,0,.15);
+  }
+  .btn-mock.login{background:linear-gradient(135deg,var(--brand-dark),var(--brand-green))}
+  .btn-mock.success{background:linear-gradient(135deg,var(--success),#22c55e)}
+  .btn-mock.warn{background:linear-gradient(135deg,var(--warn),var(--brand-gold-2)); color:#000}
+  .btn-mock.danger{background:linear-gradient(135deg,var(--error),#ef4444)}
+  .btn-mock.gold{background:linear-gradient(135deg,var(--brand-gold),var(--brand-gold-2)); color:var(--brand-dark)}
+  .btn-mock.gray{background:#64748b}
+
+  /* ============ SCREEN MOCKUP ============ */
+  .screen-mock{
+    background:#0f172a; border-radius:14px; overflow:hidden;
+    margin:22px 0; border:2px solid #1e293b;
+    box-shadow:0 10px 28px rgba(15,23,42,.28);
+  }
+  .screen-mock .titlebar{
+    background:linear-gradient(135deg,#1e293b,#334155);
+    color:#e2e8f0; padding:12px 18px; font-size:.85rem;
+    font-weight:700; display:flex; align-items:center; gap:10px;
+    border-bottom:2px solid var(--brand-gold);
+  }
+  .screen-mock .titlebar .dots{display:flex; gap:6px; margin-right:10px}
+  .screen-mock .titlebar .dots span{width:12px;height:12px;border-radius:50%}
+  .screen-mock .titlebar .dots span:nth-child(1){background:#ef4444}
+  .screen-mock .titlebar .dots span:nth-child(2){background:#f59e0b}
+  .screen-mock .titlebar .dots span:nth-child(3){background:#22c55e}
+  .screen-mock .body{
+    background:#f8fafc; padding:24px; color:#334155; font-size:.92rem;
+  }
+  .screen-mock .body .form-row{
+    display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .screen-mock .body .field{flex:1; min-width:180px}
+  .screen-mock .body .field label{
+    display:block; font-size:.75rem; font-weight:800;
+    color:var(--brand-dark); text-transform:uppercase;
+    margin-bottom:5px; letter-spacing:.5px;
+  }
+  .screen-mock .body .field .input-mock{
+    background:#fff; border:2px solid var(--border); border-radius:8px;
+    padding:10px 14px; color:#94a3b8; font-size:.88rem;
+    font-family:'Consolas',monospace;
+  }
+  .screen-mock .body .big-btn{
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; text-align:center; padding:14px;
+    border-radius:10px; font-weight:800; font-size:1rem;
+    margin-top:10px;
+  }
+  .screen-mock .body .lang-pills{
+    display:flex; gap:6px; justify-content:center; margin-top:10px;
+  }
+  .screen-mock .body .lang-pills span{
+    padding:4px 12px; border-radius:14px;
+    border:2px solid var(--border); font-size:.75rem; font-weight:700;
+  }
+  .screen-mock .body .lang-pills span.on{
+    background:var(--brand-gold); color:var(--brand-dark);
+    border-color:var(--brand-gold);
+  }
+
+  /* ============ SCREENSHOT PLACEHOLDER ============ */
+  .screenshot{
+    background:linear-gradient(135deg,#f0fdf4,#ecfdf5);
+    border:3px dashed var(--brand-gold);
+    border-radius:14px; padding:38px 24px; text-align:center;
+    margin:22px 0; color:var(--brand-dark);
+  }
+  .screenshot .s-icon{font-size:3rem; margin-bottom:10px; display:block}
+  .screenshot strong{
+    display:block; font-size:1.05rem; margin-bottom:6px;
+    color:var(--brand-dark);
+  }
+  .screenshot small{color:var(--muted); font-size:.83rem}
+
+  /* ============ PRACTICE BOX ============ */
+  .practice{
+    background:linear-gradient(135deg,#eff6ff,#e0f2fe);
+    border:2px solid var(--info); border-radius:14px;
+    padding:20px 24px; margin:22px 0;
+  }
+  .practice h4{
+    color:var(--info); margin:0 0 12px;
+    font-size:.98rem; text-transform:uppercase;
+    letter-spacing:1px; font-weight:800;
+  }
+  .practice ol{margin-left:22px; margin-top:8px}
+  .practice ol li{margin-bottom:8px; font-size:.94rem}
+
+  /* ============ BILINGUAL ============ */
+  body.lang-am .en, body.lang-om .en, body.lang-ti .en{display:none !important}
+  body.lang-en .am, body.lang-en .om, body.lang-en .ti{display:none !important}
+  body:not(.lang-am) .am{display:none}
+  body:not(.lang-om) .om{display:none}
+  body:not(.lang-ti) .ti{display:none}
+
+  /* ============ SEARCH ============ */
+  .hl{background:#fde047; padding:1px 3px; border-radius:3px; font-weight:600}
+  .hidden{display:none !important}
+  #noResult{
+    text-align:center; padding:60px 20px; color:var(--error);
+    font-weight:700; font-size:1.15rem; display:none;
+  }
+
+  /* ============ TOP BUTTON ============ */
+  #toTop{
+    position:fixed; right:22px; bottom:22px; z-index:150;
+    background:linear-gradient(135deg,var(--brand-dark),var(--brand-green));
+    color:#fff; border:2px solid var(--brand-gold);
+    width:54px; height:54px; border-radius:50%;
+    font-size:1.3rem; cursor:pointer; display:none;
+    box-shadow:0 6px 20px rgba(13,61,46,.5);
+    transition:.25s;
+  }
+  #toTop:hover{transform:translateY(-4px) scale(1.08)}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:linear-gradient(135deg,#0d3d2e,#051e16);
+    color:#cbd5e1; text-align:center; padding:46px 24px; margin-top:60px;
+    border-top:4px solid var(--brand-gold);
+  }
+  footer .f-title{
+    color:var(--brand-gold); font-weight:800;
+    font-size:1.15rem; margin-bottom:10px;
+  }
+  footer p{font-size:.88rem; opacity:.85; margin:4px 0; color:#cbd5e1}
+
+  @media (max-width:640px){
+    header.hero h1{font-size:1.5rem}
+    section{padding:22px 20px}
+    nav.toc ol{grid-template-columns:1fr}
+    .search-bar{top:46px}
+    .screen-mock .body .form-row{flex-direction:column}
+  }
+</style>
+</head>
+<body class="lang-en">
+
+<!-- ============ LANGUAGE BAR ============ -->
+<div class="lang-bar">
+  <div class="brand">
+    <span class="seal">🛡️</span>
+    <span>PEACE KEEPERS · Master Manual · Part 1</span>
+  </div>
+  <div class="lang-buttons">
+    <button class="lang-btn active" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('am')" data-lang="am">አማ</button>
+    <button class="lang-btn" onclick="setLang('om')" data-lang="om">Afa O</button>
+    <button class="lang-btn" onclick="setLang('ti')" data-lang="ti">ትግ</button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="seal-big">🛡️</div>
+  <h1 class="en">Peace Keepers – Master User Manual</h1>
+  <h1 class="am">ፒስ ኪፐርስ – ማስተር የተጠቃሚ መመሪያ</h1>
+  <h1 class="om">Peace Keepers – Buugqa Fayyadamaa Guddaa</h1>
+  <h1 class="ti">ፒስ ኪፐርስ – ቀንዲ መምርሒ ተጠቃሚ</h1>
+
+  <h2 class="en">Addis Ababa City Peace &amp; Security Administration Bureau</h2>
+  <h2 class="am">የአዲስ አበባ ከተማ ሰላምና ጸጥታ አስተዳደር ቢሮ</h2>
+  <h2 class="om">Biiroo Bulchiinsaa Nageenyaa fi Nagaa Magaalaa Finfinnee</h2>
+  <h2 class="ti">ቤሮ ሰላምን ጸጥታን ከተማ ኣዲስ ኣበባ</h2>
+
+  <p class="lead en">A complete step-by-step guide for every user — designed for people with no technical background. Every button, every field, every screen is explained in plain language.</p>
+  <p class="lead am">ለሁሉም ተጠቃሚ የተዘጋጀ ሙሉ ደረጃ በደረጃ መመሪያ — ለቴክኒክ ያልሆኑ ሰዎች የተዘጋጀ። ሁሉም ቁልፍ፣ ሁሉም መስክ፣ ሁሉም ገጽ በቀላል ቋንቋ ተብራርቷል።</p>
+  <p class="lead om">Qajeelfama guutuu tarkaanfii-tarkaanfiitiif fayyadamtoota hundaaf — namoota ogummaa teekniikii hin qabneef qophaa'e.</p>
+  <p class="lead ti">ንኹሎም ተጠቀምቲ ዝተዳለወ ምሉእ ደረጃ-ብደረጃ መምርሒ — ንቴክኒካዊ ዘይኮኑ ሰባት ዝተዳለወ።</p>
+
+  <div class="badges">
+    <span class="badge gold en">Part 1 of 5</span>
+    <span class="badge gold am">ክፍል 1 ከ5</span>
+    <span class="badge gold om">Kutaa 1/5</span>
+    <span class="badge gold ti">ክፋል 1 ካብ 5</span>
+    <span class="badge en">No Technical Skills Needed</span>
+    <span class="badge am">የቴክኒክ ክህሎት አያስፈልግም</span>
+    <span class="badge en">Every Field Explained</span>
+    <span class="badge am">ሁሉም መስክ ተብራርቷል</span>
+    <span class="badge en">Live Searchable</span>
+    <span class="badge am">ፍለጋ ይሰራል</span>
+  </div>
+</header>
+
+<!-- ============ SEARCH ============ -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="🔍 Search the manual… / ፈልግ…" oninput="searchManual()">
+  <button onclick="clearSearch()">
+    <span class="en">Clear</span>
+    <span class="am">አጽዳ</span>
+    <span class="om">Haqi</span>
+    <span class="ti">ኣጽሪ</span>
+  </button>
+  <span class="search-stats" id="stats"></span>
+</div>
+
+<!-- ============ PART NAVIGATION ============ -->
+<div class="part-nav">
+  <a href="#" class="active"><span class="pn-num">1</span>
+    <span class="en">Start · Login · Officers</span>
+    <span class="am">ጅምር · መግቢያ · መኮንኖች</span>
+    <span class="om">Jalqaba · Seensa · Ofiseroonni</span>
+    <span class="ti">መጀመሪያ · መእተዊ · መኮነንቲ</span>
+  </a>
+  <a href="PEACE-KEEPERS-MANUAL-PART-2.html"><span class="pn-num">2</span>
+    <span class="en">Officers · Attendance</span>
+    <span class="am">መኮንኖች · ክትትል</span>
+    <span class="om">Ofiseroonni · Argama</span>
+    <span class="ti">መኮነንቲ · ተረኽቦ</span>
+  </a>
+  <a href="PEACE-KEEPERS-MANUAL-PART-3.html"><span class="pn-num">3</span>
+    <span class="en">Crimes · Reports</span>
+    <span class="am">ወንጀሎች · ሪፖርቶች</span>
+    <span class="om">Yakkoota · Gabaasota</span>
+    <span class="ti">ገበናት · ጸብጻባት</span>
+  </a>
+  <a href="PEACE-KEEPERS-MANUAL-PART-4.html"><span class="pn-num">4</span>
+    <span class="en">SMS · Users · Certificates</span>
+    <span class="am">SMS · ተጠቃሚዎች · ሰርተፍኬት</span>
+    <span class="om">SMS · Fayyadamtoota · Waraqaa</span>
+    <span class="ti">SMS · ተጠቀምቲ · ሰርተፍኬት</span>
+  </a>
+  <a href="PEACE-KEEPERS-MANUAL-PART-5.html"><span class="pn-num">5</span>
+    <span class="en">Settings · Reports · Help</span>
+    <span class="am">ቅንብሮች · ሪፖርቶች · እርዳታ</span>
+    <span class="om">Qindaa'ina · Gabaasota · Gargaarsa</span>
+    <span class="ti">ቅጥዒ · ጸብጻባት · ሓገዝ</span>
+  </a>
+</div>
+
+<!-- ============ TABLE OF CONTENTS ============ -->
+<nav class="toc">
+  <h2>
+    <span class="en">📖 Table of Contents — Part 1</span>
+    <span class="am">📖 ማውጫ — ክፍል 1</span>
+    <span class="om">📖 Tarree Qabiyyee — Kutaa 1</span>
+    <span class="ti">📖 ዝርዝር ትሕዝቶ — ክፋል 1</span>
+  </h2>
+  <ol>
+    <li><a href="#welcome">
+      <span class="en">Welcome &amp; What Is Peace Keepers</span>
+      <span class="am">እንኳን ደህና መጡ እና ፒስ ኪፐርስ ምን ማለት ነው</span>
+      <span class="om">Baga nagaan dhuftan fi Peace Keepers maali</span>
+      <span class="ti">እንቋዕ ብደሓን መጻእኩምን ፒስ ኪፐርስ እንታይ ማለት</span>
+    </a></li>
+    <li><a href="#roles">
+      <span class="en">Who Uses This System</span>
+      <span class="am">ሲስተሙን የሚጠቀሙ ሰዎች</span>
+      <span class="om">Eenyu siistimii kana fayyadama</span>
+      <span class="ti">መን እዩ እዚ ስርዓት ዝጥቀም</span>
+    </a></li>
+    <li><a href="#needs">
+      <span class="en">What You Need Before Starting</span>
+      <span class="am">قبل ከመጀመር ምን ያስፈልጋል</span>
+      <span class="om">Maal barbaachisa jalqabuu dura</span>
+      <span class="ti">ቅድሚ ምጅማር እንታይ የድሊ</span>
+    </a></li>
+    <li><a href="#open-app">
+      <span class="en">How to Open the App</span>
+      <span class="am">መተግበሪያውን እንዴት መክፈት</span>
+      <span class="om">App akkamitti banama</span>
+      <span class="ti">ኣፕ ከመይ ጌርካ ትኸፍት</span>
+    </a></li>
+    <li><a href="#screen-layout">
+      <span class="en">Understanding the Login Screen</span>
+      <span class="am">የመግቢያ ገጹን መረዳት</span>
+      <span class="om">Fuula Seensa hubachuu</span>
+      <span class="ti">ገጽ መእተዊ ምርዳእ</span>
+    </a></li>
+    <li><a href="#login">
+      <span class="en">How to Log In — Step by Step</span>
+      <span class="am">እንዴት እንደሚገቡ — ደረጃ በደረጃ</span>
+      <span class="om">Akkamitti seensa — tarkaanfii</span>
+      <span class="ti">ከመይ ጌርካ ትኣቱ — ደረጃ ብደረጃ</span>
+    </a></li>
+    <li><a href="#forgot-pin">
+      <span class="en">Forgot PIN — Recovery</span>
+      <span class="am">ፒን ረሳሁ — መመለሻ</span>
+      <span class="om">PIN dagatame — deebisuu</span>
+      <span class="ti">ፒን ረሲዐ — ምምላስ</span>
+    </a></li>
+    <li><a href="#signup">
+      <span class="en">Sign Up — New User Registration</span>
+      <span class="am">ተመዝገብ — አዲስ ተጠቃሚ ምዝገባ</span>
+      <span class="om">Galmaa'i — galmee haaraa</span>
+      <span class="ti">ተመዝገብ — ሓድሽ ተጠቃሚ ምዝገባ</span>
+    </a></li>
+    <li><a href="#dashboard-tour">
+      <span class="en">Dashboard Tour — What You See After Login</span>
+      <span class="am">ዳሽቦርድ ጉብኝት — ከገቡ በኋላ ምን ያያሉ</span>
+      <span class="om">Daashboordii daawwannaa</span>
+      <span class="ti">ዳሽቦርድ ምብጻሕ</span>
+    </a></li>
+    <li><a href="#navigation">
+      <span class="en">How to Navigate the Menu</span>
+      <span class="am">ምናሌውን እንዴት መጠቀም</span>
+      <span class="om">Menu akkamitti fayyadamuu</span>
+      <span class="ti">ምናሌ ከመይ ጌርካ ትጥቀም</span>
+    </a></li>
+    <li><a href="#language">
+      <span class="en">Changing the Language (EN · አማ · Afa O · ትግ)</span>
+      <span class="am">ቋንቋ መቀየር (EN · አማ · Afa O · ትግ)</span>
+      <span class="om">Afaan jijjiiruu</span>
+      <span class="ti">ቋንቋ ምቕያር</span>
+    </a></li>
+    <li><a href="#register-pk">
+      <span class="en">Register a Peace Keeper — Every Field</span>
+      <span class="am">ፒስ ኪፐር መመዝገብ — ሁሉም መስክ</span>
+      <span class="om">Peace Keeper galmeessuu — dirree hunda</span>
+      <span class="ti">ፒስ ኪፐር ምዝገባ — ኩሉ መዳርግ</span>
+    </a></li>
+    <li><a href="#bulk-registration">
+      <span class="en">Bulk Registration — Many Officers at Once</span>
+      <span class="am">የጅምላ ምዝገባ — ብዙ መኮንኖች በአንድ ጊዜ</span>
+      <span class="om">Galmee hedduu — ofiseroonni baay'ee</span>
+      <span class="ti">ብዙሓት ምዝገባ</span>
+    </a></li>
+    <li><a href="#edit-pk">
+      <span class="en">Editing a Peace Keeper After Saving</span>
+      <span class="am">ከተቀመጠ በኋላ ፒስ ኪፐር ማስተካከል</span>
+      <span class="om">Erga olkaa'e booda sirreessuu</span>
+      <span class="ti">ድሕሪ ምቕማጥ ምስተካከል</span>
+    </a></li>
+    <li><a href="#problems">
+      <span class="en">Troubleshooting — Part 1</span>
+      <span class="am">ችግር መፍታት — ክፍል 1</span>
+      <span class="om">Rakkoo furuu — Kutaa 1</span>
+      <span class="ti">ጸገም ምፍታሕ — ክፋል 1</span>
+    </a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============ 1. WELCOME ============ -->
+<section id="welcome">
+  <h2><span class="icon">🎯</span>
+    <span class="en">1. Welcome — What Is Peace Keepers?</span>
+    <span class="am">1. እንኳን ደህና መጡ — ፒስ ኪፐርስ ምን ማለት ነው?</span>
+    <span class="om">1. Baga nagaan dhuftan — Peace Keepers maali?</span>
+    <span class="ti">1. እንቋዕ ብደሓን መጻእኩም — ፒስ ኪፐርስ እንታይ ማለት?</span>
+  </h2>
+
+  <p class="en">Welcome to <strong>Peace Keepers</strong>, the official crime and case management system of the <strong>Addis Ababa City Peace &amp; Security Administration Bureau</strong>. This system helps the Bureau register peace keepers, record crimes, track community discussions, manage attendance, and coordinate everything through one secure platform.</p>
+
+  <p class="am">እንኳን ወደ <strong>ፒስ ኪፐርስ</strong> በደህና መጡ — ይህ የ<strong>አዲስ አበባ ከተማ ሰላምና ጸጥታ አስተዳደር ቢሮ</strong> ይፋዊ የወንጀልና የጉዳይ አስተዳደር ሲስተም ነው። ይህ ሲስተም ቢሮው ፒስ ኪፐሮችን እንዲመዘግብ፣ ወንጀሎችን እንዲመዘግብ፣ የማህበረሰብ ውይይቶችን እንዲከታተል፣ ክትትል እንዲያደርግ እና ሁሉንም በአንድ ደህንነቱ የተጠበቀ መድረክ እንዲያስተባብር ይረዳል።</p>
+
+  <p class="om">Baga nagaan dhuftan gara <strong>Peace Keepers</strong> — sirna seeraa fi bulchiinsa yakkaa <strong>Biiroo Bulchiinsaa Nageenyaa fi Nagaa Magaalaa Finfinnee</strong>. Sirni kun biiroo gargaara ofiseroonni galmeessuu, yakka galmeessuu, marii hawaasaa hordofuu, argama hordofuu fi wantoota hunda dirree nageenya qabu irratti qindeessuu.</p>
+
+  <p class="ti">እንቋዕ ብደሓን መጻእኩም ናብ <strong>ፒስ ኪፐርስ</strong> — ወግዓዊ ስርዓት ምሕደራ ገበንን ጉዳያትን ናይ <strong>ቤሮ ሰላምን ጸጥታን ከተማ ኣዲስ ኣበባ</strong>።</p>
+
+  <h3>
+    <span class="en">What Does This System Do?</span>
+    <span class="am">ይህ ሲስተም ምን ይሰራል?</span>
+    <span class="om">Sirni kun maal hojjeta?</span>
+    <span class="ti">እዚ ስርዓት እንታይ ይሰርሕ?</span>
+  </h3>
+
+  <div class="callout gold">
+    <span class="co-icon">📋</span>
+    <div>
+      <strong class="en">Main Things You Can Do</strong>
+      <strong class="am">ዋና ማድረግ የሚችሉት</strong>
+      <strong class="om">Waan guddaa gochuu dandeessan</strong>
+      <strong class="ti">ቀንዲ ክትገብርዎ ትኽእሉ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">Register peace keepers and keep their records up to date</li>
+        <li class="en">File crime cases and update their status</li>
+        <li class="en">Submit community discussion reports</li>
+        <li class="en">Record daily attendance (individual, QR, or bulk)</li>
+        <li class="en">Send SMS messages to peace keepers</li>
+        <li class="en">Manage system users, certificates, and ID cards</li>
+        <li class="en">View reports, charts, and analytics</li>
+        <li class="en">Review activity logs</li>
+
+        <li class="am">ፒስ ኪፐሮችን መመዝገብ እና መዝገቦቻቸውን ወቅታዊ ማድረግ</li>
+        <li class="am">የወንጀል ጉዳዮችን መመዝገብ እና ሁኔታቸውን ማሻሻል</li>
+        <li class="am">የማህበረሰብ ውይይት ሪፖርቶችን ማስገባት</li>
+        <li class="am">የዕለት ተዕለት ክትትል መመዝገብ (በግል፣ በQR ወይም በጅምላ)</li>
+        <li class="am">ለፒስ ኪፐሮች SMS መልእክቶችን መላክ</li>
+        <li class="am">የሲስተም ተጠቃሚዎችን፣ ሰርተፍኬቶችን እና መታወቂያዎችን ማስተዳደር</li>
+        <li class="am">ሪፖርቶችን፣ ግራፎችን እና ትንታኔዎችን መመልከት</li>
+        <li class="am">የእንቅስቃሴ ምዝግቦችን መገምገም</li>
+
+        <li class="om">Ofiseroonni galmeessuu fi galmee isaanii haaromsuu</li>
+        <li class="om">Yakkoota galmeessuu fi haala isaanii haaromsuu</li>
+        <li class="om">Gabaasa marii hawaasaa galmeessuu</li>
+        <li class="om">Argama guyyaa galmeessuu (dhuunfaa, QR, yookaan hedduu)</li>
+        <li class="om">Ofiseroonniif SMS erguu</li>
+        <li class="om">Fayyadamtoota, waraqaa ragaa fi eenyummeessaa bulchuu</li>
+        <li class="om">Gabaasota, chaartii fi xiinxala ilaaluu</li>
+
+        <li class="ti">ፒስ ኪፐራት ምዝገባን መዝገቦም ህሉው ምግባርን</li>
+        <li class="ti">ጉዳያት ገበን ምዝገባን ኩነታቶም ምሕዳስን</li>
+        <li class="ti">ጸብጻብ ምይይት ማሕበረሰብ ምቕራብ</li>
+        <li class="ti">መዓልታዊ ተረኽቦ ምዝገባ</li>
+        <li class="ti">ንፒስ ኪፐራት SMS ምስዳድ</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <span class="co-icon">ℹ️</span>
+    <div>
+      <strong class="en">Who is this manual for?</strong>
+      <strong class="am">ይህ መመሪያ ለማን ነው?</strong>
+      <strong class="om">Buugni kun eenyuuf?</strong>
+      <strong class="ti">እዚ መምርሒ ንመን እዩ?</strong>
+      <span class="en">Everyone using the system — from administrators to data entry officers and field peace keepers. No computer background is required.</span>
+      <span class="am">ሲስተሙን የሚጠቀሙ ሁሉ — ከአስተዳዳሪዎች እስከ የመረጃ አስገቢ መኮንኖች እና የመስክ ፒስ ኪፐሮች። የኮምፒውተር ዳራ አያስፈልግም።</span>
+      <span class="am">ሲስተሙን የሚጠቀሙ ሁሉ — ከአስተዳዳሪዎች እስከ የመረጃ አስገቢ መኮንኖች እና የመስክ ፒስ ኪፐሮች። የኮምፒውተር ዳራ አያስፈልግም።</span>
+      <span class="om">Namoota sirna kana fayyadaman hunda — bulchitoota irraa hanga ofiseroonni galmee fi ofiseroonni dirree. Ogummaan kompiyuutaraa hin barbaachisu.</span>
+      <span class="ti">ኩሎም ነቲ ስርዓት ዝጥቀሙ — ካብ ኣማሓደሮት ክሳብ መኮነንቲ ምዝገባን ፒስ ኪፐራት መሮርን። ትሕዝቶ ኮምፒዩተር ኣየድልን።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. ROLES ============ -->
+<section id="roles">
+  <h2><span class="icon">👥</span>
+    <span class="en">2. Who Uses This System</span>
+    <span class="am">2. ሲስተሙን የሚጠቀሙ ሰዎች</span>
+    <span class="om">2. Eenyu siistimii kana fayyadama</span>
+    <span class="ti">2. መን እዩ እዚ ስርዓት ዝጥቀም</span>
+  </h2>
+
+  <p class="en">The system is used by several types of people. Each role sees different menus and can perform different actions.</p>
+  <p class="am">ሲስተሙ በተለያዩ ዓይነት ሰዎች ይጠቀማል። እያንዳንዱ ሚና የተለያየ ምናሌ ያያል እና የተለያዩ ተግባራትን ማከናወን ይችላል።</p>
+  <p class="om">Sirni kun namoota akaakuu adda addaatiin fayyadama. Tokkoon tokkoon gahee menu adda addaa fi hojii adda addaa qaba.</p>
+  <p class="ti">እቲ ስርዓት ብዝተፈላለዩ ዓይነታት ሰባት ይጥቀም። ነፍሲ ወከፍ ተራ ዝተፈላለየ ምናሌን ተግባራትን ኣለዎ።</p>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Role</span><span class="am">ሚና</span><span class="om">Gahee</span><span class="ti">ተራ</span></th>
+        <th><span class="en">What They Do</span><span class="am">ምን ያደርጋሉ</span><span class="om">Maal hojjatu</span><span class="ti">እንታይ ይገብሩ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Super Admin</span>
+          <span class="am">ሱፐር አድሚን</span>
+          <span class="om">Super Admin</span>
+          <span class="ti">ሱፐር ኣድሚን</span>
+        </td>
+        <td>
+          <span class="en">Sees every menu. Manages users, backups, area settings, and all data. Full power.</span>
+          <span class="am">ሁሉንም ምናሌ ያያል። ተጠቃሚዎችን፣ ባክአፖችን፣ የአካባቢ ቅንብሮችን እና ሁሉንም መረጃ ያስተዳድራል። ሙሉ ስልጣን።</span>
+          <span class="om">Menu hunda ilaala. Fayyadamtoota, baakapii, qindaa'ina naannoo fi daataa hunda bulcha.</span>
+          <span class="ti">ኩሉ ምናሌ ይርኢ። ተጠቀምቲ፣ ባክኣፕ፣ ቅጥዒ ከባቢን ኩሉ ዳታን ይሓድር።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Administrator</span>
+          <span class="am">አስተዳዳሪ</span>
+          <span class="om">Bulchaa</span>
+          <span class="ti">ኣማሓዳሪ</span>
+        </td>
+        <td>
+          <span class="en">Manages peace keepers, crime cases, users, certificates, and reports. Cannot access system backups.</span>
+          <span class="am">ፒስ ኪፐሮችን፣ የወንጀል ጉዳዮችን፣ ተጠቃሚዎችን፣ ሰርተፍኬቶችን እና ሪፖርቶችን ያስተዳድራል። የሲስተም ባክአፖችን ማግኘት አይችልም።</span>
+          <span class="om">Ofiseroonni, yakkoota, fayyadamtoota, waraqaa fi gabaasota bulcha.</span>
+          <span class="ti">ፒስ ኪፐራት፣ ጉዳያት ገበን፣ ተጠቀምቲ፣ ሰርተፍኬትን ጸብጻባትን ይሓድር።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Supervisor</span>
+          <span class="am">ሱፐርቫይዘር</span>
+          <span class="om">Toʼataa</span>
+          <span class="ti">ሱፐርቫይዘር</span>
+        </td>
+        <td>
+          <span class="en">Approves SMS, reviews community reports, checks attendance, monitors officer status.</span>
+          <span class="am">SMS ያጸድቃል፣ የማህበረሰብ ሪፖርቶችን ይገመግማል፣ ክትትልን ያረጋግጣል፣ የመኮንኖችን ሁኔታ ይከታተላል።</span>
+          <span class="om">SMS mirkaneessa, gabaasa hawaasaa gamaaggama, argama ilaala.</span>
+          <span class="ti">SMS የጽድቕ፣ ጸብጻባት ማሕበረሰብ ይገምግም፣ ተረኽቦ ይቆጻጸር።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Data Entry Officer</span>
+          <span class="am">የመረጃ አስገቢ መኮንን</span>
+          <span class="om">Ofiseraa Galmee</span>
+          <span class="ti">መኮነን ምዝገባ</span>
+        </td>
+        <td>
+          <span class="en">Registers peace keepers, files crimes, records attendance, submits community reports.</span>
+          <span class="am">ፒስ ኪፐሮችን ይመዘግባል፣ ወንጀሎችን ይመዘግባል፣ ክትትል ይመዘግባል፣ የማህበረሰብ ሪፖርቶችን ያስገባል።</span>
+          <span class="om">Ofiseroonni galmeessa, yakka galmeessa, argama galmeessa.</span>
+          <span class="ti">ፒስ ኪፐራት ይመዝግብ፣ ገበናት ይመዝግብ፣ ተረኽቦ ይመዝግብ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Peace Keeper (Field)</span>
+          <span class="am">ፒስ ኪፐር (መስክ)</span>
+          <span class="om">Peace Keeper (Dirree)</span>
+          <span class="ti">ፒስ ኪፐር (መሮር)</span>
+        </td>
+        <td>
+          <span class="en">Checks in at duty stations, views assigned tasks, receives SMS instructions.</span>
+          <span class="am">በስራ ቦታ ይገኛል፣ የተመደቡ ተግባራትን ይመለከታል፣ የSMS መመሪያዎችን ይቀበላል።</span>
+          <span class="om">Bakka hojii irratti seena, hojii kennamee ilaala, ajaja SMS fudhata.</span>
+          <span class="ti">ኣብ ቦታ ስራሕ ይረክብ፣ ዝተመደበ ዕዮ ይርኢ፣ ትእዛዝ SMS ይቕበል።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <span class="co-icon">⚠️</span>
+    <div>
+      <strong class="en">Your role decides what you see</strong>
+      <strong class="am">የእርስዎ ሚና የሚያዩትን ይወስናል</strong>
+      <strong class="om">Gaheen keessan waan ilaaltan murteessa</strong>
+      <strong class="ti">ተራኹም እቲ እትርእይዎ ይውስን</strong>
+      <span class="en">If a menu item from this manual is not visible in your account, it means your role doesn't have permission. Contact your administrator to request access.</span>
+      <span class="am">በዚህ መመሪያ ውስጥ ያለ የምናሌ ንጥል በመለያዎ ውስጥ ካልታየ ሚናዎ ፈቃድ የለውም ማለት ነው። ፈቃድ ለመጠየቅ አስተዳዳሪዎን ያግኙ።</span>
+      <span class="om">Yoo menu tokko akaawuntii keessan keessatti hin mul'atu, gaheen keessan hayyama hin qabu jechuudha.</span>
+      <span class="ti">ኣብ ሕሳብኩም ዘይተራእየ ንጥል ምናሌ እንተሎ ተራኹም ፍቓድ የብሉን ማለት እዩ።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. WHAT YOU NEED ============ -->
+<section id="needs">
+  <h2><span class="icon">✅</span>
+    <span class="en">3. What You Need Before Starting</span>
+    <span class="am">3. ከመጀመር በፊት ምን ያስፈልጋል</span>
+    <span class="om">3. Maal barbaachisa jalqabuu dura</span>
+    <span class="ti">3. ቅድሚ ምጅማር እንታይ የድሊ</span>
+  </h2>
+
+  <p class="en">Before you start using the system, make sure you have all of the following. If anything is missing, contact your supervisor.</p>
+  <p class="am">ሲስተሙን ከመጠቀም በፊት የሚከተሉት ሁሉ መኖራቸውን ያረጋግጡ። ማንኛውም ነገር ከጎደለ ሱፐርቫይዘርዎን ያግኙ።</p>
+  <p class="om">Sirna kana fayyadamuu dura wantoota armaan gadii hundi qabaachuu qabu. Waan hanqate yoo jiraate, toʼataa keessan qunnamaa.</p>
+  <p class="ti">ቅድሚ እቲ ስርዓት ምጥቃም ዝስዕቡ ኩሎም ከም ዘለዉኹም ኣረጋግጹ። ዝጎደለ እንተሎ ሱፐርቫይዘርኩም ተወከሱ።</p>
+
+  <h3>
+    <span class="en">Checklist</span>
+    <span class="am">የፍተሻ ዝርዝር</span>
+    <span class="om">Tarree mirkaneessaa</span>
+    <span class="ti">ዝርዝር መረጋገጺ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Item</span><span class="am">ንጥል</span><span class="om">Wantoota</span><span class="ti">ንጥሊ</span></th>
+        <th><span class="en">Why You Need It</span><span class="am">ለምን ያስፈልጋል</span><span class="om">Maaliif barbaachisa</span><span class="ti">ስለምንታይ የድሊ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Internet Connection</span>
+          <span class="am">የኢንተርኔት ግንኙነት</span>
+          <span class="om">Walqunnamtii Interneetii</span>
+          <span class="ti">ምትእስሳር ኢንተርነት</span>
+        </td>
+        <td>
+          <span class="en">Wi-Fi or mobile data. Minimum 2 Mbps is enough.</span>
+          <span class="am">Wi-Fi ወይም የሞባይል ዳታ። ቢያንስ 2 Mbps በቂ ነው።</span>
+          <span class="om">Wi-Fi yookaan daataa mobaayilaa. Yoo xiqqaate 2 Mbps ga'a.</span>
+          <span class="ti">Wi-Fi ወይ ዳታ ሞባይል። እንተወሓደ 2 Mbps እኹል።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Modern Browser</span>
+          <span class="am">ዘመናዊ አሳሽ</span>
+          <span class="om">Browser ammayyaa</span>
+          <span class="ti">ዘመናዊ መርበብ</span>
+        </td>
+        <td>
+          <span class="en">Chrome, Edge, Firefox, or Safari — updated to the latest version.</span>
+          <span class="am">Chrome, Edge, Firefox ወይም Safari — ወደ አዲሱ ቅጂ የተሻሻለ።</span>
+          <span class="om">Chrome, Edge, Firefox yookaan Safari — gara versiyoonii haaraatti haaromsame.</span>
+          <span class="ti">Chrome, Edge, Firefox ወይ Safari — ናብ ሓድሽ ቅዳሕ ዝተሓደሰ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Username &amp; PIN</span>
+          <span class="am">የተጠቃሚ ስም እና ፒን</span>
+          <span class="om">Maqaa Fayyadamaa fi PIN</span>
+          <span class="ti">ስም ተጠቃሚን ፒንን</span>
+        </td>
+        <td>
+          <span class="en">Given to you by your administrator. Keep them secret.</span>
+          <span class="am">በአስተዳዳሪዎ የተሰጡ። ሚስጥራዊ ያድርጉ።</span>
+          <span class="om">Bulchaa keessan isinii kenna. Isaan iccitiin qabadhaa.</span>
+          <span class="ti">ብኣማሓዳሪኹም ተዋሂቡኩም። ምስጢራዊ ግበርዎ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Device</span>
+          <span class="am">መሳሪያ</span>
+          <span class="om">Meeshaa</span>
+          <span class="ti">መሳርሒ</span>
+        </td>
+        <td>
+          <span class="en">Desktop computer, laptop, tablet, or smartphone.</span>
+          <span class="am">ዴስክቶፕ ኮምፒውተር፣ ላፕቶፕ፣ ታብሌት ወይም ስማርትፎን።</span>
+          <span class="om">Kompiyuutara deeskitooppii, laaptooppii, tablet, yookaan bilbila harkaa.</span>
+          <span class="ti">ዴስክቶፕ ኮምፒዩተር፣ ላፕቶፕ፣ ታብለት ወይ ስማርትፎን።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Quiet Place</span>
+          <span class="am">ጸጥ ያለ ቦታ</span>
+          <span class="om">Bakka cal'isaa</span>
+          <span class="ti">ህዱእ ቦታ</span>
+        </td>
+        <td>
+          <span class="en">So you can read the fields and type without interruption.</span>
+          <span class="am">መስኮቹን በማንበብ ያለ መስተጓጎል ለመተየብ።</span>
+          <span class="om">Dirreewwan dubbisuu fi addaan citee barreessuuf.</span>
+          <span class="ti">ንመዳርግ ንምንባብን ብዘይ ምትሕልላፍ ንምጽሓፍን።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span class="co-icon">💡</span>
+    <div>
+      <strong class="en">Tip — Print this manual</strong>
+      <strong class="am">ጠቃሚ ምክር — መመሪያውን ያትሙ</strong>
+      <strong class="om">Gorsa — buugqa kana maxxansi</strong>
+      <strong class="ti">ምኽሪ — ነዚ መምርሒ ሕተም</strong>
+      <span class="en">You can print this manual by pressing Ctrl + P in your browser. Keep a printed copy beside your computer for quick reference.</span>
+      <span class="am">በአሳሽዎ Ctrl + P በመጫን ይህን መመሪያ ማተም ይችላሉ። ለፈጣን ማጣቀሻ በኮምፒውተርዎ አጠገብ የታተመ ቅጂ ያስቀምጡ።</span>
+      <span class="om">Browser keessan keessatti Ctrl + P tuquun buugqa kana maxxansuu dandeessu.</span>
+      <span class="ti">ኣብ መርበብኩም Ctrl + P ብምጥዋቕ ነዚ መምርሒ ክትሕትሙ ትኽእሉ።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. HOW TO OPEN APP ============ -->
+<section id="open-app">
+  <h2><span class="icon">🌐</span>
+    <span class="en">4. How to Open the App</span>
+    <span class="am">4. መተግበሪያውን እንዴት መክፈት</span>
+    <span class="om">4. App akkamitti banama</span>
+    <span class="ti">4. ኣፕ ከመይ ጌርካ ትኸፍት</span>
+  </h2>
+
+  <p class="en">The system is a website — you do <strong>not</strong> need to install anything. You open it exactly like any other website.</p>
+  <p class="am">ሲስተሙ ድረ-ገጽ ነው — ምንም <strong>መጫን አያስፈልግም</strong>። እንደሌላ ድረ-ገጽ በቀላሉ ይከፍቱታል።</p>
+  <p class="om">Sirni kun weebsaayitii ti — <strong>waan tokkollee install gochuu hin barbaachisu</strong>. Akka weebsaayitii biraa banama.</p>
+  <p class="ti">እቲ ስርዓት ወብሳይት እዩ — <strong>ዝኾነ ክትጽዕኑ ኣየድልን</strong>። ከም ካልእ ወብሳይት ትኸፍትዎ።</p>
+
+  <h3>
+    <span class="en">Official Address</span>
+    <span class="am">ይፋዊ አድራሻ</span>
+    <span class="om">Teessoo Ofiisaa</span>
+    <span class="ti">ወግዓዊ ኣድራሻ</span>
+  </h3>
+
+  <div class="screen-mock">
+    <div class="titlebar">
+      <span class="dots"><span></span><span></span><span></span></span>
+      <span class="en">Website Address</span>
+      <span class="am">የድረ-ገጽ አድራሻ</span>
+      <span class="om">Teessoo Weebsaayitii</span>
+      <span class="ti">ኣድራሻ ወብሳይት</span>
+    </div>
+    <div class="body">
+      <div class="big-btn" style="font-family:'Consolas',monospace; font-size:1.1rem;">
+        https://www.aapskeeper.gov.et
+      </div>
+      <p style="text-align:center; margin-top:14px; color:#64748b; font-size:.9rem;">
+        <span class="en">Copy this address exactly. Use HTTPS (with the S).</span>
+        <span class="am">ይህን አድራሻ በትክክል ይቅዱ። HTTPS (ከS ጋር) ይጠቀሙ።</span>
+        <span class="om">Teessoo kana sirriitti waraabi. HTTPS (S waliin) fayyadami.</span>
+        <span class="ti">ነዚ ኣድራሻ ብልክዕ ቅዳሕ። HTTPS (ምስ S) ተጠቐም።</span>
+      </p>
+    </div>
+  </div>
+
+  <h3>
+    <span class="en">Step-by-Step — Opening on Desktop</span>
+    <span class="am">ደረጃ በደረጃ — በዴስክቶፕ</span>
+    <span class="om">Tarkaanfii — Deeskitooppii irratti</span>
+    <span class="ti">ደረጃ ብደረጃ — ኣብ ዴስክቶፕ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Open your browser</strong>
+        <strong class="am">አሳሽዎን ይክፈቱ</strong>
+        <strong class="om">Browser keessan banaa</strong>
+        <strong class="ti">መርበብኩም ክፈቱ</strong>
+        <span class="en">Double-click Chrome, Edge, Firefox, or Safari on your desktop.</span>
+        <span class="am">በዴስክቶፕዎ ላይ Chrome, Edge, Firefox ወይም Safari በእጥፍ ይጫኑ።</span>
+        <span class="om">Chrome, Edge, Firefox yookaan Safari deeskitooppii irratti lamaan tuqi.</span>
+        <span class="ti">ኣብ ዴስክቶፕኩም Chrome, Edge, Firefox ወይ Safari ብኽልተ ጠውቕ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Click the address bar</strong>
+        <strong class="am">የአድራሻ አሞሌውን ይጫኑ</strong>
+        <strong class="om">Barruu teessoo tuqi</strong>
+        <strong class="ti">ኣሞላ ኣድራሻ ጠውቕ</strong>
+        <span class="en">The long white box at the very top of the browser window.</span>
+        <span class="am">በአሳሹ አናት ላይ ያለው ረጅም ነጭ ሳጥን።</span>
+        <span class="om">Saanduqa adii dheeraa gara olii browser keessa jiru.</span>
+        <span class="ti">እቲ ነዊሕ ጻዕዳ ሳጹን ኣብ ላዕሊ መርበብ ዘሎ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Type the address</strong>
+        <strong class="am">አድራሻውን ይተይቡ</strong>
+        <strong class="om">Teessoo barreessi</strong>
+        <strong class="ti">ኣድራሻ ጽሓፍ</strong>
+        <span class="en">Type exactly: <code>www.aapskeeper.gov.et</code></span>
+        <span class="am">በትክክል ይተይቡ: <code>www.aapskeeper.gov.et</code></span>
+        <span class="om">Sirriitti barreessi: <code>www.aapskeeper.gov.et</code></span>
+        <span class="ti">ብልክዕ ጽሓፍ: <code>www.aapskeeper.gov.et</code></span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Press Enter</strong>
+        <strong class="am">Enter ይጫኑ</strong>
+        <strong class="om">Enter tuqi</strong>
+        <strong class="ti">Enter ጠውቕ</strong>
+        <span class="en">On your keyboard — the big key with the bent arrow.</span>
+        <span class="am">በኮምፒውተርዎ ኪቦርድ ላይ — ታላቁ ጠመዝማዛ ቀስት ያለው ቁልፍ።</span>
+        <span class="om">Kiiboordii keessan irratti — furtuu guddaa xiyyaa qabu.</span>
+        <span class="ti">ኣብ ኪቦርድኩም — እቲ ዓቢ ቀስቲ ዘለዎ መጠወሊ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Wait for the page to load</strong>
+        <strong class="am">ገጹ እስኪጫን ይጠብቁ</strong>
+        <strong class="om">Fuulli akka fe'amu eegi</strong>
+        <strong class="ti">እቲ ገጽ ክጽዕን ተጸበ</strong>
+        <span class="en">Usually takes 2–5 seconds. You will see the Addis Ababa city seal and green background.</span>
+        <span class="am">ብìnhማዊ 2-5 ሰከንድ ይወስዳል። የአዲስ አበባ ከተማ ማህተም እና አረንጓዴ ዳራ ያያሉ።</span>
+        <span class="om">Yeroo baay'ee sekondii 2–5 fudhata. Chaappaa Finfinnee fi duubbee magariisa ni argitu.</span>
+        <span class="ti">መብዛሕትኡ ግዜ 2–5 ሰከንድ ይወስድ። ማህተም ኣዲስ ኣበባን ቀጠልያ ቀጠልያን ክትርኢ ኢኻ።</span>
+      </div>
+    </li>
+  </ol>
+
+  <h3>
+    <span class="en">Step-by-Step — Opening on a Phone</span>
+    <span class="am">ደረጃ በደረጃ — በስልክ</span>
+    <span class="om">Tarkaanfii — Bilbila harkaa</span>
+    <span class="ti">ደረጃ ብደረጃ — ኣብ ተሌፎን</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Tap your browser app</strong>
+        <strong class="am">የአሳሽ መተግበሪያውን ይንኩ</strong>
+        <strong class="om">App browser tuqi</strong>
+        <strong class="ti">መተግበሪ መርበብ ተንክፍ</strong>
+        <span class="en">Chrome or Safari on your home screen.</span>
+        <span class="am">በስልክዎ ማያ ገጽ ላይ Chrome ወይም Safari።</span>
+        <span class="om">Chrome yookaan Safari screen mana irratti.</span>
+        <span class="ti">ኣብ መንጸሪ ቤትኩም Chrome ወይ Safari።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Tap the address bar</strong>
+        <strong class="am">የአድራሻ አሞሌውን ይንኩ</strong>
+        <strong class="om">Barruu teessoo tuqi</strong>
+        <strong class="ti">ኣሞላ ኣድራሻ ተንክፍ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Type: www.aapskeeper.gov.et</strong>
+        <strong class="am">ይተይቡ: www.aapskeeper.gov.et</strong>
+        <strong class="om">Barreessi: www.aapskeeper.gov.et</strong>
+        <strong class="ti">ጽሓፍ: www.aapskeeper.gov.et</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Tap "Go" on the keyboard</strong>
+        <strong class="am">በኪቦርድ ላይ "Go" ይንኩ</strong>
+        <strong class="om">Kiiboordii irratti "Go" tuqi</strong>
+        <strong class="ti">ኣብ ኪቦርድ "Go" ተንክፍ</strong>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout tip">
+    <span class="co-icon">📌</span>
+    <div>
+      <strong class="en">Bookmark the page</strong>
+      <strong class="am">ገጹን ያስቀምጡ</strong>
+      <strong class="om">Fuula kana bukmaarkii godhi</strong>
+      <strong class="ti">ነቲ ገጽ ቡክማርክ ግበር</strong>
+      <span class="en">On desktop: press Ctrl + D. On phone: tap the star icon. Then you can reach the login page in one click next time.</span>
+      <span class="am">በዴስክቶፕ: Ctrl + D ይጫኑ። በስልክ: የኮከብ አዶን ይንኩ። በሚቀጥለው ጊዜ የመግቢያ ገጹን በአንድ ጠቅታ ማግኘት ይችላሉ።</span>
+      <span class="om">Deeskitooppii: Ctrl + D tuqi. Bilbila: icon urjii tuqi. Yeroo biraa seenaa tokkoon argatta.</span>
+      <span class="ti">ዴስክቶፕ: Ctrl + D ጠውቕ። ተሌፎን: ኣይኮን ኮኾብ ተንክፍ። ኣብ ዝቕጽል ግዜ ብሓደ ጠውቕታ ትረኽቦ።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. SCREEN LAYOUT ============ -->
+<section id="screen-layout">
+  <h2><span class="icon">🖼️</span>
+    <span class="en">5. Understanding the Login Screen</span>
+    <span class="am">5. የመግቢያ ገጹን መረዳት</span>
+    <span class="om">5. Fuula Seensa hubachuu</span>
+    <span class="ti">5. ገጽ መእተዊ ምርዳእ</span>
+  </h2>
+
+  <p class="en">When the page loads, you will see the login screen. It has 3 main parts.</p>
+  <p class="am">ገጹ ሲጫን የመግቢያ ገጹን ያያሉ። 3 ዋና ክፍሎች አሉት።</p>
+  <p class="om">Yeroo fuulli fe'amu, fuula seensaa ni argitu. Kutaa guddaa 3 qaba.</p>
+  <p class="ti">እቲ ገጽ ምስ ተጻዕነ ገጽ መእተዊ ትርኢ። 3 ቀንዲ ክፍልታት ኣለዎ።</p>
+
+  <div class="screenshot">
+    <span class="s-icon">🖼️</span>
+    <strong>
+      <span class="en">SCREENSHOT: Login Page</span>
+      <span class="am">ፎቶ: የመግቢያ ገጽ</span>
+      <span class="om">Suuraa: Fuula Seensa</span>
+      <span class="ti">ስእሊ: ገጽ መእተዊ</span>
+    </strong>
+    
+  </div>
+
+  <h3>
+    <span class="en">What Each Part Means</span>
+    <span class="am">እያንዳንዱ ክፍል ምን ማለት ነው</span>
+    <span class="om">Tokkoon tokkoon kutaa maal jechuudha</span>
+    <span class="ti">ነፍሲ ወከፍ ክፍሊ እንታይ ማለት</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Part of the Screen</span><span class="am">የገጹ ክፍል</span><span class="om">Kutaa fuulaa</span><span class="ti">ክፍሊ ገጽ</span></th>
+        <th><span class="en">What It Does</span><span class="am">ምን ያደርጋል</span><span class="om">Maal hojjeta</span><span class="ti">እንታይ ይገብር</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">City Seal &amp; Title</span>
+          <span class="am">የከተማ ማህተም እና ርዕስ</span>
+          <span class="om">Chaappaa Magaalaa fi Mata Duree</span>
+          <span class="ti">ማህተም ከተማን ኣርእስትን</span>
+        </td>
+        <td>
+          <span class="en">Shows the official Addis Ababa City Peace &amp; Security Bureau logo and name in 4 languages.</span>
+          <span class="am">ይፋዊውን የአዲስ አበባ ከተማ ሰላምና ጸጥታ ቢሮ አርማ እና ስም በ4 ቋንቋዎች ያሳያል።</span>
+          <span class="om">Logo fi maqaa Biiroo Nageenyaa fi Nagaa Magaalaa Finfinnee afaan 4 keessatti agarsiisa.</span>
+          <span class="ti">ሎጎን ስምን ቤሮ ሰላምን ጸጥታን ከተማ ኣዲስ ኣበባ ብ4 ቋንቋ የርኢ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Language Buttons</span>
+          <span class="am">የቋንቋ ቁልፎች</span>
+          <span class="om">Furtuu Afaanii</span>
+          <span class="ti">መጠወሊ ቋንቋ</span>
+        </td>
+        <td>
+          <span class="en">Four small buttons: <strong>EN · አማ · Afa O · ትግ</strong>. Click any to switch the whole page to that language.</span>
+          <span class="am">አራት ትንንሽ ቁልፎች: <strong>EN · አማ · Afa O · ትግ</strong>። ገጹን ወደዚያ ቋንቋ ለመቀየር ማንኛውንም ይጫኑ።</span>
+          <span class="om">Furtuu xiqqaa afur: <strong>EN · አማ · Afa O · ትግ</strong>. Fuula guutuu gara afaan sanaatti jijjiiruuf kamiyyuu tuqi.</span>
+          <span class="ti">ኣርባዕተ ንኣሽቱ መጠወሊ: <strong>EN · አማ · Afa O · ትግ</strong>. ንኹሉ ገጽ ናብቲ ቋንቋ ንምቕያር ዝኾነ ጠውቕ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Username Field</span>
+          <span class="am">የተጠቃሚ ስም መስክ</span>
+          <span class="om">Dirree Maqaa Fayyadamaa</span>
+          <span class="ti">መዳርግ ስም ተጠቃሚ</span>
+        </td>
+        <td>
+          <span class="en">A white box with the person icon. Type your username here.</span>
+          <span class="am">የሰው አዶ ያለው ነጭ ሳጥን። የተጠቃሚ ስምዎን እዚህ ይተይቡ።</span>
+          <span class="om">Saanduqa adii icon namaa waliin. Maqaa fayyadamaa keessan asitti barreessaa.</span>
+          <span class="ti">ጻዕዳ ሳጹን ምስ ኣይኮን ሰብ። ስም ተጠቃሚኹም ኣብዚ ጽሓፉ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">PIN Field</span>
+          <span class="am">የፒን መስክ</span>
+          <span class="om">Dirree PIN</span>
+          <span class="ti">መዳርግ ፒን</span>
+        </td>
+        <td>
+          <span class="en">A white box with the lock icon. Type your secret PIN. Dots will appear instead of the numbers.</span>
+          <span class="am">የመቆለፊያ አዶ ያለው ነጭ ሳጥን። ሚስጥራዊ ፒንዎን ይተይቡ። ከቁጥሮቹ ይልቅ ነጥቦች ይታያሉ።</span>
+          <span class="om">Saanduqa adii icon qulfii waliin. PIN iccitii keessan barreessaa. Lakkoofsa bakka tuqaa mul'ata.</span>
+          <span class="ti">ጻዕዳ ሳጹን ምስ ኣይኮን መቐለሊ። ፒን ምስጢርኩም ጽሓፉ። ኣብ ክንዲ ቁጽሪ ነጥብታት ይርአ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Login Button</span>
+          <span class="am">የመግቢያ ቁልፍ</span>
+          <span class="om">Furtuu Seensa</span>
+          <span class="ti">መጠወሊ መእተዊ</span>
+        </td>
+        <td>
+          <span class="en">A large dark green button with the enter icon (➜]). Click after filling both fields.</span>
+          <span class="am">የመግቢያ አዶ (➜]) ያለው ትልቅ ጥቁር አረንጓዴ ቁልፍ። ሁለቱንም መስኮች ከሞሉ በኋላ ይጫኑ።</span>
+          <span class="om">Furtuu guddaa magariisa hoomaa icon seensaa waliin. Dirree lamaan erga guuttanii booda tuqi.</span>
+          <span class="ti">ዓቢ ጸሊም ቀጠልያ መጠወሊ ምስ ኣይኮን መእተዊ። ክልቲኡ መዳርግ ድሕሪ ምምላእኩም ጠውቑ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Sign Up Link</span>
+          <span class="am">የምዝገባ አገናኝ</span>
+          <span class="om">Liinkii Galmee</span>
+          <span class="ti">መላግቦ ምዝገባ</span>
+        </td>
+        <td>
+          <span class="en">Bottom-left text with a person-plus icon. Used by new users who have never logged in before.</span>
+          <span class="am">በግራ በታች ያለው ጽሁፍ — የሰው+ አዶ ያለው። ቀደም ሲል ያልገቡ አዲስ ተጠቃሚዎች የሚጠቀሙበት።</span>
+          <span class="om">Barruu gadii bitaa icon nama+ waliin. Fayyadamtoota haaraa kan hin seenneef.</span>
+          <span class="ti">ጽሑፍ ትሕቲ ጸጋ ምስ ኣይኮን ሰብ+። ንሓደስቲ ተጠቀምቲ ቀድሚ ዘይኣተዉ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Forgot PIN Link</span>
+          <span class="am">የፒን መርሳት አገናኝ</span>
+          <span class="om">Liinkii PIN Dagannaa</span>
+          <span class="ti">መላግቦ ረሲዕ ፒን</span>
+        </td>
+        <td>
+          <span class="en">Bottom-right blue link with a key icon. Used when you cannot remember your PIN.</span>
+          <span class="am">በቀኝ በታች ያለው ሰማያዊ አገናኝ — የቁልፍ አዶ ያለው። ፒንዎን ማስታወስ ሲያቅትዎ የሚጠቀሙበት።</span>
+          <span class="om">Liinkii cuquliisa gadii mirgaa icon furtuu waliin. Yeroo PIN yaadachuu hin dandeenyu fayyadama.</span>
+          <span class="ti">ሰማያዊ መላግቦ ትሕቲ የማን ምስ ኣይኮን መፍትሕ። ፒንኩም ክትዝክሩ እንተዘይክኢልኩም ዝጥቀሙሉ።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="screen-mock">
+    <div class="titlebar">
+      <span class="dots"><span></span><span></span><span></span></span>
+      <span class="en">What the Login Screen Looks Like — Simplified</span>
+      <span class="am">የመግቢያ ገጽ ቀለል ባለ መልኩ</span>
+      <span class="om">Fuula Seensa — Salphaatti</span>
+      <span class="ti">ገጽ መእተዊ — ቀሊል</span>
+    </div>
+    <div class="body">
+      <div style="text-align:center; font-size:2.4rem; margin-bottom:10px;">🛡️</div>
+      <div style="text-align:center; font-weight:800; color:#0d3d2e; font-size:1.1rem;">የአዲስ አበባ ከተማ አስተዳደር</div>
+      <div style="text-align:center; font-size:.85rem; color:#64748b; margin-bottom:8px;">Addis Ababa City Peace &amp; Security Administration Bureau</div>
+      <div class="lang-pills">
+        <span class="on">EN</span>
+        <span>አማ</span>
+        <span>Afa O</span>
+        <span>ትግ</span>
+      </div>
+      <div class="form-row" style="margin-top:22px">
+        <div class="field">
+          <label>👤 Username</label>
+          <div class="input-mock">SUPER_AD</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label>🔒 PIN</label>
+          <div class="input-mock">••••••</div>
+        </div>
+      </div>
+      <div class="big-btn">➜ Login</div>
+      <div style="display:flex; justify-content:space-between; margin-top:16px; font-size:.85rem;">
+        <span style="color:#0d3d2e; font-weight:700;">👤+ Sign Up</span>
+        <span style="color:#2563eb; font-weight:700;">🔑 Forgot PIN/Password?</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. HOW TO LOG IN ============ -->
+<section id="login">
+  <h2><span class="icon">🔐</span>
+    <span class="en">6. How to Log In — Step by Step</span>
+    <span class="am">6. እንዴት እንደሚገቡ — ደረጃ በደረጃ</span>
+    <span class="om">6. Akkamitti seensa — tarkaanfii</span>
+    <span class="ti">6. ከመይ ጌርካ ትኣቱ — ደረጃ ብደረጃ</span>
+  </h2>
+
+  <p class="en">Logging in is the very first thing you do every day. Follow these 8 steps exactly.</p>
+  <p class="am">መግባት በየቀኑ የሚያደርጉት የመጀመሪያው ነገር ነው። እነዚህን 8 ደረጃዎች በትክክል ይከተሉ።</p>
+  <p class="om">Seensaan waan guyyuu jalqaba irratti gochuu qabdan isa tokkoffaa ti. Tarkaanfii 8 kana sirriitti hordofaa.</p>
+  <p class="ti">መእተዊ እቲ መጀመርታ መዓልታዊ እትገብሮ እዩ። ነዞም 8 ደረጃታት ብልክዕ ተኸተሉ።</p>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Open the login page</strong>
+        <strong class="am">የመግቢያ ገጹን ይክፈቱ</strong>
+        <strong class="om">Fuula seensaa banaa</strong>
+        <strong class="ti">ገጽ መእተዊ ክፈቱ</strong>
+        <span class="en">Type <code>www.aapskeeper.gov.et</code> in your browser and press Enter. Wait for the page to load fully.</span>
+        <span class="am">በአሳሽዎ <code>www.aapskeeper.gov.et</code> ይተይቡ እና Enter ይጫኑ። ገጹ ሙሉ በሙሉ እስኪጫን ይጠብቁ።</span>
+        <span class="om">Browser keessan keessatti <code>www.aapskeeper.gov.et</code> barreessaa Enter tuqaa. Fuulli guutummaatti akka fe'amu eegaa.</span>
+        <span class="ti">ኣብ መርበብኩም <code>www.aapskeeper.gov.et</code> ጽሓፉ Enter ጠውቑ። እቲ ገጽ ምሉእ ብምሉእ ክጽዕን ተጸበዩ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Choose your language (optional)</strong>
+        <strong class="am">ቋንቋዎን ይምረጡ (አማራጭ)</strong>
+        <strong class="om">Afaan keessan filadhaa (filannoo)</strong>
+        <strong class="ti">ቋንቋኹም ምረጹ (ኣማራጺ)</strong>
+        <span class="en">Click <strong>EN</strong>, <strong>አማ</strong>, <strong>Afa O</strong>, or <strong>ትግ</strong> at the top of the login card.</span>
+        <span class="am">በመግቢያ ካርዱ አናት ላይ <strong>EN</strong>፣ <strong>አማ</strong>፣ <strong>Afa O</strong> ወይም <strong>ትግ</strong> ይጫኑ።</span>
+        <span class="om">Gubbaa kaardii seensaa irratti <strong>EN</strong>, <strong>አማ</strong>, <strong>Afa O</strong> yookaan <strong>ትግ</strong> tuqi.</span>
+        <span class="ti">ኣብ ላዕሊ ካርድ መእተዊ <strong>EN</strong>, <strong>አማ</strong>, <strong>Afa O</strong> ወይ <strong>ትግ</strong> ጠውቑ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Click inside the Username box</strong>
+        <strong class="am">የተጠቃሚ ስም ሳጥን ውስጥ ይጫኑ</strong>
+        <strong class="om">Saanduqa Maqaa Fayyadamaa keessatti tuqi</strong>
+        <strong class="ti">ኣብ ውሽጢ ሳጹን ስም ተጠቃሚ ጠውቑ</strong>
+        <span class="en">A blinking line (cursor) will appear inside the box.</span>
+        <span class="am">በሳጥኑ ውስጥ የሚብራ መስመር (cursor) ይታያል።</span>
+        <span class="om">Sarara calaqqisu (cursor) saanduqa keessatti mul'ata.</span>
+        <span class="ti">ብሩህ መስመር (ካርሰር) ኣብ ውሽጢ ሳጹን ይርአ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Type your username</strong>
+        <strong class="am">የተጠቃሚ ስምዎን ይተይቡ</strong>
+        <strong class="om">Maqaa fayyadamaa keessan barreessaa</strong>
+        <strong class="ti">ስም ተጠቃሚኹም ጽሓፉ</strong>
+        <span class="en">Example: <code>SUPER_AD</code> or <code>abebe.kebede</code>. It is usually case-sensitive (capital letters matter).</span>
+        <span class="am">ለምሳሌ: <code>SUPER_AD</code> ወይም <code>abebe.kebede</code>። አብዛኛውን ጊዜ ትልቅና ትንሽ ፊደል ልዩነት አለው።</span>
+        <span class="om">Fakkeenya: <code>SUPER_AD</code> yookaan <code>abebe.kebede</code>. Yeroo baay'ee qubee guddaa fi xiqqaan adda.</span>
+        <span class="ti">ኣብነት: <code>SUPER_AD</code> ወይ <code>abebe.kebede</code>። መብዛሕትኡ ግዜ ዓቢን ንእሽቶን ፊደል ይለያዩ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Click inside the PIN box</strong>
+        <strong class="am">የፒን ሳጥን ውስጥ ይጫኑ</strong>
+        <strong class="om">Saanduqa PIN keessatti tuqi</strong>
+        <strong class="ti">ኣብ ውሽጢ ሳጹን ፒን ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Type your PIN</strong>
+        <strong class="am">ፒንዎን ይተይቡ</strong>
+        <strong class="om">PIN keessan barreessaa</strong>
+        <strong class="ti">ፒንኩም ጽሓፉ</strong>
+        <span class="en">Each digit appears as a dot (•••) — this is normal. Nobody can see your PIN.</span>
+        <span class="am">እያንዳንዱ አሃዝ እንደ ነጥብ (•••) ይታያል — ይህ የተለመደ ነው። ማንም ፒንዎን ማየት አይችልም።</span>
+        <span class="om">Lakkoofsi tokkoon tokkoon tuqaa (•••) fakkaata — kun baramaa. Namni PIN keessan hin argu.</span>
+        <span class="ti">ነፍሲ ወከፍ ኣሃዝ ከም ነጥቢ (•••) ይርአ — እዚ ንቡር እዩ። ዋላ ሓደ ፒንኩም ክርኢ ኣይክእልን።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Click the Login button</strong>
+        <strong class="am">Login ቁልፍ ይጫኑ</strong>
+        <strong class="om">Furtuu Login tuqi</strong>
+        <strong class="ti">መጠወሊ Login ጠውቑ</strong>
+        <span class="btn-mock login">➜ Login</span>
+        <span class="en"> The big dark green button at the bottom of the card.</span>
+        <span class="am"> በካርዱ ታችኛው ክፍል ያለው ትልቁ ጥቁር አረንጓዴ ቁልፍ።</span>
+        <span class="om"> Furtuu guddaa magariisa hoomaa kaardii jalatti.</span>
+        <span class="ti"> እቲ ዓቢ ጸሊም ቀጠልያ መጠወሊ ኣብ ትሕቲ ካርድ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">8</span>
+      <div class="step-text">
+        <strong class="en">Wait for the dashboard to load</strong>
+        <strong class="am">ዳሽቦርዱ እስኪጫን ይጠብቁ</strong>
+        <strong class="om">Daashboordiin akka fe'amu eegi</strong>
+        <strong class="ti">ዳሽቦርድ ክጽዕን ተጸበ</strong>
+        <span class="en">A blue/green progress bar may appear. After 2–5 seconds, the dashboard will open.</span>
+        <span class="am">ሰማያዊ/አረንጓዴ የሂደት አሞሌ ሊታይ ይችላል። ከ2-5 ሰከንድ በኋላ ዳሽቦርዱ ይከፈታል።</span>
+        <span class="om">Barruu adeemsaa cuquliisa/magariisa mul'achuu danda'a. Erga sekondii 2–5 booda daashboordiin bana.</span>
+        <span class="ti">ሰማያዊ/ቀጠልያ ኣሞላ ምዕባለ ክርአ ይኽእል። ድሕሪ 2–5 ሰከንድ ዳሽቦርድ ይኽፈት።</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout tip">
+    <span class="co-icon">✅</span>
+    <div>
+      <strong class="en">How to know you're logged in</strong>
+      <strong class="am">መግባትዎን እንዴት ማወቅ</strong>
+      <strong class="om">Akkamitti seensa beekuu</strong>
+      <strong class="ti">ከመይ ጌርካ ምእታው ትፈልጥ</strong>
+      <span class="en">You will see the dashboard with coloured cards (Total Peace Keepers, Total Crime Cases, etc.) and your name in the top-right corner.</span>
+      <span class="am">በቀለም ያሸበረቁ ካርዶች (ጠቅላላ ፒስ ኪፐሮች፣ ጠቅላላ የወንጀል ጉዳዮች፣ ወዘተ) እና ስምዎን ከላይ በቀኝ በኩል ያያሉ።</span>
+      <span class="om">Kaardiiwwan halluu qaban (Peace Keepers waliigalaa, Yakkoota waliigalaa, kkf) fi maqaa keessan gubbaa mirgaatti argitu.</span>
+      <span class="ti">ብሕብሪ ዝተሸበረቑ ካርድታትን ስምኩምን ኣብ ላዕሊ የማን ትርኢ።</span>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="co-icon">⚠️</span>
+    <div>
+      <strong class="en">Wrong username or PIN?</strong>
+      <strong class="am">የተሳሳተ የተጠቃሚ ስም ወይም ፒን?</strong>
+      <strong class="om">Maqaa fayyadamaa yookaan PIN dogoggora?</strong>
+      <strong class="ti">ጌጋ ስም ተጠቃሚ ወይ ፒን?</strong>
+      <span class="en">A red message will appear. Check your spelling carefully. If you make 5 wrong attempts, you must wait 15 minutes. Use "Forgot PIN/Password?" if needed.</span>
+      <span class="am">ቀይ መልእክት ይታያል። ፊደላቱን በጥንቃቄ ያረጋግጡ። 5 ጊዜ ከተሳሳቱ 15 ደቂቃ መጠበቅ አለብዎ። ካስፈለገ "Forgot PIN/Password?" ይጠቀሙ።</span>
+      <span class="om">Ergaan diimaa mul'ata. Qubeewwan sirriitti ilaali. Yoo yeroo 5 dogoggora ta'e daqiiqaa 15 eeguu qabda.</span>
+      <span class="ti">ቀያሕ መልእኽቲ ይርአ። ፊደላት ብጥንቃቐ ኣረጋግጹ። 5 ግዜ ጌጋ እንተገበርኩም 15 ደቒቕ ክትጽበዩ ኣለኩም።</span>
+    </div>
+  </div>
+
+  <div class="practice">
+    <h4>🎓
+      <span class="en">Practice Exercise 1</span>
+      <span class="am">የልምምድ ተግባር 1</span>
+      <span class="om">Shaakala 1</span>
+      <span class="ti">ልምምድ 1</span>
+    </h4>
+    <ol>
+      <li class="en">Open <code>www.aapskeeper.gov.et</code> in your browser.</li>
+      <li class="en">Switch the language to <strong>አማ</strong> and back to <strong>EN</strong>.</li>
+      <li class="en">Click on the Username box and type your real username.</li>
+      <li class="en">Click on the PIN box and type your real PIN.</li>
+      <li class="en">Click <strong>Login</strong> and confirm the dashboard opens.</li>
+      <li class="en">Click your name in the top-right corner and choose <strong>Logout</strong>.</li>
+      <li class="en">Repeat steps 3–5 to practise logging in twice.</li>
+
+      <li class="am">በአሳሽዎ <code>www.aapskeeper.gov.et</code> ይክፈቱ።</li>
+      <li class="am">ቋንቋውን ወደ <strong>አማ</strong> ከዚያም ወደ <strong>EN</strong> ይቀይሩ።</li>
+      <li class="am">የተጠቃሚ ስም ሳጥኑን ጠቅ ያድርጉ እና እውነተኛውን የተጠቃሚ ስምዎን ይተይቡ።</li>
+      <li class="am">የፒን ሳጥኑን ጠቅ ያድርጉ እና እውነተኛውን ፒንዎን ይተይቡ።</li>
+      <li class="am"><strong>Login</strong> ይጫኑ እና ዳሽቦርዱ መከፈቱን ያረጋግጡ።</li>
+      <li class="am">ከላይ በቀኝ በኩል ስምዎን ጠቅ ያድርጉ እና <strong>Logout</strong> ይምረጡ።</li>
+      <li class="am">መግባትን ሁለት ጊዜ ለመለማመድ ደረጃዎች 3-5 ን ይድገሙ።</li>
+
+      <li class="om">Browser keessan keessatti <code>www.aapskeeper.gov.et</code> banaa.</li>
+      <li class="om">Afaan gara <strong>አማ</strong> fi deebi'ii <strong>EN</strong> jijjiiri.</li>
+      <li class="om">Saanduqa Maqaa Fayyadamaa tuqiitii maqaa keessan dhugaa barreessi.</li>
+      <li class="om">Saanduqa PIN tuqiitii PIN keessan dhugaa barreessi.</li>
+      <li class="om"><strong>Login</strong> tuqiitii daashboordiin banamuu mirkaneessi.</li>
+      <li class="om">Maqaa keessan gubbaa mirgaatti tuqiitii <strong>Logout</strong> filadhu.</li>
+      <li class="om">Tarkaanfii 3–5 lamaaf shaakaluuf irra deebi'i.</li>
+
+      <li class="ti">ኣብ መርበብኩም <code>www.aapskeeper.gov.et</code> ክፈቱ።</li>
+      <li class="ti">ቋንቋ ናብ <strong>አማ</strong> ቀይሩ ደጊምኩም ናብ <strong>EN</strong>።</li>
+      <li class="ti">ሳጹን ስም ተጠቃሚ ጠውቑ ብልክዕ ስምኩም ጽሓፉ።</li>
+      <li class="ti">ሳጹን ፒን ጠውቑ ብልክዕ ፒንኩም ጽሓፉ።</li>
+      <li class="ti"><strong>Login</strong> ጠውቑ ዳሽቦርድ ምምጻኡ ኣረጋግጹ።</li>
+      <li class="ti">ስምኩም ኣብ ላዕሊ የማን ጠውቑ <strong>Logout</strong> ምረጹ።</li>
+      <li class="ti">ንኽልተ ግዜ ምእታው ንምልማመድ ደረጃ 3–5 ደግሙ።</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 7. FORGOT PIN ============ -->
+<section id="forgot-pin">
+  <h2><span class="icon">🔑</span>
+    <span class="en">7. Forgot PIN — How to Recover It</span>
+    <span class="am">7. ፒን ረሳሁ — እንዴት መመለስ</span>
+    <span class="om">7. PIN dagatame — akkamitti deebisuu</span>
+    <span class="ti">7. ፒን ረሲዐ — ከመይ ጌርካ ትምለስ</span>
+  </h2>
+
+  <p class="en">If you cannot remember your PIN, do not worry. You can reset it yourself using your registered telephone number. You will receive a 6-digit code by SMS.</p>
+  <p class="am">ፒንዎን ማስታወስ ካልቻሉ አይጨነቁ። የተመዘገበውን ስልክ ቁጥርዎን በመጠቀም እራስዎ ማስተካከል ይችላሉ። በSMS 6 አሃዝ ኮድ ይደርስዎታል።</p>
+  <p class="om">PIN keessan yaadachuu yoo hin dandeenye, hin yaadda'inaa. Lakkoofsa bilbilaa galmaa'e fayyadamuun ofii keessan sirreessuu dandeessu. SMS koodii lakkoofsa 6 argattu.</p>
+  <p class="ti">ፒንኩም ክትዝክሩ እንተዘይክኢልኩም ኣይትጨነቑ። ቁጽሪ ተሌፎን ተመዝጊብኩም ተጠቒምኩም ባዕልኹም ከተስተካክሉ ትኽእሉ። ብ SMS ናይ 6 ኣሃዝ ኮድ ክትቕበሉ ኢኹም።</p>
+
+  <h3>
+    <span class="en">Step-by-Step</span>
+    <span class="am">ደረጃ በደረጃ</span>
+    <span class="om">Tarkaanfii tarkaanfiin</span>
+    <span class="ti">ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Open the login page</strong>
+        <strong class="am">የመግቢያ ገጹን ይክፈቱ</strong>
+        <strong class="om">Fuula seensaa banaa</strong>
+        <strong class="ti">ገጽ መእተዊ ክፈቱ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Click "Forgot PIN/Password?"</strong>
+        <strong class="am">"Forgot PIN/Password?" ይጫኑ</strong>
+        <strong class="om">"Forgot PIN/Password?" tuqi</strong>
+        <strong class="ti">"Forgot PIN/Password?" ጠውቑ</strong>
+        <span class="en">The blue link at the bottom-right of the login card.</span>
+        <span class="am">በመግቢያ ካርዱ ታችኛው ቀኝ ያለው ሰማያዊ አገናኝ።</span>
+        <span class="om">Liinkii cuquliisa gadii mirgaa kaardii seensaa.</span>
+        <span class="ti">ሰማያዊ መላግቦ ትሕቲ የማን ካርድ መእተዊ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Type your username</strong>
+        <strong class="am">የተጠቃሚ ስምዎን ይተይቡ</strong>
+        <strong class="om">Maqaa fayyadamaa keessan barreessaa</strong>
+        <strong class="ti">ስም ተጠቃሚኹም ጽሓፉ</strong>
+        <span class="en">The same username you normally use to log in.</span>
+        <span class="am">ለመግቢያ የሚጠቀሙበት ተመሳሳይ የተጠቃሚ ስም።</span>
+        <span class="om">Maqaa fayyadamaa seensaaf fayyadamtan.</span>
+        <span class="ti">ተመሳሳሊ ስም ተጠቃሚ ትጥቀመሉ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Type your telephone number</strong>
+        <strong class="am">ስልክ ቁጥርዎን ይተይቡ</strong>
+        <strong class="om">Lakkoofsa bilbilaa keessan barreessaa</strong>
+        <strong class="ti">ቁጽሪ ተሌፎንኩም ጽሓፉ</strong>
+        <span class="en">The phone number that was registered with your account.</span>
+        <span class="am">ከመለያዎ ጋር የተመዘገበው ስልክ ቁጥር።</span>
+        <span class="om">Lakkoofsa bilbilaa akaawuntii keessaniin galmaa'e.</span>
+        <span class="ti">ቁጽሪ ተሌፎን ምስ ሕሳብኩም ተመዝጊቡ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Click "Send Code"</strong>
+        <strong class="am">"Send Code" ይጫኑ</strong>
+        <strong class="om">"Send Code" tuqi</strong>
+        <strong class="ti">"Send Code" ጠውቑ</strong>
+        <span class="en">A 6-digit code will be sent to your phone by SMS within 1 minute.</span>
+        <span class="am">በ1 ደቂቃ ውስጥ የ6 አሃዝ ኮድ በSMS ወደ ስልክዎ ይላካል።</span>
+        <span class="om">Daqiiqaa 1 keessatti koodiin lakkoofsa 6 SMS'n bilbila keessaniif ergama.</span>
+        <span class="ti">ኣብ 1 ደቒቕ ናይ 6 ኣሃዝ ኮድ ብ SMS ናብ ተሌፎንኩም ይለኣኽ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Open your phone and read the SMS</strong>
+        <strong class="am">ስልክዎን ከፍተው SMS ያንብቡ</strong>
+        <strong class="om">Bilbila keessan banaa SMS dubbisaa</strong>
+        <strong class="ti">ተሌፎንኩም ከፊትኩም SMS ኣንብቡ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Type the 6-digit code in the "Confirmation Code" box</strong>
+        <strong class="am">የ6 አሃዝ ኮዱን በ"Confirmation Code" ሳጥን ውስጥ ይተይቡ</strong>
+        <strong class="om">Koodii lakkoofsa 6 saanduqa "Confirmation Code" keessatti barreessaa</strong>
+        <strong class="ti">ናይ 6 ኣሃዝ ኮድ ኣብ ሳጹን "Confirmation Code" ጽሓፉ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">8</span>
+      <div class="step-text">
+        <strong class="en">Click "Verify"</strong>
+        <strong class="am">"Verify" ይጫኑ</strong>
+        <strong class="om">"Verify" tuqi</strong>
+        <strong class="ti">"Verify" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">9</span>
+      <div class="step-text">
+        <strong class="en">Type your new PIN twice</strong>
+        <strong class="am">አዲሱን ፒን ሁለት ጊዜ ይተይቡ</strong>
+        <strong class="om">PIN haaraa lamaan barreessaa</strong>
+        <strong class="ti">ሓድሽ ፒን ክልተ ግዜ ጽሓፉ</strong>
+        <span class="en">In "New PIN" and "Confirm PIN" boxes. Use only numbers.</span>
+        <span class="am">በ"New PIN" እና "Confirm PIN" ሳጥኖች ውስጥ። ቁጥሮች ብቻ ይጠቀሙ።</span>
+        <span class="om">Saanduqa "New PIN" fi "Confirm PIN" keessatti. Lakkoofsa qofa fayyadami.</span>
+        <span class="ti">ኣብ ሳጹን "New PIN" ን "Confirm PIN"። ቁጽሪ ጥራይ ተጠቐሙ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">10</span>
+      <div class="step-text">
+        <strong class="en">Click "Save"</strong>
+        <strong class="am">"Save" ይጫኑ</strong>
+        <strong class="om">"Save" tuqi</strong>
+        <strong class="ti">"Save" ጠውቑ</strong>
+        <span class="en">Now you can log in with your new PIN.</span>
+        <span class="am">አሁን በአዲሱ ፒንዎ መግባት ይችላሉ።</span>
+        <span class="om">Amma PIN haaraan seenuu dandeessu.</span>
+        <span class="ti">ሕጂ ብሓድሽ ፒንኩም ክትኣቱ ትኽእሉ።</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout danger">
+    <span class="co-icon">🚨</span>
+    <div>
+      <strong class="en">Do not share the SMS code</strong>
+      <strong class="am">የSMS ኮዱን አትካፈሉ</strong>
+      <strong class="om">Koodii SMS hin qoodinaa</strong>
+      <strong class="ti">ኮድ SMS ኣይትካፈሉ</strong>
+      <span class="en">The 6-digit code is like a key to your account. Never give it to anyone — not even someone claiming to be IT support.</span>
+      <span class="am">የ6 አሃዝ ኮዱ ለመለያዎ ቁልፍ ነው። ለማንም አይስጡ — እንደ አይቲ ድጋፍ ቢናገርም።</span>
+      <span class="om">Koodiin lakkoofsa 6 furtuu akaawuntii keessaniif. Nama kamiifis hin kenninaa.</span>
+      <span class="ti">ናይ 6 ኣሃዝ ኮድ ከም መፍትሕ ሕሳብኩም እዩ። ንዝኾነ ሰብ ኣይትሃብዎ።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. SIGN UP ============ -->
+<section id="signup">
+  <h2><span class="icon">👤+</span>
+    <span class="en">8. Sign Up — New User Registration</span>
+    <span class="am">8. ተመዝገብ — አዲስ ተጠቃሚ ምዝገባ</span>
+    <span class="om">8. Galmaa'i — galmee fayyadamaa haaraa</span>
+    <span class="ti">8. ተመዝገብ — ሓድሽ ተጠቃሚ ምዝገባ</span>
+  </h2>
+
+  <p class="en">Only use Sign Up if you are a brand-new user and your administrator told you to create your own account. If they already gave you a username and PIN, <strong>do not sign up</strong> — just log in directly.</p>
+  <p class="am">የምዝገባውን ይጠቀሙ አዲስ ተጠቃሚ ከሆኑ እና አስተዳዳሪዎ የራስዎን መለያ እንዲፈጥሩ ከነገሩዎት ብቻ ነው። አስቀድሞ የተጠቃሚ ስም እና ፒን ከሰጡዎት <strong>አይመዝገቡ</strong> — በቀጥታ ይግቡ።</p>
+  <p class="om">Galmee kana fayyadami yoo fayyadamaa haaraa taatee bulchaan akaawuntii mataa keessan akka uumtan sitti himte qofa. Yoo maqaa fayyadamaa fi PIN duraan siif kennan <strong>hin galmaa'in</strong> — kallattiin seeni.</p>
+  <p class="ti">እዚ ምዝገባ ጥቐም ሓድሽ ተጠቃሚ እንተኾይንካን ኣማሓዳሪኻ ሕሳብካ ክትፈጥር እንተነጊሩካን ጥራይ። ቀድሚ ስም ተጠቃሚን ፒንን እንተተዋሂቡካ <strong>ኣይትመዝገብ</strong> — ብቐጥታ እቶ።</p>
+
+  <h3>
+    <span class="en">Step-by-Step</span>
+    <span class="am">ደረጃ በደረጃ</span>
+    <span class="om">Tarkaanfii tarkaanfiin</span>
+    <span class="ti">ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">On the login page, click "Sign Up"</strong>
+        <strong class="am">በመግቢያ ገጹ ላይ "Sign Up" ይጫኑ</strong>
+        <strong class="om">Fuula seensaa irratti "Sign Up" tuqi</strong>
+        <strong class="ti">ኣብ ገጽ መእተዊ "Sign Up" ጠውቑ</strong>
+        <span class="en">The link in the bottom-left of the login card.</span>
+        <span class="am">በመግቢያ ካርዱ ታችኛው ግራ ያለው አገናኝ።</span>
+        <span class="om">Liinkii gadii bitaa kaardii seensaa.</span>
+        <span class="ti">መላግቦ ትሕቲ ጸጋ ካርድ መእተዊ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">The Sign Up form will open</strong>
+        <strong class="am">የምዝገባ ቅጹ ይከፈታል</strong>
+        <strong class="om">Unka galmee ni bana</strong>
+        <strong class="ti">ቅጥዒ ምዝገባ ይኽፈት</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Fill in every required field (see the full table below)</strong>
+        <strong class="am">እያንዳንዱ አስፈላጊ መስክ ይሙሉ (ሙሉ ሰንጠረዡን ከታች ይመልከቱ)</strong>
+        <strong class="om">Dirree barbaachisaa hunda guuti (tarree guutuu gadii ilaali)</strong>
+        <strong class="ti">ነፍሲ ወከፍ ዘድሊ መዳርግ ምልኡ (ምሉእ ሰደቓ ትሕቲ ርአ)</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Choose a strong PIN (numbers only, at least 6 digits)</strong>
+        <strong class="am">ጠንካራ ፒን ይምረጡ (ቁጥሮች ብቻ፣ ቢያንስ 6 አሃዝ)</strong>
+        <strong class="om">PIN cimaa filadhu (lakkoofsa qofa, yoo xiqqaate 6)</strong>
+        <strong class="ti">ዓቢ ፒን ምረጹ (ቁጽሪ ጥራይ፣ እንተወሓደ 6 ኣሃዝ)</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Upload your photo (optional but recommended)</strong>
+        <strong class="am">ፎቶዎን ይጫኑ (አማራጭ ግን ይመከራል)</strong>
+        <strong class="om">Suuraa keessan ol kaa'i (filannoo garuu gorfama)</strong>
+        <strong class="ti">ስእልኹም ጽዓኑ (ኣማራጺ ግን ይምከር)</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Click "Sign Up" / "Register"</strong>
+        <strong class="am">"Sign Up" / "Register" ይጫኑ</strong>
+        <strong class="om">"Sign Up" / "Register" tuqi</strong>
+        <strong class="ti">"Sign Up" / "Register" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Wait for confirmation</strong>
+        <strong class="am">ማረጋገጫ ይጠብቁ</strong>
+        <strong class="om">Mirkaneessaa eegi</strong>
+        <strong class="ti">መረጋገጺ ተጸበ</strong>
+        <span class="en">A green message will say "Account created successfully" or similar. You can now log in.</span>
+        <span class="am">አረንጓዴ መልእክት "መለያ በተሳካ ሁኔታ ተፈጥሯል" ወይም ተመሳሳይ ይላል። አሁን መግባት ይችላሉ።</span>
+        <span class="om">Ergaan magariisa "Akaawuntiin milkaa'inaan uumame" jedha. Amma seenuu dandeessu.</span>
+        <span class="ti">ቀጠልያ መልእኽቲ "ሕሳብ ብዓወት ተፈጢሩ" ይብል። ሕጂ ክትኣቱ ትኽእል።</span>
+      </div>
+    </li>
+  </ol>
+
+  <h3>
+    <span class="en">📝 Sign Up — Every Field Explained</span>
+    <span class="am">📝 ምዝገባ — ሁሉም መስክ ተብራርቷል</span>
+    <span class="om">📝 Galmee — dirree hunda ibsame</span>
+    <span class="ti">📝 ምዝገባ — ኩሉ መዳርግ ተብራሂሩ</span>
+  </h3>
+
+  <h4>
+    <span class="en">Personal Information</span>
+    <span class="am">የግል መረጃ</span>
+    <span class="om">Odeeffannoo Dhuunfaa</span>
+    <span class="ti">ግላዊ ሓበሬታ</span>
+  </h4>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+        <th><span class="en">Example</span><span class="am">ምሳሌ</span><span class="om">Fakkeenya</span><span class="ti">ኣብነት</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Identity No</span>
+          <span class="am">የመታወቂያ ቁጥር</span>
+          <span class="om">Lakkoofsa Eenyummeessaa</span>
+          <span class="ti">ቁጽሪ መንነት</span>
+        </td>
+        <td>
+          <span class="en">Your government-issued ID number (fayda/kebele ID). This must be unique — no two users can share it.</span>
+          <span class="am">በመንግስት የተሰጠው የመታወቂያ ቁጥር (ፋይዳ/ቀበሌ መታወቂያ)። ልዩ መሆን አለበት — ሁለት ተጠቃሚዎች ሊጋሩት አይችሉም።</span>
+          <span class="om">Lakkoofsa eenyummeessaa mootummaa (faydaa/kebelee). Adda ta'uu qaba.</span>
+          <span class="ti">ቁጽሪ መንነት ብመንግስቲ ተዋሂቡ (ፋይዳ/ቀበሌ)። ፍሉይ ክኸውን ኣለዎ።</span>
+        </td>
+        <td><code>1234567890</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Full Name</span>
+          <span class="am">ሙሉ ስም</span>
+          <span class="om">Maqaa Guutuu</span>
+          <span class="ti">ምሉእ ስም</span>
+        </td>
+        <td>
+          <span class="en">Your complete legal name — first name, father's name, grandfather's name.</span>
+          <span class="am">ሙሉ ህጋዊ ስምዎ — የመጀመሪያ ስም፣ የአባት ስም፣ የአያት ስም።</span>
+          <span class="om">Maqaa seeraa guutuu — maqaa duraa, maqaa abbaa, maqaa akaakayyuu.</span>
+          <span class="ti">ምሉእ ሕጋዊ ስምኩም — ቀዳማይ ስም፣ ስም ኣቦ፣ ስም ኣቦሓጎ።</span>
+        </td>
+        <td><code>Abebe Kebede Tesfaye</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Gender</span>
+          <span class="am">ጾታ</span>
+          <span class="om">Saala</span>
+          <span class="ti">ጾታ</span>
+        </td>
+        <td>
+          <span class="en">Select from the dropdown: Male or Female.</span>
+          <span class="am">ከዝርዝሩ ይምረጡ: ወንድ ወይም ሴት።</span>
+          <span class="om">Tarree irraa filadhu: Dhiira yookaan Dhalaa.</span>
+          <span class="ti">ካብ ዝርዝር ምረጹ: ተባዕታይ ወይ ኣንስተይቲ።</span>
+        </td>
+        <td>
+          <span class="en">Male</span>
+          <span class="am">ወንድ</span>
+          <span class="om">Dhiira</span>
+          <span class="ti">ተባዕታይ</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Birth Place</span>
+          <span class="am">የትውልድ ቦታ</span>
+          <span class="om">Bakka Dhalootaa</span>
+          <span class="ti">ቦታ ልደት</span>
+        </td>
+        <td>
+          <span class="en">The city, town, or village where you were born.</span>
+          <span class="am">የተወለዱበት ከተማ፣ ከተማ ወይም መንደር።</span>
+          <span class="om">Magaalaa yookaan ganda itti dhalatte.</span>
+          <span class="ti">እትትወለደሉ ከተማ ወይ ቁሸት።</span>
+        </td>
+        <td><code>Addis Ababa</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Date of Birth</span>
+          <span class="am">የትውልድ ቀን</span>
+          <span class="om">Guyyaa Dhalootaa</span>
+          <span class="ti">ዕለት ልደት</span>
+        </td>
+        <td>
+          <span class="en">Format: dd/mm/yyyy. Use the calendar icon to pick the date.</span>
+          <span class="am">ቅርጸት: ቀን/ወር/ዓመት። ቀኑን ለመምረጥ የቀን መርጫ አዶውን ይጠቀሙ።</span>
+          <span class="om">Boccaa: gg/jj/ww. Guyyaa filachuuf icon kalendarii fayyadami.</span>
+          <span class="ti">ቅርጺ: መዓልቲ/ወርሒ/ዓመት። ንመዓልቲ ንምምራጽ ኣይኮን ካላንደር ተጠቐሙ።</span>
+        </td>
+        <td><code>15/05/1990</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Age</span>
+          <span class="am">ዕድሜ</span>
+          <span class="om">Umurii</span>
+          <span class="ti">ዕድመ</span>
+        </td>
+        <td>
+          <span class="en">Auto-calculated from your Date of Birth — you do not type this.</span>
+          <span class="am">ከትውልድ ቀንዎ በራስ-ሰር ይሰላል — እርስዎ አይተይቡም።</span>
+          <span class="om">Guyyaa dhalootaa irraa ofumaan shallagama — ati hin barreessu.</span>
+          <span class="ti">ካብ ዕለት ልደትኩም ብራስኡ ይሕሰብ — ኣብኡ ኣይትጽሕፍን።</span>
+        </td>
+        <td><em>auto</em></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Photo</span>
+          <span class="am">ፎቶ</span>
+          <span class="om">Suuraa</span>
+          <span class="ti">ስእሊ</span>
+        </td>
+        <td>
+          <span class="en">Click "Choose File" and select a clear portrait photo (JPG or PNG, max 5 MB). Face the camera directly.</span>
+          <span class="am">"Choose File" ይጫኑ እና ግልጽ የፊት ፎቶ ይምረጡ (JPG ወይም PNG፣ ቢበዛ 5 MB)። ፊትዎን ወደ ካሜራ ያዙሩ።</span>
+          <span class="om">"Choose File" tuqiitii suuraa fuulaa ifa ta'e filadhu (JPG yookaan PNG, hanga 5 MB).</span>
+          <span class="ti">"Choose File" ጠውቑ ንጹር ስእሊ ገጽ ምረጹ (JPG ወይ PNG፣ ክሳብ 5 MB)።</span>
+        </td>
+        <td><code>myphoto.jpg</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>
+    <span class="en">Address</span>
+    <span class="am">አድራሻ</span>
+    <span class="om">Teessoo</span>
+    <span class="ti">ኣድራሻ</span>
+  </h4>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">City</span>
+          <span class="am">ከተማ</span>
+          <span class="om">Magaalaa</span>
+          <span class="ti">ከተማ</span>
+        </td>
+        <td>
+          <span class="en">Your city (usually Addis Ababa).</span>
+          <span class="am">የእርስዎ ከተማ (አብዛኛውን ጊዜ አዲስ አበባ)።</span>
+          <span class="om">Magaalaa keessan (yeroo baay'ee Finfinnee).</span>
+          <span class="ti">ከተማኹም (መብዛሕትኡ ግዜ ኣዲስ ኣበባ)።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Sub City</span>
+          <span class="am">ክፍለ ከተማ</span>
+          <span class="om">Kutaa Magaalaa</span>
+          <span class="ti">ክፍለ ከተማ</span>
+        </td>
+        <td>
+          <span class="en">Select from the dropdown (e.g. Bole, Kirkos, Arada).</span>
+          <span class="am">ከዝርዝሩ ይምረጡ (ለምሳሌ ቦሌ፣ ቂርቆስ፣ አራዳ)።</span>
+          <span class="om">Tarree irraa filadhu (fkn Boole, Qirqos, Araada).</span>
+          <span class="ti">ካብ ዝርዝር ምረጹ (ኣብነት ቦሌ፣ ቂርቆስ፣ ኣራዳ)።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Region</span>
+          <span class="am">ክልል</span>
+          <span class="om">Naannoo</span>
+          <span class="ti">ክልል</span>
+        </td>
+        <td>
+          <span class="en">Select from the dropdown (e.g. Addis Ababa Administration).</span>
+          <span class="am">ከዝርዝሩ ይምረጡ (ለምሳሌ የአዲስ አበባ አስተዳደር)።</span>
+          <span class="om">Tarree irraa filadhu (fkn Bulchiinsa Finfinnee).</span>
+          <span class="ti">ካብ ዝርዝር ምረጹ (ኣብነት ምሕደራ ኣዲስ ኣበባ)።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Ketena</span>
+          <span class="am">ቀበሌ</span>
+          <span class="om">Ganda</span>
+          <span class="ti">ቀበሌ</span>
+        </td>
+        <td>
+          <span class="en">Select your ketena. The list updates after you choose a sub-city.</span>
+          <span class="am">የእርስዎን ቀበሌ ይምረጡ። ክፍለ ከተማ ከመረጡ በኋላ ዝርዝሩ ይታደሳል።</span>
+          <span class="om">Ganda keessan filadhu. Erga kutaa magaalaa filattanii booda tarreen haarama.</span>
+          <span class="ti">ቀበሌኹም ምረጹ። ድሕሪ ምምራጽ ክፍለ ከተማ ዝርዝሩ ይሕደስ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Blok</span>
+          <span class="am">ብሎክ</span>
+          <span class="om">Blookii</span>
+          <span class="ti">ብሎክ</span>
+        </td>
+        <td>
+          <span class="en">Select your block within the ketena.</span>
+          <span class="am">በቀበሌው ውስጥ ያለውን ብሎክ ይምረጡ።</span>
+          <span class="om">Blookii ganda keessatti filadhu.</span>
+          <span class="ti">ብሎክ ኣብ ውሽጢ ቀበሌ ምረጹ።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>
+    <span class="en">Contact</span>
+    <span class="am">የመገኛ መረጃ</span>
+    <span class="om">Qunnamtii</span>
+    <span class="ti">ርክብ</span>
+  </h4>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Telephone</span>
+          <span class="am">ስልክ</span>
+          <span class="om">Bilbila</span>
+          <span class="ti">ተሌፎን</span>
+        </td>
+        <td>
+          <span class="en">10-digit mobile number, starting with 09. Example: <code>0912345678</code>. This is used to send you the password reset code.</span>
+          <span class="am">10 አሃዝ የሞባይል ቁጥር፣ በ09 የሚጀምር። ለምሳሌ: <code>0912345678</code>። የይለፍ ቃል መመለሻ ኮድ ለመላክ ያገለግላል።</span>
+          <span class="om">Lakkoofsa mobaayilaa dijiitii 10, 09'n jalqabu. Fkn: <code>0912345678</code>.</span>
+          <span class="ti">ቁጽሪ ሞባይል 10 ኣሃዝ፣ ብ 09 ዝጅምር። ኣብነት: <code>0912345678</code>።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Email</span>
+          <span class="am">ኢሜይል</span>
+          <span class="om">Imeelii</span>
+          <span class="ti">ኢመይል</span>
+        </td>
+        <td>
+          <span class="en">Optional but recommended. Example: <code>yourname@example.com</code></span>
+          <span class="am">አማራጭ ግን ይመከራል። ለምሳሌ: <code>yourname@example.com</code></span>
+          <span class="om">Filannoo garuu gorfama. Fkn: <code>yourname@example.com</code></span>
+          <span class="ti">ኣማራጺ ግን ይምከር። ኣብነት: <code>yourname@example.com</code></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>
+    <span class="en">Work</span>
+    <span class="am">ስራ</span>
+    <span class="om">Hojii</span>
+    <span class="ti">ስራሕ</span>
+  </h4>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Department</span>
+          <span class="am">መምሪያ</span>
+          <span class="om">Kutaa</span>
+          <span class="ti">ቤት ስራሕ</span>
+        </td>
+        <td>
+          <span class="en">Your department or office (e.g. Operations, Records, Traffic).</span>
+          <span class="am">የእርስዎ መምሪያ ወይም ቢሮ (ለምሳሌ ኦፕሬሽን፣ መዝገብ፣ ትራፊክ)።</span>
+          <span class="om">Kutaa yookaan waajjira keessan (fkn Hojii, Galmee, Tiraafika).</span>
+          <span class="ti">ቤት ስራሕኩም ወይ ቤሮ (ኣብነት ስርሒት፣ መዝገብ፣ ትራፊክ)።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Responsibility</span>
+          <span class="am">ኃላፊነት</span>
+          <span class="om">Ittoophiyaa</span>
+          <span class="ti">ሓላፍነት</span>
+        </td>
+        <td>
+          <span class="en">Your job title or main responsibility (e.g. Data Entry Officer, Supervisor).</span>
+          <span class="am">የስራ ርዕስዎ ወይም ዋና ኃላፊነትዎ (ለምሳሌ የመረጃ አስገቢ መኮንን፣ ሱፐርቫይዘር)።</span>
+          <span class="om">Mata dureen hojii yookaan ittoophiyaa guddaa (fkn Ofiseraa Galmee, Toʼataa).</span>
+          <span class="ti">ኣርእስቲ ስራሕኩም ወይ ቀንዲ ሓላፍነትኩም (ኣብነት መኮነን ምዝገባ፣ ሱፐርቫይዘር)።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>
+    <span class="en">Login Credentials</span>
+    <span class="am">የመግቢያ ማረጋገጫ</span>
+    <span class="om">Ragaa Seensaa</span>
+    <span class="ti">መረጋገጺ መእተዊ</span>
+  </h4>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Username</span>
+          <span class="am">የተጠቃሚ ስም</span>
+          <span class="om">Maqaa Fayyadamaa</span>
+          <span class="ti">ስም ተጠቃሚ</span>
+        </td>
+        <td>
+          <span class="en">Choose a unique username — letters, numbers, dots, underscores only. Example: <code>abebe.k</code>. Must be different from everyone else's.</span>
+          <span class="am">ልዩ የተጠቃሚ ስም ይምረጡ — ፊደላት፣ ቁጥሮች፣ ነጥቦች፣ ከስር መስመሮች ብቻ። ለምሳሌ: <code>abebe.k</code>። ከሌሎች የተለየ መሆን አለበት።</span>
+          <span class="om">Maqaa fayyadamaa adda ta'e filadhu — qubee, lakkoofsa, tuqaa, jal'oo qofa. Fkn: <code>abebe.k</code>.</span>
+          <span class="ti">ፍሉይ ስም ተጠቃሚ ምረጹ — ፊደላት፣ ቁጽሪ፣ ነጥቢ፣ መስመር ጥራይ። ኣብነት: <code>abebe.k</code>።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">User Type</span>
+          <span class="am">የተጠቃሚ ዓይነት</span>
+          <span class="om">Akaakuu Fayyadamaa</span>
+          <span class="ti">ዓይነት ተጠቃሚ</span>
+        </td>
+        <td>
+          <span class="en">Select from the dropdown. Usually set by your administrator.</span>
+          <span class="am">ከዝርዝሩ ይምረጡ። አብዛኛውን ጊዜ በአስተዳዳሪዎ ይቀመጣል።</span>
+          <span class="om">Tarree irraa filadhu. Yeroo baay'ee bulchaan keessan isa kaa'a.</span>
+          <span class="ti">ካብ ዝርዝር ምረጹ። መብዛሕትኡ ግዜ ብኣማሓዳሪኹም ይቕመጥ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">PIN</span>
+          <span class="am">ፒን</span>
+          <span class="om">PIN</span>
+          <span class="ti">ፒን</span>
+        </td>
+        <td>
+          <span class="en">Numbers only, at least 6 digits. Do NOT use <code>123456</code> or <code>111111</code> — use a mix like <code>593816</code>.</span>
+          <span class="am">ቁጥሮች ብቻ፣ ቢያንስ 6 አሃዝ። <code>123456</code> ወይም <code>111111</code> አይጠቀሙ — እንደ <code>593816</code> ድብልቅ ይጠቀሙ።</span>
+          <span class="om">Lakkoofsa qofa, yoo xiqqaate 6. <code>123456</code> yookaan <code>111111</code> hin fayyadaminaa — fkn <code>593816</code> fayyadami.</span>
+          <span class="ti">ቁጽሪ ጥራይ፣ እንተወሓደ 6። <code>123456</code> ወይ <code>111111</code> ኣይትጠቐሙ — ከም <code>593816</code> ተጠቐሙ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Confirm PIN</span>
+          <span class="am">ፒን ያረጋግጡ</span>
+          <span class="om">PIN Mirkaneessi</span>
+          <span class="ti">ፒን ኣረጋግጽ</span>
+        </td>
+        <td>
+          <span class="en">Type the exact same PIN again. If the two do not match, an error will appear.</span>
+          <span class="am">ተመሳሳዩን ፒን እንደገና ይተይቡ። ሁለቱ ካልተመሳሰሉ ስህተት ይታያል።</span>
+          <span class="om">PIN sanaan wal fakkaatu irra deebi'ii barreessi. Yoo wal hin fakkaanne dogoggorri mul'ata.</span>
+          <span class="ti">ተመሳሳሊ ፒን ደጊምካ ጽሓፍ። ክልቲኡ እንተዘይተመሳሰለ ጌጋ ይርአ።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout gold">
+    <span class="co-icon">🌟</span>
+    <div>
+      <strong class="en">Strong PIN tips</strong>
+      <strong class="am">ጠንካራ ፒን ምክሮች</strong>
+      <strong class="om">Gorsa PIN cimaa</strong>
+      <strong class="ti">ምኽሪ ዓቢ ፒን</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">Use at least 6 digits — 8 is even safer.</li>
+        <li class="en">Avoid your birth year, phone number, or 123456.</li>
+        <li class="en">Do not reuse the same PIN for other apps.</li>
+        <li class="en">Change your PIN every 3 months.</li>
+        <li class="am">ቢያንስ 6 አሃዝ ይጠቀሙ — 8 የበለጠ ደህንነቱ የተጠበቀ ነው።</li>
+        <li class="am">የትውልድ ዓመትዎን፣ ስልክ ቁጥርዎን ወይም 123456 አይጠቀሙ።</li>
+        <li class="am">ለሌሎች መተግበሪያዎች ተመሳሳይ ፒን አይድገሙ።</li>
+        <li class="am">በየ3 ወሩ ፒንዎን ይቀይሩ።</li>
+        <li class="om">Yoo xiqqaate lakkoofsa 6 fayyadami — 8 caalaatti nageenya qaba.</li>
+        <li class="om">Waggaa dhalootaa, lakkoofsa bilbilaa, yookaan 123456 hin fayyadaminaa.</li>
+        <li class="om">PIN tokko apps biroof hin deebisinaa.</li>
+        <li class="ti">እንተወሓደ 6 ኣሃዝ ተጠቐሙ — 8 ዝያዳ ውሕስነት ኣለዎ።</li>
+        <li class="ti">ዓመት ልደትኩም፣ ቁጽሪ ተሌፎንኩም ወይ 123456 ኣይትጠቐሙ።</li>
+        <li class="ti">ንኻልኦት ኣፕ ተመሳሳሊ ፒን ኣይትደግሙ።</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. DASHBOARD TOUR ============ -->
+<section id="dashboard-tour">
+  <h2><span class="icon">📊</span>
+    <span class="en">9. Dashboard Tour — What You See After Login</span>
+    <span class="am">9. የዳሽቦርድ ጉብኝት — ከገቡ በኋላ ምን ያያሉ</span>
+    <span class="om">9. Daawwannaa Daashboordii — erga seentanii booda maal argitu</span>
+    <span class="ti">9. ምብጻሕ ዳሽቦርድ — ድሕሪ ምእታው እንታይ ትርኢ</span>
+  </h2>
+
+  <p class="en">The dashboard is your home screen. It has 3 parts: the top bar, the left menu, and the main content area.</p>
+  <p class="am">ዳሽቦርድ የመነሻ ገጽዎ ነው። 3 ክፍሎች አሉት: የላይኛው አሞሌ፣ የግራው ምናሌ እና ዋናው የይዘት ቦታ።</p>
+  <p class="om">Daashboordiin fuula mana keessanii ti. Kutaa 3 qaba: barruu gubbaa, menu bitaa fi bakka qabiyyee guddaa.</p>
+  <p class="ti">ዳሽቦርድ ገጽ ቤትኩም እዩ። 3 ክፍልታት ኣለዎ: ኣሞላ ላዕሊ፣ ምናሌ ጸጋን ቀንዲ ቦታ ትሕዝቶን።</p>
+
+  <h3>
+    <span class="en">The Three Parts of the Dashboard</span>
+    <span class="am">የዳሽቦርዱ ሶስት ክፍሎች</span>
+    <span class="om">Kutaa sadan daashboordii</span>
+    <span class="ti">ሰለስተ ክፍልታት ዳሽቦርድ</span>
+  </h3>
+
+  <div class="screen-mock">
+    <div class="titlebar">
+      <span class="dots"><span></span><span></span><span></span></span>
+      <span class="en">Dashboard Layout — Simplified</span>
+      <span class="am">የዳሽቦርድ አቀማመጥ — ቀለል ባለ</span>
+      <span class="om">Qindaa'ina Daashboordii — Salphaatti</span>
+      <span class="ti">ኣቀማምጣ ዳሽቦርድ — ቀሊል</span>
+    </div>
+    <div class="body" style="padding:0; background:#f4f7f5;">
+      <div style="background:#0d3d2e; color:#fff; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; font-size:.85rem;">
+        <span style="font-weight:700;">🛡️ Peace Keepers</span>
+        <span style="font-size:1.1rem;">🔔 &nbsp; ✉️ &nbsp; <strong>ABEBE K.</strong> ▼</span>
+      </div>
+      <div style="display:flex; min-height:280px;">
+        <div style="width:210px; background:#fff; border-right:2px solid #e2e8f0; padding:14px 10px; font-size:.82rem;">
+          <div style="padding:9px 12px; background:#e8f5ec; border-left:4px solid #c9a227; border-radius:6px; margin-bottom:6px; font-weight:700; color:#0d3d2e;">🏠 Dashboard</div>
+          <div style="padding:9px 12px; color:#334155; margin-bottom:4px;">👮 Peace Keepers</div>
+          <div style="padding:9px 12px; color:#334155; margin-bottom:4px;">📁 Crime Cases</div>
+          <div style="padding:9px 12px; color:#334155; margin-bottom:4px;">🏘️ Community Reports</div>
+          <div style="padding:9px 12px; color:#334155; margin-bottom:4px;">📅 Attendance</div>
+          <div style="padding:9px 12px; color:#334155; margin-bottom:4px;">💬 SMS</div>
+          <div style="padding:9px 12px; color:#334155; margin-bottom:4px;">✉️ Messages</div>
+          <div style="padding:9px 12px; color:#334155; margin-bottom:4px;">🪪 Certificates</div>
+          <div style="padding:9px 12px; color:#334155;">⚙️ Settings</div>
+        </div>
+        <div style="flex:1; padding:20px;">
+          <div style="font-size:1rem; font-weight:800; color:#0d3d2e; margin-bottom:14px;">📊 Overview</div>
+          <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px;">
+            <div style="background:linear-gradient(135deg,#0d3d2e,#1a5c3f); color:#fff; padding:16px; border-radius:10px; border-left:4px solid #c9a227;">
+              <div style="font-size:.75rem; opacity:.85;">TOTAL PEACE KEEPERS</div>
+              <div style="font-size:1.5rem; font-weight:800;">12,847</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#c9a227,#e0b83a); color:#0d3d2e; padding:16px; border-radius:10px;">
+              <div style="font-size:.75rem; font-weight:700; opacity:.85;">TOTAL CRIME CASES</div>
+              <div style="font-size:1.5rem; font-weight:800;">3,402</div>
+            </div>
+            <div style="background:#fff; padding:16px; border-radius:10px; border:2px solid #e2e8f0;">
+              <div style="font-size:.75rem; color:#64748b;">PENDING CASES</div>
+              <div style="font-size:1.5rem; font-weight:800; color:#dc2626;">217</div>
+            </div>
+            <div style="background:#fff; padding:16px; border-radius:10px; border:2px solid #e2e8f0;">
+              <div style="font-size:.75rem; color:#64748b;">COMMUNITY REPORTS</div>
+              <div style="font-size:1.5rem; font-weight:800; color:#16a34a;">84</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>
+    <span class="en">The Top Bar</span>
+    <span class="am">የላይኛው አሞሌ</span>
+    <span class="om">Barruu Gubbaa</span>
+    <span class="ti">ኣሞላ ላዕሊ</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Element</span><span class="am">ክፍል</span><span class="om">Wantoota</span><span class="ti">ንጥሊ</span></th>
+        <th><span class="en">What It Does</span><span class="am">ምን ያደርጋል</span><span class="om">Maal hojjeta</span><span class="ti">እንታይ ይገብር</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">🛡️ Logo (left)</span>
+          <span class="am">🛡️ አርማ (ግራ)</span>
+          <span class="om">🛡️ Logo (bitaa)</span>
+          <span class="ti">🛡️ ሎጎ (ጸጋ)</span>
+        </td>
+        <td>
+          <span class="en">Click to return to the dashboard from anywhere.</span>
+          <span class="am">ከየትኛውም ቦታ ወደ ዳሽቦርድ ለመመለስ ይጫኑ።</span>
+          <span class="om">Bakka kamiyyuu irraa gara daashboordiitti deebi'uuf tuqi.</span>
+          <span class="ti">ካብ ዝኾነ ቦታ ናብ ዳሽቦርድ ንምምላስ ጠውቕ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">🔔 Bell icon</span>
+          <span class="am">🔔 የደወል አዶ</span>
+          <span class="om">🔔 Icon bilbilaa</span>
+          <span class="ti">🔔 ኣይኮን ደወል</span>
+        </td>
+        <td>
+          <span class="en">Shows your notifications. A red dot means unread items. Click to open the list.</span>
+          <span class="am">ማሳወቂያዎችዎን ያሳያል። ቀይ ነጥብ ያልተነበቡ ንጥሎች ማለት ነው። ዝርዝሩን ለመክፈት ይጫኑ።</span>
+          <span class="om">Beeksisa keessan agarsiisa. Tuqni diimaa wantoota hin dubbifamne agarsiisa.</span>
+          <span class="ti">መልእኽትታትኩም የርኢ። ቀያሕ ነጥቢ ዘይተነበቡ ኣመልክት።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">✉️ Envelope icon</span>
+          <span class="am">✉️ የፖስታ አዶ</span>
+          <span class="om">✉️ Icon xalayaa</span>
+          <span class="ti">✉️ ኣይኮን መልእኽቲ</span>
+        </td>
+        <td>
+          <span class="en">Your internal messages. Click to read and reply.</span>
+          <span class="am">የውስጥ መልእክቶችዎ። ለማንበብ እና ለመመለስ ይጫኑ።</span>
+          <span class="om">Ergaawwan keessan. Dubbisuuf fi deebisuuf tuqi.</span>
+          <span class="ti">ውሽጣዊ መልእኽትታትኩም። ንምንባብን ንምምላስን ጠውቕ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Your name (right)</span>
+          <span class="am">ስምዎ (ቀኝ)</span>
+          <span class="om">Maqaa keessan (mirga)</span>
+          <span class="ti">ስምኩም (የማን)</span>
+        </td>
+        <td>
+          <span class="en">Click to open profile menu: update profile, change PIN, log out.</span>
+          <span class="am">የመገለጫ ምናሌ ለመክፈት ይጫኑ: መገለጫ ማዘመን፣ ፒን መቀየር፣ መውጣት።</span>
+          <span class="om">Menu profaayilii banuuf tuqi: profaayilii haaromsuu, PIN jijjiiruu, ba'uu.</span>
+          <span class="ti">ምናሌ መግለጺ ንምኽፋት ጠውቕ: መግለጺ ምሕዳስ፣ ፒን ምቕያር፣ ምውጻእ።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 10. NAVIGATION ============ -->
+<section id="navigation">
+  <h2><span class="icon">🧭</span>
+    <span class="en">10. How to Navigate the Menu</span>
+    <span class="am">10. ምናሌውን እንዴት መጠቀም</span>
+    <span class="om">10. Menu akkamitti fayyadamuu</span>
+    <span class="ti">10. ምናሌ ከመይ ጌርካ ትጥቀም</span>
+  </h2>
+
+  <p class="en">The left-side menu is your map of the system. Every time you click a menu item, the main content area changes.</p>
+  <p class="am">የግራው ምናሌ የሲስተሙ ካርታዎ ነው። በማንኛውም ጊዜ የምናሌ ንጥል ሲጫኑ ዋናው የይዘት ቦታ ይቀየራል።</p>
+  <p class="om">Menu bitaa kaartaa sirna keessaniiti. Yeroo kamiyyuu miiltoo menu tuqtan bakki qabiyyee guddaan jijjiirama.</p>
+  <p class="ti">ምናሌ ጸጋ ካርታ ስርዓትኩም እዩ። ዝኾነ ግዜ ንጥሊ ምናሌ ምስ ጠወቕኩም ቀንዲ ቦታ ትሕዝቶ ይቕየር።</p>
+
+  <h3>
+    <span class="en">Standard Menu Items (based on your role)</span>
+    <span class="am">መደበኛ የምናሌ ንጥሎች (በሚናዎ)</span>
+    <span class="om">Miiltoowwan Menu Baramaa (gahee keessaniin)</span>
+    <span class="ti">ንጥልታት ምናሌ ንቡር (ብተራኹም)</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Menu Item</span><span class="am">የምናሌ ንጥል</span><span class="om">Miiltoo Menu</span><span class="ti">ንጥሊ ምናሌ</span></th>
+        <th><span class="en">What It Opens</span><span class="am">ምን ይከፍታል</span><span class="om">Maal bana</span><span class="ti">እንታይ ይኸፍት</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">🏠 Dashboard</span>
+          <span class="am">🏠 ዳሽቦርድ</span>
+          <span class="om">🏠 Daashboordii</span>
+          <span class="ti">🏠 ዳሽቦርድ</span>
+        </td>
+        <td>
+          <span class="en">The home overview with statistics cards.</span>
+          <span class="am">የስታቲስቲክስ ካርዶች ያሉት የመነሻ ማጠቃለያ።</span>
+          <span class="om">Daawwannaa mana kaardiiwwan lakkoofsaa waliin.</span>
+          <span class="ti">መበገሲ ምልስ ምስ ካርድታት ስታቲስቲክስ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">👮 Peace Keepers</span>
+          <span class="am">👮 ፒስ ኪፐሮች</span>
+          <span class="om">👮 Ofiseroonni</span>
+          <span class="ti">👮 ፒስ ኪፐራት</span>
+        </td>
+        <td>
+          <span class="en">Register, view, edit peace keepers (officers).</span>
+          <span class="am">ፒስ ኪፐሮችን (መኮንኖችን) መመዝገብ፣ መመልከት፣ ማስተካከል።</span>
+          <span class="om">Galmeessuu, ilaaluu, sirreessuu ofiseroonni.</span>
+          <span class="ti">ፒስ ኪፐራት (መኮነንቲ) ምዝገባ፣ ምርኣይ፣ ምስተካከል።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">📁 Crime Cases</span>
+          <span class="am">📁 የወንጀል ጉዳዮች</span>
+          <span class="om">📁 Yakkoota</span>
+          <span class="ti">📁 ጉዳያት ገበን</span>
+        </td>
+        <td>
+          <span class="en">File new crime, view/edit existing cases, manage case types.</span>
+          <span class="am">አዲስ ወንጀል መመዝገብ፣ ያሉትን ጉዳዮች መመልከት/ማስተካከል፣ የጉዳይ ዓይነቶችን ማስተዳደር።</span>
+          <span class="om">Yakka haaraa galmeessuu, kan jiru ilaaluu/sirreessuu, akaakuu bulchuu.</span>
+          <span class="ti">ሓድሽ ገበን ምዝገባ፣ ዘሎ ምርኣይ/ምስተካከል፣ ዓይነት ምሕዳር።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">🏘️ Community Reports</span>
+          <span class="am">🏘️ የማህበረሰብ ሪፖርቶች</span>
+          <span class="om">🏘️ Gabaasa Hawaasaa</span>
+          <span class="ti">🏘️ ጸብጻባት ማሕበረሰብ</span>
+        </td>
+        <td>
+          <span class="en">Submit discussion reports, view past reports.</span>
+          <span class="am">የውይይት ሪፖርቶችን ማስገባት፣ ያለፉ ሪፖርቶችን መመልከት።</span>
+          <span class="om">Gabaasa marii galmeessuu, kan darbe ilaaluu.</span>
+          <span class="ti">ጸብጻባት ምይይት ምቕራብ፣ ዝሓለፉ ምርኣይ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">📅 Attendance</span>
+          <span class="am">📅 ክትትል</span>
+          <span class="om">📅 Argama</span>
+          <span class="ti">📅 ተረኽቦ</span>
+        </td>
+        <td>
+          <span class="en">Record daily attendance (individual, QR, bulk) and view history.</span>
+          <span class="am">የዕለት ተዕለት ክትትል መመዝገብ (በግል፣ በQR፣ በጅምላ) እና ታሪክ መመልከት።</span>
+          <span class="om">Argama guyyaa galmeessuu (dhuunfaa, QR, hedduu) fi seenaa ilaaluu.</span>
+          <span class="ti">መዓልታዊ ተረኽቦ ምዝገባን ታሪኽ ምርኣይን።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">💬 SMS</span>
+          <span class="am">💬 SMS</span>
+          <span class="om">💬 SMS</span>
+          <span class="ti">💬 SMS</span>
+        </td>
+        <td>
+          <span class="en">Compose, approve, and review SMS messages.</span>
+          <span class="am">SMS መልእክቶችን መጻፍ፣ ማጽደቅ እና መገምገም።</span>
+          <span class="om">SMS barreessuu, mirkaneessuu fi gamaaggamuu.</span>
+          <span class="ti">SMS ምጽሓፍ፣ ምጽዳቕን ምግምጋምን።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">✉️ Messages</span>
+          <span class="am">✉️ መልእክቶች</span>
+          <span class="om">✉️ Ergaawwan</span>
+          <span class="ti">✉️ መልእኽትታት</span>
+        </td>
+        <td>
+          <span class="en">Internal messaging between users.</span>
+          <span class="am">በተጠቃሚዎች መካከል የውስጥ መልእክት።</span>
+          <span class="om">Ergaa giddu-galeessaa fayyadamtoota gidduu.</span>
+          <span class="ti">ውሽጣዊ መልእኽቲ ኣብ መንጎ ተጠቀምቲ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">🪪 Certificates &amp; ID Cards</span>
+          <span class="am">🪪 ሰርተፍኬቶች እና መታወቂያዎች</span>
+          <span class="om">🪪 Waraqaa Ragaafi Eenyummeessaa</span>
+          <span class="ti">🪪 ሰርተፍኬትን መንነትን</span>
+        </td>
+        <td>
+          <span class="en">Request, approve, track certificates and ID cards.</span>
+          <span class="am">ሰርተፍኬቶችን እና መታወቂያዎችን መጠየቅ፣ ማጽደቅ፣ መከታተል።</span>
+          <span class="om">Waraqaa fi eenyummeessaa gaafachuu, mirkaneessuu, hordofuu.</span>
+          <span class="ti">ሰርተፍኬትን መንነትን ምሕታት፣ ምጽዳቕ፣ ምክትታል።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">📈 Reports</span>
+          <span class="am">📈 ሪፖርቶች</span>
+          <span class="om">📈 Gabaasota</span>
+          <span class="ti">📈 ጸብጻባት</span>
+        </td>
+        <td>
+          <span class="en">Charts, analytics, exports.</span>
+          <span class="am">ግራፎች፣ ትንታኔዎች፣ ወደ ውጭ መላክ።</span>
+          <span class="om">Chaartii, xiinxala, baasuu.</span>
+          <span class="ti">ስእልታት፣ ትንተና፣ ምውጻእ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">⚙️ Settings</span>
+          <span class="am">⚙️ ቅንብሮች</span>
+          <span class="om">⚙️ Qindaa'ina</span>
+          <span class="ti">⚙️ ቅጥዒ</span>
+        </td>
+        <td>
+          <span class="en">Your profile, PIN change, notification preferences.</span>
+          <span class="am">መገለጫዎ፣ ፒን መቀየር፣ የማሳወቂያ ምርጫዎች።</span>
+          <span class="om">Profaayilii keessan, PIN jijjiiruu, filannoo beeksisaa.</span>
+          <span class="ti">መግለጺኹም፣ ፒን ምቕያር፣ ምርጫ መልእኽቲ።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span class="co-icon">🧭</span>
+    <div>
+      <strong class="en">The active menu item is highlighted</strong>
+      <strong class="am">ንቁ የምናሌ ንጥል ይደምቃል</strong>
+      <strong class="om">Miiltoon menu socho'aa ifa ta'a</strong>
+      <strong class="ti">ንጥሊ ምናሌ ንጡፍ ይበርህ</strong>
+      <span class="en">When you click a menu item, it stays highlighted in green with a gold left border so you always know where you are.</span>
+      <span class="am">የምናሌ ንጥል ሲጫኑ በአረንጓዴ ተደምቆ ከወርቃማ የግራ ጠርዝ ጋር ይቆያል — የት እንዳሉ ሁልጊዜ ያውቃሉ።</span>
+      <span class="om">Yeroo miiltoo menu tuqtan magariisaan ifa ta'ee daangaa bitaa warqee waliin tura — eessaa jirtan beekuu dandeessu.</span>
+      <span class="ti">ንጥሊ ምናሌ ምስ ጠወቕኩም ብቀጠልያ ጸዲቑ ምስ ወርቃዊ ዶብ ጸጋ ይተርፍ — ኣበይ ከም ዘለኹም ትፈልጡ።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11. LANGUAGE ============ -->
+<section id="language">
+  <h2><span class="icon">🌐</span>
+    <span class="en">11. Changing the Language (EN · አማ · Afa O · ትግ)</span>
+    <span class="am">11. ቋንቋ መቀየር (EN · አማ · Afa O · ትግ)</span>
+    <span class="om">11. Afaan jijjiiruu (EN · አማ · Afa O · ትግ)</span>
+    <span class="ti">11. ቋንቋ ምቕያር (EN · አማ · Afa O · ትግ)</span>
+  </h2>
+
+  <p class="en">The system supports 4 languages: English (EN), Amharic (አማ), Afaan Oromoo (Afa O), and Tigrinya (ትግ). You can switch at any time.</p>
+  <p class="am">ሲስተሙ 4 ቋንቋዎችን ይደግፋል: እንግሊዝኛ (EN)፣ አማርኛ (አማ)፣ አፋን ኦሮሞ (Afa O) እና ትግርኛ (ትግ)። በማንኛውም ጊዜ መቀየር ይችላሉ።</p>
+  <p class="om">Sirni kun afaan 4 deeggara: Ingiliffa (EN), Amaariffa (አማ), Afaan Oromoo (Afa O) fi Tigrinya (ትግ). Yeroo kamiyyuu jijjiiruu dandeessu.</p>
+  <p class="ti">እቲ ስርዓት 4 ቋንቋታት ይድግፍ: እንግሊዝኛ (EN)፣ ኣምሓርኛ (አማ)፣ ኣፋን ኦሮሞ (Afa O) ትግርኛ (ትግ)። ዝኾነ ግዜ ክትቅይሩ ትኽእሉ።</p>
+
+  <h3>
+    <span class="en">Step-by-Step</span>
+    <span class="am">ደረጃ በደረጃ</span>
+    <span class="om">Tarkaanfii tarkaanfiin</span>
+    <span class="ti">ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Look at the top of the login card</strong>
+        <strong class="am">የመግቢያ ካርዱ አናት ላይ ይመልከቱ</strong>
+        <strong class="om">Gubbaa kaardii seensaa ilaali</strong>
+        <strong class="ti">ኣብ ላዕሊ ካርድ መእተዊ ተመልከት</strong>
+        <span class="en">You will see 4 small buttons: <strong>EN · አማ · Afa O · ትግ</strong></span>
+        <span class="am">4 ትንንሽ ቁልፎች ያያሉ: <strong>EN · አማ · Afa O · ትግ</strong></span>
+        <span class="om">Furtuu xiqqaa 4 argita: <strong>EN · አማ · Afa O · ትግ</strong></span>
+        <span class="ti">4 ንኣሽቱ መጠወሊ ትርኢ: <strong>EN · አማ · Afa O · ትግ</strong></span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Click the language you want</strong>
+        <strong class="am">የሚፈልጉትን ቋንቋ ይጫኑ</strong>
+        <strong class="om">Afaan barbaaddu tuqi</strong>
+        <strong class="ti">ቋንቋ እትደልዮ ጠውቕ</strong>
+        <span class="en">For example, click <strong>አማ</strong> for Amharic.</span>
+        <span class="am">ለምሳሌ ለአማርኛ <strong>አማ</strong> ይጫኑ።</span>
+        <span class="om">Fkn Amaariffaaf <strong>አማ</strong> tuqi.</span>
+        <span class="ti">ኣብነት ንኣምሓርኛ <strong>አማ</strong> ጠውቕ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">The whole page changes language instantly</strong>
+        <strong class="am">ሙሉ ገጹ ወዲያውኑ ቋንቋ ይቀይራል</strong>
+        <strong class="om">Fuulli guutuun battalumatti afaan jijjiirta</strong>
+        <strong class="ti">ኩሉ ገጽ ብቕጽበት ቋንቋ ይቕይር</strong>
+        <span class="en">Field labels, buttons, and messages all switch to your chosen language.</span>
+        <span class="am">የመስክ ስሞች፣ ቁልፎች እና መልእክቶች በሙሉ ወደ መረጡት ቋንቋ ይቀየራሉ።</span>
+        <span class="om">Maqaa dirree, furtuu fi ergaa hundi afaan filattaniitti jijjiirama.</span>
+        <span class="ti">ስም መዳርግ፣ መጠወሊን መልእኽትታትን ኩሎም ናብ ዝመረጽኩሞ ቋንቋ ይቕየሩ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Your choice is remembered</strong>
+        <strong class="am">የመረጡት ይታወሳል</strong>
+        <strong class="om">Filannoon keessan ni yaadatama</strong>
+        <strong class="ti">ዝመረጽኩሞ ይዝከር</strong>
+        <span class="en">Next time you visit, the system automatically uses your last language choice.</span>
+        <span class="am">በሚቀጥለው ጊዜ ሲጎበኙ ሲስተሙ በራስ-ሰር የመጨረሻውን የቋንቋ ምርጫዎን ይጠቀማል።</span>
+        <span class="om">Yeroo itti aanu yeroo daawwattan, sirni filannoo afaan dhumaa keessan fayyadama.</span>
+        <span class="ti">ኣብ ዝቕጽል ግዜ ምስ ተበጻሕኩም ስርዓት ናይ መወዳእታ ምርጫ ቋንቋኹም ይጥቀም።</span>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ 12. REGISTER PK ============ -->
+<section id="register-pk">
+  <h2><span class="icon">👮</span>
+    <span class="en">12. Register a Peace Keeper — Every Field Explained</span>
+    <span class="am">12. ፒስ ኪፐር መመዝገብ — ሁሉም መስክ ተብራርቷል</span>
+    <span class="om">12. Ofiseraa Galmeessuu — dirree hunda ibsame</span>
+    <span class="ti">12. ፒስ ኪፐር ምዝገባ — ኩሉ መዳርግ ተብራሂሩ</span>
+  </h2>
+
+  <p class="en">Registering peace keepers is the most common task. Follow every step carefully — accuracy here matters because this data is used everywhere else in the system.</p>
+  <p class="am">ፒስ ኪፐሮችን መመዝገብ በጣም የተለመደ ተግባር ነው። እያንዳንዱን ደረጃ በጥንቃቄ ይከተሉ — ትክክለኛነት እዚህ በጣም አስፈላጊ ነው ምክንያቱም ይህ መረጃ በሌላ ቦታ ሁሉ ይጠቀማል።</p>
+  <p class="om">Ofiseroonni galmeessuun hojii baay'ee baramaa ti. Tarkaanfii hunda sirriitti hordofi — sirriitti galmeessuun barbaachisa sababni isaas daataan kun bakka biraa hundatti fayyadama.</p>
+  <p class="ti">ፒስ ኪፐራት ምዝገባ ኣዝዩ ልሙድ ዕዮ እዩ። ነፍሲ ወከፍ ደረጃ ብጥንቃቐ ተኸተሉ — ትኽክለኝነት ኣብዚ ኣገዳሲ እዩ ምኽንያቱም እዚ ዳታ ኣብ ካልእ ቦታ ኩሉ ይጥቀም።</p>
+
+  <h3>
+    <span class="en">Before You Start</span>
+    <span class="am">قبل ከመጀመር</span>
+    <span class="om">Jalqabuu dura</span>
+    <span class="ti">ቅድሚ ምጅማር</span>
+  </h3>
+
+  <div class="callout info">
+    <span class="co-icon">📋</span>
+    <div>
+      <strong class="en">Have These Ready</strong>
+      <strong class="am">እነዚህን ያዘጋጁ</strong>
+      <strong class="om">Kanota qopheessi</strong>
+      <strong class="ti">እዞም ኣዳልዉ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">The officer's government-issued ID number</li>
+        <li class="en">The officer's phone number (10 digits, starts with 09)</li>
+        <li class="en">The officer's photo (JPG or PNG, max 5 MB, clear face)</li>
+        <li class="en">The sub-city, district, ketena, and block where they serve</li>
+        <li class="am">የመኮንኑ የመንግስት መታወቂያ ቁጥር</li>
+        <li class="am">የመኮንኑ ስልክ ቁጥር (10 አሃዝ፣ በ09 የሚጀምር)</li>
+        <li class="am">የመኮንኑ ፎቶ (JPG ወይም PNG፣ ቢበዛ 5 MB፣ ግልጽ ፊት)</li>
+        <li class="am">የሚያገለግሉበት ክፍለ ከተማ፣ አውራጃ፣ ቀበሌ እና ብሎክ</li>
+        <li class="om">Lakkoofsa eenyummeessaa mootummaa ofiseraa</li>
+        <li class="om">Lakkoofsa bilbilaa (dijiitii 10, 09'n jalqaba)</li>
+        <li class="om">Suuraa ofiseraa (JPG yookaan PNG, hanga 5 MB)</li>
+        <li class="om">Kutaa magaalaa, aanaa, ganda fi blookii</li>
+        <li class="ti">ቁጽሪ መንነት መኮነን ብመንግስቲ ተዋሂቡ</li>
+        <li class="ti">ቁጽሪ ተሌፎን (10 ኣሃዝ፣ ብ 09 ዝጅምር)</li>
+        <li class="ti">ስእሊ መኮነን (JPG ወይ PNG፣ ክሳብ 5 MB)</li>
+        <li class="ti">ክፍለ ከተማ፣ ወረዳ፣ ቀበሌን ብሎክን</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>
+    <span class="en">Step-by-Step Instructions</span>
+    <span class="am">ደረጃ በደረጃ መመሪያዎች</span>
+    <span class="om">Qajeelfama tarkaanfii</span>
+    <span class="ti">መምርሒ ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">From the dashboard, click "Peace Keepers" in the left menu</strong>
+        <strong class="am">ከዳሽቦርዱ በግራ ምናሌ "ፒስ ኪፐሮች" ይጫኑ</strong>
+        <strong class="om">Daashboordii irraa menu bitaa irratti "Ofiseroonni" tuqi</strong>
+        <strong class="ti">ካብ ዳሽቦርድ ኣብ ምናሌ ጸጋ "ፒስ ኪፐራት" ጠውቑ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Click the "Register New" button</strong>
+        <strong class="am">"Register New" ቁልፍ ይጫኑ</strong>
+        <strong class="om">Furtuu "Register New" tuqi</strong>
+        <strong class="ti">መጠወሊ "Register New" ጠውቑ</strong>
+        <span class="btn-mock login">➕ Register New Peace Keeper</span>
+        <span class="en"> Usually at the top-right of the page.</span>
+        <span class="am"> አብዛኛውን ጊዜ በገጹ አናት ቀኝ።</span>
+        <span class="om"> Yeroo baay'ee gubbaa mirga fuulaa.</span>
+        <span class="ti"> መብዛሕትኡ ግዜ ኣብ ላዕሊ የማን ገጽ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">The registration form opens</strong>
+        <strong class="am">የምዝገባ ቅጹ ይከፈታል</strong>
+        <strong class="om">Unkni galmee bana</strong>
+        <strong class="ti">ቅጥዒ ምዝገባ ይኽፈት</strong>
+        <span class="en">You will see a form with several fields (see the table below).</span>
+        <span class="am">በርካታ መስኮች ያሉት ቅጽ ያያሉ (ከታች ያለውን ሰንጠረዥ ይመልከቱ)።</span>
+        <span class="om">Unka dirree hedduu qabu argita (tarree gadii ilaali).</span>
+        <span class="ti">ቅጥዒ ብዙሓት መዳርግ ዘለዎ ትርኢ (ሰደቓ ትሕቲ ርአ)።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Fill in the fields marked with a red star (*)</strong>
+        <strong class="am">በቀይ ኮከብ (*) የተመለከቱትን መስኮች ይሙሉ</strong>
+        <strong class="om">Dirreewwan urjii diimaan (*) mallatteeffame guuti</strong>
+        <strong class="ti">መዳርግ ብቀያሕ ኮኾብ (*) ዝተለምዐ ምልኡ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Upload the officer's photo (if available)</strong>
+        <strong class="am">የመኮንኑን ፎቶ ይጫኑ (ካለ)</strong>
+        <strong class="om">Suuraa ofiseraa ol kaa'i (yoo jiraate)</strong>
+        <strong class="ti">ስእሊ መኮነን ጽዓኑ (እንተሎ)</strong>
+        <span class="en">Click "Choose File" → pick a clear portrait photo → wait for it to upload.</span>
+        <span class="am">"Choose File" ይጫኑ → ግልጽ የፊት ፎቶ ይምረጡ → እስኪጫን ይጠብቁ።</span>
+        <span class="om">"Choose File" tuqi → suuraa fuulaa filadhu → akka fe'amu eegi.</span>
+        <span class="ti">"Choose File" ጠውቑ → ንጹር ስእሊ ገጽ ምረጹ → ክጽዕን ተጸበዩ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Double-check every field</strong>
+        <strong class="am">ሁሉንም መስክ በድጋሚ ያረጋግጡ</strong>
+        <strong class="om">Dirree hunda irra deebi'ii mirkaneessi</strong>
+        <strong class="ti">ነፍሲ ወከፍ መዳርግ ደጊምኩም ኣረጋግጹ</strong>
+        <span class="en">Especially the ID number and phone number — these must be unique.</span>
+        <span class="am">በተለይ የመታወቂያ ቁጥሩን እና ስልክ ቁጥሩን — ልዩ መሆን አለባቸው።</span>
+        <span class="om">Keessumaa lakkoofsa eenyummeessaa fi bilbilaa — adda ta'uu qabu.</span>
+        <span class="ti">ብልዕልና ቁጽሪ መንነትን ቁጽሪ ተሌፎንን — ፍሉይ ክኾኑ ኣለዎም።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Click "Save" or "Register"</strong>
+        <strong class="am">"Save" ወይም "Register" ይጫኑ</strong>
+        <strong class="om">"Save" yookaan "Register" tuqi</strong>
+        <strong class="ti">"Save" ወይ "Register" ጠውቑ</strong>
+        <span class="btn-mock success">✓ Save Peace Keeper</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">8</span>
+      <div class="step-text">
+        <strong class="en">Wait for the success message</strong>
+        <strong class="am">የስኬት መልእክት ይጠብቁ</strong>
+        <strong class="om">Ergaa milkaa'inaa eegi</strong>
+        <strong class="ti">መልእኽቲ ዓወት ተጸበ</strong>
+        <span class="en">A green box will say "Peace Keeper registered successfully".</span>
+        <span class="am">አረንጓዴ ሳጥን "ፒስ ኪፐር በተሳካ ሁኔታ ተመዝግቧል" ይላል።</span>
+        <span class="om">Saanduqa magariisa "Ofiseraan milkaa'inaan galmaa'e" jedha.</span>
+        <span class="ti">ቀጠልያ ሳጹን "ፒስ ኪፐር ብዓወት ተመዝጊቡ" ይብል።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">9</span>
+      <div class="step-text">
+        <strong class="en">Find the new officer in the list</strong>
+        <strong class="am">አዲሱን መኮንን በዝርዝሩ ውስጥ ያግኙ</strong>
+        <strong class="om">Ofiseraa haaraa tarree keessatti argi</strong>
+        <strong class="ti">ሓድሽ መኮነን ኣብ ዝርዝር ርኸቡ</strong>
+        <span class="en">Click "View Peace Keepers" and use the search box — type the name you just registered.</span>
+        <span class="am">"View Peace Keepers" ይጫኑ እና የፍለጋ ሳጥኑን ይጠቀሙ — አሁን የመዘገቡትን ስም ይተይቡ።</span>
+        <span class="om">"View Peace Keepers" tuqiitii saanduqa barbaachaaf fayyadami — maqaa amma galmeessite barreessi.</span>
+        <span class="ti">"View Peace Keepers" ጠውቑ ሳጹን ድሌት ተጠቐሙ — ሕጂ ዝመዘገብኩሞ ስም ጽሓፉ።</span>
+      </div>
+    </li>
+  </ol>
+
+  <h3>
+    <span class="en">📝 Every Field — What to Enter and Why</span>
+    <span class="am">📝 ሁሉም መስክ — ምን ማስገባት እና ለምን</span>
+    <span class="om">📝 Dirree hunda — maal galchuu fi maaliif</span>
+    <span class="ti">📝 ኩሉ መዳርግ — እንታይ ኣእቱን ስለምንታይን</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Field</span><span class="am">መስክ</span><span class="om">Dirree</span><span class="ti">መዳርግ</span></th>
+        <th><span class="en">What to Enter</span><span class="am">ምን ማስገባት</span><span class="om">Maal galchuu</span><span class="ti">እንታይ ኣእቱ</span></th>
+        <th><span class="en">Example</span><span class="am">ምሳሌ</span><span class="om">Fakkeenya</span><span class="ti">ኣብነት</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">pkFullName</span>
+          <span class="am">ሙሉ ስም</span>
+          <span class="om">Maqaa Guutuu</span>
+          <span class="ti">ምሉእ ስም</span>
+        </td>
+        <td>
+          <span class="en">The officer's complete name — first name, father's name, grandfather's name. Do not use nicknames.</span>
+          <span class="am">የመኮንኑ ሙሉ ስም — የመጀመሪያ ስም፣ የአባት ስም፣ የአያት ስም። ቅጽል ስሞችን አይጠቀሙ።</span>
+          <span class="om">Maqaa guutuu ofiseraa — maqaa duraa, maqaa abbaa, maqaa akaakayyuu. Maqaa bogonnaa hin fayyadaminaa.</span>
+          <span class="ti">ምሉእ ስም መኮነን — ቀዳማይ ስም፣ ስም ኣቦ፣ ስም ኣቦሓጎ። ቅጽል ስም ኣይትጠቐሙ።</span>
+        </td>
+        <td><code>Abebe Kebede Tesfaye</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">pkIdentityNo</span>
+          <span class="am">የመታወቂያ ቁጥር</span>
+          <span class="om">Lakkoofsa Eenyummeessaa</span>
+          <span class="ti">ቁጽሪ መንነት</span>
+        </td>
+        <td>
+          <span class="en">The officer's government-issued identity number. Must be unique — no two officers can share it.</span>
+          <span class="am">በመንግስት የተሰጠው የመታወቂያ ቁጥር። ልዩ መሆን አለበት — ሁለት መኮንኖች ሊጋሩት አይችሉም።</span>
+          <span class="om">Lakkoofsa eenyummeessaa mootummaa. Adda ta'uu qaba — ofiseroonni lama qooduu hin danda'an.</span>
+          <span class="ti">ቁጽሪ መንነት ብመንግስቲ ተዋሂቡ። ፍሉይ ክኸውን ኣለዎ — ክልተ መኮነንቲ ክካፈልዎ ኣይኽእሉን።</span>
+        </td>
+        <td><code>1234567890</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">pkPhone</span>
+          <span class="am">ስልክ</span>
+          <span class="om">Bilbila</span>
+          <span class="ti">ተሌፎን</span>
+        </td>
+        <td>
+          <span class="en">10-digit phone number starting with 09. No spaces, no +251, no dashes.</span>
+          <span class="am">10 አሃዝ ስልክ ቁጥር በ09 የሚጀምር። ክፍተት የለም፣ +251 የለም፣ ሰረዝ የለም።</span>
+          <span class="om">Lakkoofsa bilbilaa dijiitii 10 09'n jalqabu. Duwwaa hin qabu, +251 hin qabu, xaarrii hin qabu.</span>
+          <span class="ti">ቁጽሪ ተሌፎን 10 ኣሃዝ ብ 09 ዝጅምር። ክፍተት የለን፣ +251 የለን፣ ሰረዝ የለን።</span>
+        </td>
+        <td><code>0912345678</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">pkEmail</span>
+          <span class="am">ኢሜይል</span>
+          <span class="om">Imeelii</span>
+          <span class="ti">ኢመይል</span>
+        </td>
+        <td>
+          <span class="en">Optional. Use a real working email — it is used for password reset.</span>
+          <span class="am">አማራጭ። እውነተኛ የሚሰራ ኢሜይል ይጠቀሙ — ለይለፍ ቃል መመለሻ ያገለግላል።</span>
+          <span class="om">Filannoo. Imeelii dhugaa hojjetu fayyadami — password reset'iif ni gargaara.</span>
+          <span class="ti">ኣማራጺ። ናይ ሓቂ ዝሰርሕ ኢመይል ተጠቐሙ — ንመምለሲ ፒን ይጠቅም።</span>
+        </td>
+        <td><code>abebe@example.com</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">pkArea</span>
+          <span class="am">አካባቢ</span>
+          <span class="om">Naannoo</span>
+          <span class="ti">ከባቢ</span>
+        </td>
+        <td>
+          <span class="en">Select the officer's service area from the dropdown list.</span>
+          <span class="am">ከዝርዝሩ የመኮንኑን የአገልግሎት አካባቢ ይምረጡ።</span>
+          <span class="om">Tarree irraa naannoo tajaajilaa ofiseraa filadhu.</span>
+          <span class="ti">ካብ ዝርዝር ከባቢ ኣገልግሎት መኮነን ምረጹ።</span>
+        </td>
+        <td><code>Bole</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">pkKetena</span>
+          <span class="am">ቀበሌ</span>
+          <span class="om">Ganda</span>
+          <span class="ti">ቀበሌ</span>
+        </td>
+        <td>
+          <span class="en">The ketena (neighborhood) where the officer works. Type or select.</span>
+          <span class="am">መኮንኑ የሚሰራበት ቀበሌ። ይተይቡ ወይም ይምረጡ።</span>
+          <span class="om">Ganda ofiseraan itti hojjetu. Barreessi yookaan filadhu.</span>
+          <span class="ti">ቀበሌ መኮነን ዝሰርሓሉ። ጽሓፉ ወይ ምረጹ።</span>
+        </td>
+        <td><code>Ketena 04</code></td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">pkAddress</span>
+          <span class="am">አድራሻ</span>
+          <span class="om">Teessoo</span>
+          <span class="ti">ኣድራሻ</span>
+        </td>
+        <td>
+          <span class="en">Optional. Full address (house number, street, landmarks).</span>
+          <span class="am">አማራጭ። ሙሉ አድራሻ (የቤት ቁጥር፣ መንገድ፣ ምልክቶች)።</span>
+          <span class="om">Filannoo. Teessoo guutuu (lakkoofsa manaa, karaa, mallattoo).</span>
+          <span class="ti">ኣማራጺ። ምሉእ ኣድራሻ (ቁጽሪ ገዛ፣ መገዲ፣ ምልክት)።</span>
+        </td>
+        <td><code>House 214, Bole Road</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="practice">
+    <h4>🎓
+      <span class="en">Practice Exercise 2</span>
+      <span class="am">የልምምድ ተግባር 2</span>
+      <span class="om">Shaakala 2</span>
+      <span class="ti">ልምምድ 2</span>
+    </h4>
+    <ol>
+      <li class="en">Log in to the system.</li>
+      <li class="en">Click "Peace Keepers" → "Register New".</li>
+      <li class="en">Register a <strong>test officer</strong> with these values:
+        <ul style="margin-left:20px">
+          <li>Name: <code>Test Officer One</code></li>
+          <li>Identity No: <code>TEST-0001</code></li>
+          <li>Phone: <code>0900000001</code></li>
+          <li>Area: pick any from the dropdown</li>
+          <li>Ketena: <code>Test Ketena</code></li>
+        </ul>
+      </li>
+      <li class="en">Save, then search for "Test Officer One".</li>
+      <li class="en">After confirming it works, ask your supervisor whether you should delete the test record.</li>
+
+      <li class="am">ወደ ሲስተሙ ይግቡ።</li>
+      <li class="am">"ፒስ ኪፐሮች" → "Register New" ይጫኑ።</li>
+      <li class="am">በእነዚህ እሴቶች <strong>የሙከራ መኮንን</strong> ይመዝግቡ:
+        <ul style="margin-left:20px">
+          <li>ስም: <code>Test Officer One</code></li>
+          <li>የመታወቂያ ቁጥር: <code>TEST-0001</code></li>
+          <li>ስልክ: <code>0900000001</code></li>
+          <li>አካባቢ: ከዝርዝሩ ማንኛውንም ይምረጡ</li>
+          <li>ቀበሌ: <code>Test Ketena</code></li>
+        </ul>
+      </li>
+      <li class="am">ያስቀምጡ፣ ከዚያ "Test Officer One" ይፈልጉ።</li>
+      <li class="am">መስራቱን ካረጋገጡ በኋላ የሙከራ መዝገቡን መሰረዝ እንዳለብዎ ሱፐርቫይዘርዎን ይጠይቁ።</li>
+
+      <li class="om">Sirna seeni.</li>
+      <li class="om">"Ofiseroonni" → "Register New" tuqi.</li>
+      <li class="om"><strong>Ofiseraa shaakalaa</strong> qormaata kanaan galmeessi:
+        <ul style="margin-left:20px">
+          <li>Maqaa: <code>Test Officer One</code></li>
+          <li>Eenyummeessaa: <code>TEST-0001</code></li>
+          <li>Bilbila: <code>0900000001</code></li>
+          <li>Naannoo: kamiyyuu filadhu</li>
+          <li>Ganda: <code>Test Ketena</code></li>
+        </ul>
+      </li>
+      <li class="om">Olkaa'i, sana booda "Test Officer One" barbaadi.</li>
+      <li class="om">Hojjechuu mirkaneessitee booda, galmee shaakalaa haquu qabduu toʼataa keessan gaafadhu.</li>
+
+      <li class="ti">ናብ ስርዓት እቶ።</li>
+      <li class="ti">"ፒስ ኪፐራት" → "Register New" ጠውቕ።</li>
+      <li class="ti"><strong>መኮነን ፈተነ</strong> በዞም እሴታት መዝግብ:
+        <ul style="margin-left:20px">
+          <li>ስም: <code>Test Officer One</code></li>
+          <li>መንነት: <code>TEST-0001</code></li>
+          <li>ተሌፎን: <code>0900000001</code></li>
+          <li>ከባቢ: ዝኾነ ምረጽ</li>
+          <li>ቀበሌ: <code>Test Ketena</code></li>
+        </ul>
+      </li>
+      <li class="ti">ኣቐምጥ፣ ደሓር "Test Officer One" ድለ።</li>
+      <li class="ti">ይሰርሕ ምዃኑ ምስ ኣረጋገጽካ መዝገብ ፈተነ ክትድምስሶ ከም ዘለካ ሱፐርቫይዘርካ ሕተት።</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 13. BULK REGISTRATION ============ -->
+<section id="bulk-registration">
+  <h2><span class="icon">📥</span>
+    <span class="en">13. Bulk Registration — Many Officers at Once</span>
+    <span class="am">13. የጅምላ ምዝገባ — ብዙ መኮንኖች በአንድ ጊዜ</span>
+    <span class="om">13. Galmee Hedduu — ofiseroonni baay'ee al tokko</span>
+    <span class="ti">13. ብዙሓት ምዝገባ — ብዙሓት መኮነንቲ ብሓደ</span>
+  </h2>
+
+  <p class="en">If you need to register many officers at once (for example, a new batch of 50 recruits), use the Bulk Registration tool instead of typing them one by one.</p>
+  <p class="am">ብዙ መኮንኖችን በአንድ ጊዜ መመዝገብ ካስፈለገዎት (ለምሳሌ 50 አዲስ ቅጥሮች) አንድ በአንድ ከመተየብ ይልቅ የጅምላ ምዝገባ መሳሪያውን ይጠቀሙ።</p>
+  <p class="om">Yoo ofiseroonni baay'ee al tokko galmeessuu barbaaddan (fkn haaraa 50), meeshaa Galmee Hedduu fayyadamaa, tokkoon tokkoon barreessuu irraa.</p>
+  <p class="ti">ብዙሓት መኮነንቲ ብሓደ እንተደሊኹም (ኣብነት 50 ሓደስቲ) መሳርሒ ብዙሓት ምዝገባ ተጠቐሙ።</p>
+
+  <h3>
+    <span class="en">Step-by-Step</span>
+    <span class="am">ደረጃ በደረጃ</span>
+    <span class="om">Tarkaanfii</span>
+    <span class="ti">ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Prepare an Excel or CSV file</strong>
+        <strong class="am">የExcel ወይም CSV ፋይል ያዘጋጁ</strong>
+        <strong class="om">Faayilii Excel yookaan CSV qopheessi</strong>
+        <strong class="ti">ፋይል Excel ወይ CSV ኣዳሉ</strong>
+        <span class="en">One row per officer. Columns must match the required fields (Full Name, ID, Phone, etc.).</span>
+        <span class="am">ለአንድ መኮንን አንድ ረድፍ። አምዶች ከሚያስፈልጉ መስኮች ጋር መመሳሰል አለባቸው (ሙሉ ስም፣ መታወቂያ፣ ስልክ ወዘተ)።</span>
+        <span class="om">Ofiseraa tokkoof tarree tokko. Kolomni dirree barbaachisu waliin walsimu qabu.</span>
+        <span class="ti">ንሓደ መኮነን ሓደ መስመር። ኣምዳታት ምስ ዘድልዩ መዳርግ ክሰማማዕ ኣለዎም።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Open "Peace Keepers" → "Bulk Registration"</strong>
+        <strong class="am">"ፒስ ኪፐሮች" → "Bulk Registration" ይክፈቱ</strong>
+        <strong class="om">"Ofiseroonni" → "Bulk Registration" banaa</strong>
+        <strong class="ti">"ፒስ ኪፐራት" → "Bulk Registration" ክፈቱ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Upload the file</strong>
+        <strong class="am">ፋይሉን ይጫኑ</strong>
+        <strong class="om">Faayilii ol kaa'i</strong>
+        <strong class="ti">ፋይል ጽዓኑ</strong>
+        <span class="en">Click "Choose File" → select your prepared Excel/CSV → click "Upload".</span>
+        <span class="am">"Choose File" ይጫኑ → ያዘጋጁትን Excel/CSV ይምረጡ → "Upload" ይጫኑ።</span>
+        <span class="om">"Choose File" tuqi → Excel/CSV qopheessite filadhu → "Upload" tuqi.</span>
+        <span class="ti">"Choose File" ጠውቑ → ዘዳለኹሞ Excel/CSV ምረጹ → "Upload" ጠውቑ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">Wait for validation</strong>
+        <strong class="am">ማረጋገጫ ይጠብቁ</strong>
+        <strong class="om">Mirkaneessaa eegi</strong>
+        <strong class="ti">መረጋገጺ ተጸበ</strong>
+        <span class="en">The system will check your file. If any row is wrong (missing data, duplicate ID), it will show you which row.</span>
+        <span class="am">ሲስተሙ ፋይልዎን ያረጋግጣል። ማንኛውም ረድፍ ካልተሳካ (የጎደለ ውሂብ፣ ተደጋጋሚ መታወቂያ) የትኛው ረድፍ እንደሆነ ያሳያል።</span>
+        <span class="om">Sirni faayilii keessan mirkaneessa. Yoo tarreen dogoggora ta'e (daataa hanqate, eenyummeessaa irra deebi'e), tarree kam akka ta'e agarsiisa.</span>
+        <span class="ti">ስርዓት ፋይልኩም ይመርምር። ዝኾነ መስመር ጌጋ እንተኾይኑ ኣየናይ መስመር ምዃኑ የርኢ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Review the preview list</strong>
+        <strong class="am">የቅድመ እይታ ዝርዝሩን ይገምግሙ</strong>
+        <strong class="om">Tarree dur-ilaalii gamaaggami</strong>
+        <strong class="ti">ዝርዝር ቅድመ ትርኢት ገምግሙ</strong>
+        <span class="en">You will see every officer about to be added. Scan for mistakes.</span>
+        <span class="am">ሊጨመሩ ያሉትን ሁሉንም መኮንኖች ያያሉ። ስህተቶችን ይፈልጉ።</span>
+        <span class="om">Ofiseraa hundaa kan dabalamu argita. Dogoggora barbaadi.</span>
+        <span class="ti">ኩሎም መኮነንቲ ዝውሰኹ ትርኢ። ጌጋታት ድለ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Click "Confirm & Register All"</strong>
+        <strong class="am">"Confirm & Register All" ይጫኑ</strong>
+        <strong class="om">"Confirm & Register All" tuqi</strong>
+        <strong class="ti">"Confirm & Register All" ጠውቑ</strong>
+        <span class="btn-mock success">✓ Confirm &amp; Register All</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Wait for the result summary</strong>
+        <strong class="am">የውጤት ማጠቃለያ ይጠብቁ</strong>
+        <strong class="om">Cuunfaa bu'aa eegi</strong>
+        <strong class="ti">ማጠቃለያ ውጽኢት ተጸበ</strong>
+        <span class="en">The system shows: "Registered: 48 — Failed: 2" and lists reasons for failures.</span>
+        <span class="am">ሲስተሙ ያሳያል: "የተመዘገቡ: 48 — ያልተሳኩ: 2" እና የመክሸፍ ምክንያቶችን ይዘረዝራል።</span>
+        <span class="om">Sirni agarsiisa: "Galmaa'an: 48 — Kufe: 2" fi sababa kufiinsaa tarreessa.</span>
+        <span class="ti">ስርዓት የርኢ: "ተመዝጊቦም: 48 — ዘይተዓወቱ: 2" ምኽንያታት ድማ ይዘርዝር።</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout tip">
+    <span class="co-icon">💡</span>
+    <div>
+      <strong class="en">Bulk Registration tips</strong>
+      <strong class="am">የጅምላ ምዝገባ ምክሮች</strong>
+      <strong class="om">Gorsa galmee hedduu</strong>
+      <strong class="ti">ምኽሪ ብዙሓት ምዝገባ</strong>
+      <ul style="margin-left:22px; margin-top:8px">
+        <li class="en">Start with 5 rows to test — confirm they register correctly, then upload the full file.</li>
+        <li class="en">Use the exact column headings from the template.</li>
+        <li class="en">Remove blank rows — they cause errors.</li>
+        <li class="en">Make sure the file is under 10 MB.</li>
+        <li class="am">በመጀመሪያ 5 ረድፎችን በመሞከር ትክክል መሆናቸውን ያረጋግጡ፣ ከዚያ ሙሉ ፋይሉን ይጫኑ።</li>
+        <li class="am">ከአብነቱ ትክክለኛዎቹን የአምድ ርዕሶች ይጠቀሙ።</li>
+        <li class="am">ባዶ ረድፎችን ያስወግዱ — ስህተት ያመጣሉ።</li>
+        <li class="am">ፋይሉ ከ10 MB በታች መሆኑን ያረጋግጡ።</li>
+        <li class="om">Jalqabaaf tarree 5 qofa qorachuuf ol kaa'i — sirrii ta'uu mirkaneessii, sana booda faayilii guutuu ol kaa'i.</li>
+        <li class="om">Mata duree kolomii sirrii ta'e fayyadami.</li>
+        <li class="om">Tarreewwan duwwaa haqi — dogoggora fidu.</li>
+        <li class="om">Faayiliin hanga 10 MB gadi ta'uu mirkaneessi.</li>
+        <li class="ti">ብ5 መስመር ጀምር ንምፍታን — ብልክዕ ምዝገቦም ኣረጋግጽ፣ ሽዑ ምሉእ ፋይል ጽዓን።</li>
+        <li class="ti">ካብ ኣብነት ብልክዕ ኣርእስትታት ኣምዲ ተጠቐም።</li>
+        <li class="ti">ጻዕዳ መስመራት ኣወግድ — ጌጋ የምጽኡ እዮም።</li>
+        <li class="ti">ፋይል ትሕቲ 10 MB ምዃኑ ኣረጋግጽ።</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14. EDIT PK ============ -->
+<section id="edit-pk">
+  <h2><span class="icon">✏️</span>
+    <span class="en">14. Editing a Peace Keeper After Saving</span>
+    <span class="am">14. ከተቀመጠ በኋላ ፒስ ኪፐር ማስተካከል</span>
+    <span class="om">14. Ofiseraa erga olkaa'e booda sirreessuu</span>
+    <span class="ti">14. ድሕሪ ምቕማጥ ፒስ ኪፐር ምስተካከል</span>
+  </h2>
+
+  <p class="en">If you made a mistake or the officer's details changed, you can edit the record without deleting it.</p>
+  <p class="am">ስህተት ከፈጸሙ ወይም የመኮንኑ ዝርዝር ከተቀየረ መዝገቡን ሳይሰርዙ ማስተካከል ይችላሉ።</p>
+  <p class="om">Yoo dogoggora raawwattan yookaan odeeffannoon ofiseraa jijjiirame, galmee haquu malee sirreessuu dandeessu.</p>
+  <p class="ti">ጌጋ እንተገበርኩም ወይ ሓበሬታ መኮነን እንተተቐየረ መዝገብ ብዘይምድምሳስ ከተስተካክሉ ትኽእሉ።</p>
+
+  <h3>
+    <span class="en">Step-by-Step</span>
+    <span class="am">ደረጃ በደረጃ</span>
+    <span class="om">Tarkaanfii</span>
+    <span class="ti">ደረጃ ብደረጃ</span>
+  </h3>
+
+  <ol class="steps">
+    <li>
+      <span class="step-badge">1</span>
+      <div class="step-text">
+        <strong class="en">Open "Peace Keepers" → "View Peace Keepers"</strong>
+        <strong class="am">"ፒስ ኪፐሮች" → "View Peace Keepers" ይክፈቱ</strong>
+        <strong class="om">"Ofiseroonni" → "View Peace Keepers" banaa</strong>
+        <strong class="ti">"ፒስ ኪፐራት" → "View Peace Keepers" ክፈቱ</strong>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">2</span>
+      <div class="step-text">
+        <strong class="en">Find the officer using the search box</strong>
+        <strong class="am">የፍለጋ ሳጥኑን በመጠቀም መኮንኑን ያግኙ</strong>
+        <strong class="om">Saanduqa barbaachaaf fayyadamuun ofiseraa argi</strong>
+        <strong class="ti">ሳጹን ድሌት ተጠቒምኩም መኮነን ርኸቡ</strong>
+        <span class="en">You can search by name, ID, or phone number.</span>
+        <span class="am">በስም፣ በመታወቂያ ወይም በስልክ ቁጥር መፈለግ ይችላሉ።</span>
+        <span class="om">Maqaa, eenyummeessaa, yookaan bilbilaan barbaaduu dandeessu.</span>
+        <span class="ti">ብስም፣ ብመንነት ወይ ብቁጽሪ ተሌፎን ክትድልዩ ትኽእሉ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">3</span>
+      <div class="step-text">
+        <strong class="en">Click the pencil ✏️ icon on the officer's row</strong>
+        <strong class="am">በመኮንኑ ረድፍ ላይ የእርሳስ ✏️ አዶን ይጫኑ</strong>
+        <strong class="om">Icon eeboo ✏️ tarree ofiseraa irratti tuqi</strong>
+        <strong class="ti">ኣይኮን ርሳስ ✏️ ኣብ መስመር መኮነን ጠውቑ</strong>
+        <span class="en">Or click the row itself to open the details, then click "Edit".</span>
+        <span class="am">ወይም ዝርዝሩን ለመክፈት ረድፉን ይጫኑ፣ ከዚያ "Edit" ይጫኑ።</span>
+        <span class="om">Yookaan tarree ofii tuqi odeeffannoo banuuf, sana booda "Edit" tuqi.</span>
+        <span class="ti">ወይ ነቲ መስመር ጠውቑ ዝርዝር ንምኽፋት፣ ሽዑ "Edit" ጠውቑ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">4</span>
+      <div class="step-text">
+        <strong class="en">The edit form opens with the current values</strong>
+        <strong class="am">የአርትዖት ቅጹ አሁን ካሉት እሴቶች ጋር ይከፈታል</strong>
+        <strong class="om">Unkni gulaallii gatii ammaa waliin bana</strong>
+        <strong class="ti">ቅጥዒ ምምሕያሽ ምስ ህሉው እሴት ይኽፈት</strong>
+        <span class="en">You will see every field filled with what you (or someone else) entered earlier.</span>
+        <span class="am">እርስዎ (ወይም ሌላ ሰው) ቀደም ብለው ያስገቡት በሁሉም መስክ ይታያል።</span>
+        <span class="om">Dirree hunda keessatti waan ati (yookaan nama biraa) duraan galchite argita.</span>
+        <span class="ti">ኩሉ መዳርግ ብዝኣተኻዮ ቀድሚ ትርኢ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">5</span>
+      <div class="step-text">
+        <strong class="en">Change only the fields that need updating</strong>
+        <strong class="am">ማሻሻል የሚያስፈልጋቸውን መስኮች ብቻ ይቀይሩ</strong>
+        <strong class="om">Dirreewwan haaromsuu barbaachisu qofa jijjiiri</strong>
+        <strong class="ti">ዘድልዩ መዳርግ ጥራይ ቀይሩ</strong>
+        <span class="en">Do not retype everything — click the field you want, delete what's wrong, type the correction.</span>
+        <span class="am">ሁሉንም እንደገና አይተይቡ — የሚፈልጉትን መስክ ይጫኑ፣ የተሳሳተውን ያጥፉ፣ እርማቱን ይተይቡ።</span>
+        <span class="om">Waan hunda irra hin barreessinaa — dirree barbaaddu tuqi, dogoggora haqi, sirreeffama barreessi.</span>
+        <span class="ti">ኩሉ ደጊምካ ኣይትጽሓፍ — መዳርግ እትደልዮ ጠውቕ፣ ጌጋ ኣጥፍእ፣ እርማት ጽሓፍ።</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">6</span>
+      <div class="step-text">
+        <strong class="en">Click "Save Changes"</strong>
+        <strong class="am">"Save Changes" ይጫኑ</strong>
+        <strong class="om">"Save Changes" tuqi</strong>
+        <strong class="ti">"Save Changes" ጠውቑ</strong>
+        <span class="btn-mock success">✓ Save Changes</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-badge">7</span>
+      <div class="step-text">
+        <strong class="en">Confirm the change</strong>
+        <strong class="am">ለውጡን ያረጋግጡ</strong>
+        <strong class="om">Jijjiirama mirkaneessi</strong>
+        <strong class="ti">ለውጢ ኣረጋግጽ</strong>
+        <span class="en">A green message appears: "Peace Keeper updated successfully". The list refreshes.</span>
+        <span class="am">አረንጓዴ መልእክት ይታያል: "ፒስ ኪፐር በተሳካ ሁኔታ ተሻሽሏል"። ዝርዝሩ ይታደሳል።</span>
+        <span class="om">Ergaan magariisa mul'ata: "Ofiseraan milkaa'inaan haaromfame". Tarreen haarama.</span>
+        <span class="ti">ቀጠልያ መልእኽቲ ይርአ: "ፒስ ኪፐር ብዓወት ተሓዲሱ"። ዝርዝሩ ይሕደስ።</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout danger">
+    <span class="co-icon">🚨</span>
+    <div>
+      <strong class="en">Do not use the browser's Back button after saving</strong>
+      <strong class="am">ካስቀመጡ በኋላ የአሳሹን "Back" ቁልፍ አይጠቀሙ</strong>
+      <strong class="om">Erga olkaa'ani booda furtuu "Back" browser hin fayyadaminaa</strong>
+      <strong class="ti">ድሕሪ ምቕማጥ መጠወሊ "Back" መርበብ ኣይትጠቐሙ</strong>
+      <span class="en">The Back button may show you old data. Instead, click a menu item to go to another page, then return.</span>
+      <span class="am">የBack ቁልፍ አሮጌ ውሂብ ሊያሳይዎ ይችላል። በምትኩ ወደ ሌላ ገጽ ለመሄድ የምናሌ ንጥል ይጫኑ፣ ከዚያ ይመለሱ።</span>
+      <span class="om">Furtuun Back daataa moofaa si agarsiisuu danda'a. Bakka bu'i, fuula biraatti darbuuf miiltoo menu tuqi, sana booda deebi'i.</span>
+      <span class="ti">መጠወሊ Back ኣረጊት ዳታ ከርኢካ ይኽእል። ኣብ ክንዱ ናብ ካልእ ገጽ ንምሕላፍ ንጥሊ ምናሌ ጠውቕ፣ ሽዑ ተመለስ።</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15. TROUBLESHOOTING ============ -->
+<section id="problems">
+  <h2><span class="icon">🛠️</span>
+    <span class="en">15. Troubleshooting — Part 1</span>
+    <span class="am">15. ችግር መፍታት — ክፍል 1</span>
+    <span class="om">15. Rakkoo furuu — Kutaa 1</span>
+    <span class="ti">15. ጸገም ምፍታሕ — ክፋል 1</span>
+  </h2>
+
+  <p class="en">If something does not work as expected, use this table to find the answer.</p>
+  <p class="am">የሚጠበቀው ባህሪ ካልሆነ መልሱን ለማግኘት ይህን ሰንጠረዥ ይጠቀሙ።</p>
+  <p class="om">Yoo waan tokko akka yaadame hin hojjenne, deebii argachuuf tarree kana fayyadami.</p>
+  <p class="ti">ዝተጠበቐ ዘይኮነ እንተፈጸመ መልሲ ንምርካብ ነዚ ሰደቓ ተጠቐሙ።</p>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Problem</span><span class="am">ችግር</span><span class="om">Rakkoo</span><span class="ti">ጸገም</span></th>
+        <th><span class="en">What to Do</span><span class="am">ምን ማድረግ</span><span class="om">Maal gochuu</span><span class="ti">እንታይ ምግባር</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Login page doesn't open</span>
+          <span class="am">የመግቢያ ገጹ አይከፈትም</span>
+          <span class="om">Fuulli seensaa hin banu</span>
+          <span class="ti">ገጽ መእተዊ ኣይኽፈትን</span>
+        </td>
+        <td>
+          <span class="en">1) Check internet. 2) Refresh (F5). 3) Try another browser. 4) Wait 5 minutes and try again. 5) If still failing, contact IT.</span>
+          <span class="am">1) ኢንተርኔት ያረጋግጡ። 2) አድስ (F5)። 3) ሌላ አሳሽ ይሞክሩ። 4) 5 ደቂቃ ጠብቀው እንደገና ይሞክሩ። 5) አሁንም ካልሰራ አይቲ ያግኙ።</span>
+          <span class="om">1) Interneetii ilaali. 2) Haaromsi (F5). 3) Browser biraa yaali. 4) Daqiiqaa 5 eegiitii irra deebi'i. 5) Yoo hin hojjenne IT qunnami.</span>
+          <span class="ti">1) ኢንተርነት ኣረጋግጽ። 2) ኣሕድስ (F5)። 3) ካልእ መርበብ ፈትን። 4) 5 ደቒቕ ተጸበ ደጊምካ ፈትን። 5) እንተዘይሰርሐ IT ተወከስ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Forgot my username</span>
+          <span class="am">የተጠቃሚ ስሜን ረሳሁ</span>
+          <span class="om">Maqaa fayyadamaa koo dagatame</span>
+          <span class="ti">ስም ተጠቃሚይ ረሲዐ</span>
+        </td>
+        <td>
+          <span class="en">Ask your administrator. There is no self-service recovery for usernames.</span>
+          <span class="am">አስተዳዳሪዎን ይጠይቁ። ለተጠቃሚ ስሞች ራስ-አገልግሎት መመለሻ የለም።</span>
+          <span class="om">Bulchaa keessan gaafadhu. Maqaa fayyadamaaf deebistuu ofii hin jiru.</span>
+          <span class="ti">ኣማሓዳሪኹም ሕተቱ። ንስም ተጠቃሚ ባዕልኻ መምለሲ የለን።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">PIN not accepted</span>
+          <span class="am">ፒን ተቀባይነት አላገኘም</span>
+          <span class="om">PIN hin fudhatamne</span>
+          <span class="ti">ፒን ኣይተቐበለን</span>
+        </td>
+        <td>
+          <span class="en">1) Check Caps Lock is off. 2) Use Forgot PIN. 3) If locked out, wait 15 minutes.</span>
+          <span class="am">1) Caps Lock ጠፍቶ መሆኑን ያረጋግጡ። 2) "Forgot PIN" ይጠቀሙ። 3) ከተቆለፈ 15 ደቂቃ ይጠብቁ።</span>
+          <span class="om">1) Caps Lock akka dhaame mirkaneessi. 2) "Forgot PIN" fayyadami. 3) Yoo cufame daqiiqaa 15 eegi.</span>
+          <span class="ti">1) Caps Lock ምጥፋኡ ኣረጋግጽ። 2) "Forgot PIN" ተጠቐም። 3) እንተተዓጽወ 15 ደቒቕ ተጸበ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Form won't save</span>
+          <span class="am">ቅጹ አይቀመጥም</span>
+          <span class="om">Unkni hin olkaa'amu</span>
+          <span class="ti">ቅጥዒ ኣይቕመጥን</span>
+        </td>
+        <td>
+          <span class="en">Look for red messages near the fields. Some fields marked with * are missing. Fill them in and try again.</span>
+          <span class="am">በመስኮቹ አጠገብ ቀይ መልእክቶችን ይፈልጉ። በ* የተመለከቱ አንዳንድ መስኮች ጎድለዋል። ሞልተው እንደገና ይሞክሩ።</span>
+          <span class="om">Ergaawwan diimaa dirreewwan cinaa barbaadi. Dirreewwan * mallatteeffaman hanqatan. Guutiitii irra deebi'i.</span>
+          <span class="ti">ቀያሕ መልእኽትታት ኣብ ጎኒ መዳርግ ድለ። መዳርግ ብ * ዝተለምዑ ጎዲሎም። ምልኡ ደጊምኩም ፈትኑ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Dropdown is empty</span>
+          <span class="am">ዝርዝሩ ባዶ ነው</span>
+          <span class="om">Tarreen duwwaa dha</span>
+          <span class="ti">ዝርዝር ጻዕዳ እዩ</span>
+        </td>
+        <td>
+          <span class="en">Select the parent field first. Example: choose Sub City before Ketena.</span>
+          <span class="am">በመጀመሪያ ወላጅ መስኩን ይምረጡ። ለምሳሌ: ከቀበሌ በፊት ክፍለ ከተማ ይምረጡ።</span>
+          <span class="om">Jalqaba dirree maatii filadhu. Fkn: Ganda dura Kutaa Magaalaa filadhu.</span>
+          <span class="ti">ቀዳማይ መዳርግ ወላዲ ምረጽ። ኣብነት: ቅድሚ ቀበሌ ክፍለ ከተማ ምረጽ።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Photo won't upload</span>
+          <span class="am">ፎቶው አይጫንም</span>
+          <span class="om">Suuraan hin olkaa'amu</span>
+          <span class="ti">ስእሊ ኣይጽዕንን</span>
+        </td>
+        <td>
+          <span class="en">1) Make sure it's JPG or PNG. 2) Must be under 5 MB. 3) Try a different photo.</span>
+          <span class="am">1) JPG ወይም PNG መሆኑን ያረጋግጡ። 2) ከ5 MB በታች መሆን አለበት። 3) ሌላ ፎቶ ይሞክሩ።</span>
+          <span class="om">1) JPG yookaan PNG ta'uu mirkaneessi. 2) Hanga 5 MB gadi ta'uu qaba. 3) Suuraa biraa yaali.</span>
+          <span class="ti">1) JPG ወይ PNG ምዃኑ ኣረጋግጽ። 2) ትሕቲ 5 MB ክኸውን ኣለዎ። 3) ካልእ ስእሊ ፈትን።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Logged out by itself</span>
+          <span class="am">በራሱ ወጣ</span>
+          <span class="om">Ofumaan baʼe</span>
+          <span class="ti">ባዕሉ ወጸ</span>
+        </td>
+        <td>
+          <span class="en">Session expired (usually after 30 minutes of inactivity). Log in again — no data is lost.</span>
+          <span class="am">ክፍለ ጊዜው አልቋል (አብዛኛውን ጊዜ ከ30 ደቂቃ እንቅስቃሴ አልባ በኋላ)። እንደገና ይግቡ — ምንም ውሂብ አይጠፋም።</span>
+          <span class="om">Yeroon darbee (yeroo baay'ee daqiiqaa 30 sochii malee booda). Irra deebi'ii seeni — daataan hin badaa.</span>
+          <span class="ti">ግዜ ተወዲኡ (መብዛሕትኡ ግዜ ድሕሪ 30 ደቒቕ ተግባር ዘይብሉ)። ደጊምካ እቶ — ዳታ ኣይጠፍእን።</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Page looks strange</span>
+          <span class="am">ገጹ እንግዳ ይመስላል</span>
+          <span class="om">Fuulli ajaa'aa fakkaata</span>
+          <span class="ti">ገጽ ዘስምብር ይመስል</span>
+        </td>
+        <td>
+          <span class="en">Press Ctrl + F5 for a hard refresh. This reloads the page completely.</span>
+          <span class="am">ለኃይለኛ ማደስ Ctrl + F5 ይጫኑ። ገጹን ሙሉ በሙሉ እንደገና ይጭናል።</span>
+          <span class="om">Haaromsa cimaaf Ctrl + F5 tuqi. Fuula guutummaatti irra deebi'ee fe'a.</span>
+          <span class="ti">ንሓያል ምሕዳስ Ctrl + F5 ጠውቕ። ገጽ ምሉእ ብምሉእ ደጊሙ ይጽዕን።</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <span class="en">Who to Contact</span>
+    <span class="am">ማንን ማግኘት እንዳለብዎ</span>
+    <span class="om">Eenyu qunnamuu qabda</span>
+    <span class="ti">መን ክትረኽቡ ኣለኩም</span>
+  </h3>
+
+  <table class="field-table">
+    <thead>
+      <tr>
+        <th><span class="en">Issue</span><span class="am">ጉዳይ</span><span class="om">Dhimma</span><span class="ti">ጉዳይ</span></th>
+        <th><span class="en">Contact</span><span class="am">ያግኙ</span><span class="om">Qunnamaa</span><span class="ti">ተወከሱ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">
+          <span class="en">Login, PIN, permissions</span>
+          <span class="am">መግቢያ፣ ፒን፣ ፈቃዶች</span>
+          <span class="om">Seensa, PIN, hayyama</span>
+          <span class="ti">መእተዊ፣ ፒን፣ ፍቓድ</span>
+        </td>
+        <td>
+          <span class="en">Your System Administrator</span>
+          <span class="am">የሲስተም አስተዳዳሪዎ</span>
+          <span class="om">Bulchaa Sirnaa keessan</span>
+          <span class="ti">ኣማሓዳሪ ስርዓትኩም</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Wrong data already saved</span>
+          <span class="am">የተቀመጠ የተሳሳተ ውሂብ</span>
+          <span class="om">Daataa dogoggoraa duraan olkaa'e</span>
+          <span class="ti">ጌጋ ዳታ ተቐሚጡ</span>
+        </td>
+        <td>
+          <span class="en">Your Supervisor</span>
+          <span class="am">ሱፐርቫይዘርዎ</span>
+          <span class="om">Toʼataa keessan</span>
+          <span class="ti">ሱፐርቫይዘርኩም</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">System slow or down</span>
+          <span class="am">ሲስተሙ ቀርፋፋ ወይም ጠፍቷል</span>
+          <span class="om">Sirni suuta ta'e yookaan cufame</span>
+          <span class="ti">ስርዓት ዝዘገየ ወይ ጠፊኡ</span>
+        </td>
+        <td>
+          <span class="en">IT Helpdesk</span>
+          <span class="am">የአይቲ ድጋፍ</span>
+          <span class="om">Gargaarsa IT</span>
+          <span class="ti">ሓገዝ IT</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-name">
+          <span class="en">Backup / restore needed</span>
+          <span class="am">ባክአፕ / መመለስ ያስፈልጋል</span>
+          <span class="om">Baakapii / deebisuu barbaachisa</span>
+          <span class="ti">ባክኣፕ / ምምላስ የድሊ</span>
+        </td>
+        <td>
+          <span class="en">Database Administrator</span>
+          <span class="am">የዳታቤዝ አስተዳዳሪ</span>
+          <span class="om">Bulchaa Daataabeesii</span>
+          <span class="ti">ኣማሓዳሪ ዳታቤዝ</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout gold">
+    <span class="co-icon">🌟</span>
+    <div>
+      <strong class="en">Before you report a problem</strong>
+      <strong class="am">ችግር ከመግለጽዎ በፊት</strong>
+      <strong class="om">Rakkoo gabaasuu dura</strong>
+      <strong class="ti">ጸገም ቅድሚ ምግላጽ</strong>
+      <span class="en">Write down: (1) what you were doing, (2) the exact error message shown, (3) the time it happened, (4) a screenshot if possible. This speeds up the fix dramatically.</span>
+      <span class="am">ይመዝግቡ: (1) ምን ያደርጉ ነበር፣ (2) የታየው ትክክለኛ የስህተት መልእክት፣ (3) የተፈጠረበት ሰዓት፣ (4) ከተቻለ ስክሪንሾት። ይህ ጥገናውን በእጅጉ ያፋጥናል።</span>
+      <span class="om">Barreessi: (1) maal hojjechaa turte, (2) ergaa dogoggoraa sirrii, (3) yeroo itti mudate, (4) yoo danda'ame suuraa. Kun sirreeffama baay'ee saffisiisa.</span>
+      <span class="ti">ጽሓፍ: (1) እንታይ ትገብር ነይርካ፣ (2) ብልክዕ መልእኽቲ ጌጋ፣ (3) ዝተፈጸመሉ ግዜ፣ (4) ስእሊ እንተኻኢሉ። እዚ ንጽገና ብዙሕ የቀልጥፍ።</span>
+    </div>
+  </div>
+
+  <h3>
+    <span class="en">What Comes Next</span>
+    <span class="am">ቀጣይ ምን ይመጣል</span>
+    <span class="om">Itti aanu maal dhufa</span>
+    <span class="ti">ቀጻሊ እንታይ ይመጽእ</span>
+  </h3>
+
+  <p class="en">You have completed Part 1. In <strong>Part 2</strong> you will learn how to:</p>
+  <p class="am">ክፍል 1 ን ጨርሰዋል። በ<strong>ክፍል 2</strong> የሚከተሉትን ይማራሉ:</p>
+  <p class="om">Kutaa 1 xumurtan. <strong>Kutaa 2</strong> keessatti barattu:</p>
+  <p class="ti">ክፋል 1 ወዲእኩም። ኣብ <strong>ክፋል 2</strong> እዞም ትምህሩ:</p>
+
+  <ul style="margin-left:24px; margin-top:8px">
+    <li class="en">View and search through the full Peace Keeper list</li>
+    <li class="en">Bulk edit officer details</li>
+    <li class="en">Change officer status (Active / On Leave / Suspended / Retired)</li>
+    <li class="en">Delete records safely</li>
+    <li class="en">Record attendance — three methods: individual, QR, bulk</li>
+    <li class="en">View attendance data and reports</li>
+
+    <li class="am">ሙሉ የፒስ ኪፐር ዝርዝርን መመልከት እና መፈለግ</li>
+    <li class="am">የመኮንኖችን ዝርዝር በጅምላ ማስተካከል</li>
+    <li class="am">የመኮንን ሁኔታ መቀየር (ንቁ / በፍቃድ / የታገደ / ጡረታ)</li>
+    <li class="am">መዝገቦችን በደህንነት መሰረዝ</li>
+    <li class="am">ክትትል መመዝገብ — ሶስት ዘዴዎች: በግል፣ በQR፣ በጅምላ</li>
+    <li class="am">የክትትል ውሂብ እና ሪፖርቶችን መመልከት</li>
+
+    <li class="om">Tarree Ofiseroonni guutuu ilaaluu fi barbaaduu</li>
+    <li class="om">Odeeffannoo ofiseraa hedduun sirreessuu</li>
+    <li class="om">Haala ofiseraa jijjiiruu (Socho'aa / Boqonnaa / Dhorkaa / Sooramaa)</li>
+    <li class="om">Galmee nagaan haquu</li>
+    <li class="om">Argama galmeessuu — mala sadii: dhuunfaa, QR, hedduu</li>
+    <li class="om">Daataa argamaa fi gabaasota ilaaluu</li>
+
+    <li class="ti">ምሉእ ዝርዝር ፒስ ኪፐራት ምርኣይን ምድላይን</li>
+    <li class="ti">ዝርዝር መኮነንቲ ብብዝሒ ምስተካከል</li>
+    <li class="ti">ኩነታት መኮነን ምቕያር (ንጡፍ / ፈቃድ / ተኣጊዱ / ጡረታ)</li>
+    <li class="ti">መዝገብ ብድሕንነት ምድምሳስ</li>
+    <li class="ti">ተረኽቦ ምዝገባ — ሰለስተ መንገድታት: ውልቃዊ፣ QR፣ ብብዝሒ</li>
+    <li class="ti">ዳታ ተረኽቦን ጸብጻባትን ምርኣይ</li>
+  </ul>
+
+  <div class="callout tip">
+    <span class="co-icon">➡️</span>
+    <div>
+      <strong class="en">Ready for Part 2?</strong>
+      <strong class="am">ለክፍል 2 ተዘጋጅተዋል?</strong>
+      <strong class="om">Kutaa 2f qophii dha?</strong>
+      <strong class="ti">ንክፋል 2 ተዳሊኹም?</strong>
+      <span class="en">Open <code>PEACE-KEEPERS-MANUAL-PART-2.html</code> (once you create it). All parts share the same design, language toggle, and search.</span>
+      <span class="am"><code>PEACE-KEEPERS-MANUAL-PART-2.html</code> ን ይክፈቱ (ከፈጠሩት በኋላ)። ሁሉም ክፍሎች ተመሳሳይ ንድፍ፣ የቋንቋ ማስተላለፊያ እና ፍለጋ ይጋራሉ።</span>
+      <span class="om"><code>PEACE-KEEPERS-MANUAL-PART-2.html</code> banaa (erga uumtanii booda). Kutaan hundi dizaayinii tokko, afaan jijjiiruu fi barbaacha qoodu.</span>
+      <span class="ti"><code>PEACE-KEEPERS-MANUAL-PART-2.html</code> ክፈቱ (ድሕሪ ምፍጣር)። ኩሎም ክፍልታት ተመሳሳሊ ንድፍን ቋንቋ መቐያሪን ድሌትን ይካፈሉ።</span>
+    </div>
+  </div>
+</section>
+
+<div id="noResult">
+  <span class="en">❌ No matching sections — try a different keyword.</span>
+  <span class="am">❌ ተመሳሳይ ክፍል አልተገኘም — ሌላ ቃል ይሞክሩ።</span>
+  <span class="om">❌ Kutaan walsimu hin argamne — jecha biraa yaali.</span>
+  <span class="ti">❌ ዝሰማማዕ ክፋል ኣይተረኽበን — ካልእ ቃል ፈትን።</span>
+</div>
+
+</main>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Top">↑</button>
+
+<footer>
+  <div class="f-title">
+    <span class="en">🛡️ Peace Keepers – Master Manual – Part 1 of 5</span>
+    <span class="am">🛡️ ፒስ ኪፐርስ – ማስተር መመሪያ – ክፍል 1 ከ5</span>
+    <span class="om">🛡️ Peace Keepers – Buugqa Guddaa – Kutaa 1/5</span>
+    <span class="ti">🛡️ ፒስ ኪፐርስ – ቀንዲ መምርሒ – ክፋል 1 ካብ 5</span>
+  </div>
+  <p class="en">Addis Ababa City Peace &amp; Security Administration Bureau · Internal Use Only</p>
+  <p class="am">የአዲስ አበባ ከተማ ሰላምና ጸጥታ አስተዳደር ቢሮ · ለውስጥ አገልግሎት ብቻ</p>
+  <p class="om">Biiroo Bulchiinsaa Nageenyaa fi Nagaa Magaalaa Finfinnee · Fayyadama Keessaa Qofa</p>
+  <p class="ti">ቤሮ ሰላምን ጸጥታን ከተማ ኣዲስ ኣበባ · ንውሽጢ ጥራይ</p>
+  <p style="margin-top:14px;opacity:.6;font-size:.8rem">© 2026 · v1.0</p>
+</footer>
+
+<script>
+/* ============ LANGUAGE TOGGLE ============ */
+function setLang(lang){
+  const body = document.body;
+  body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  document.documentElement.lang = lang;
+  try{ localStorage.setItem('pk-lang', lang); }catch(e){}
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  let saved = 'en';
+  try{ saved = localStorage.getItem('pk-lang') || 'en'; }catch(e){}
+  setLang(saved);
+});
+
+/* ============ SEARCH ============ */
+let originalHTML = new Map();
+document.querySelectorAll('main section').forEach((sec,i)=>originalHTML.set(i, sec.innerHTML));
+
+function escapeReg(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+
+function searchManual(){
+  const q = document.getElementById('searchInput').value.trim();
+  const sections = document.querySelectorAll('main section');
+  const noRes = document.getElementById('noResult');
+  const stats = document.getElementById('stats');
+  let visible = 0;
+  const kw = q.toLowerCase();
+
+  sections.forEach((sec, i)=>{
+    sec.innerHTML = originalHTML.get(i);
+    if(!kw){ sec.classList.remove('hidden'); visible++; return; }
+    const text = sec.innerText.toLowerCase();
+    if(text.includes(kw)){
+      sec.classList.remove('hidden'); visible++;
+      highlightNode(sec, kw);
+    } else sec.classList.add('hidden');
+  });
+
+  document.querySelectorAll('nav.toc a').forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if(target && target.classList.contains('hidden')) a.style.opacity='.3';
+    else a.style.opacity='1';
+  });
+
+  noRes.style.display = (kw && visible === 0) ? 'block' : 'none';
+  stats.textContent = kw ? (visible + ' section(s) match') : '';
+}
+
+function highlightNode(node, kw){
+  const regex = new RegExp('('+escapeReg(kw)+')','gi');
+  const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => {
+      if(!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      const p = n.parentNode.nodeName;
+      if(p==='SCRIPT'||p==='STYLE'||p==='CODE'||p==='PRE') return NodeFilter.FILTER_REJECT;
+      return regex.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const targets=[];
+  while(walker.nextNode()) targets.push(walker.currentNode);
+  targets.forEach(t=>{
+    const span = document.createElement('span');
+    span.innerHTML = t.nodeValue.replace(regex,'<span class="hl">$1</span>');
+    t.parentNode.replaceChild(span, t);
+  });
+}
+
+function clearSearch(){
+  document.getElementById('searchInput').value='';
+  searchManual();
+  document.getElementById('searchInput').focus();
+}
+
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  toTop.style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='/' && document.activeElement.tagName!=='INPUT'){
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+  if(e.key==='Escape') clearSearch();
+});
+</script>
+
+</body>
+</html>
